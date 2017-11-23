@@ -1,20 +1,4 @@
-<div class="page-wrapper ">
-  <div class="nav-wrapper">
-    <div class="nav-header">
-      <img class="image" src="https://orig00.deviantart.net/65e3/f/2014/207/e/2/official_wow_icon_by_benashvili-d7sd1ab.png">
-    </div>
-  </div>
-  <div class="content-wrapper">
-    <div class="heading">
-      <h1 class="text-heading">Welcome to {{title}}!</h1>
-    </div>
-    <div class="main-content">
-      <div class="test-border">
-        <Button text="login" (click)="checkLogin()"></Button>
-      </div>
-    </div>
-  </div>
+<app-login (authenticated)="checkAuth($event)" *ngIf="!isLoggedIn"></app-login>
+<div *ngIf="isLoggedIn">
+  <router-outlet></router-outlet>
 </div>
-
-
-

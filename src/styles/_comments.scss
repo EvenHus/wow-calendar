@@ -1,0 +1,85 @@
+.comments {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.comment {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid #DDDDDD;
+  background: darken(#FFFFFF, 2%);
+}
+
+.comment-avatar {
+  margin-right: 1rem;
+}
+
+.comment-avatar-img {
+  @extend .rounded-img-sm;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-content-header {
+  display: flex;
+}
+
+.comment-creator {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: $brand-primary;
+}
+
+.comment-options {
+
+}
+
+.comment-text {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.comment-meta {
+  font-size: 0.9rem;
+  color: rgba(#444444, 0.5);
+}
+
+.comment-form-wrapper {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 3rem;
+  padding: 0.5rem;
+  border-top: 1px solid $lighter-gray;
+  background-color: darken(#FFFFFF, 1%);
+
+  @media only screen and (min-width: $md-breakpoint) {
+    position: static;
+  }
+}
+
+.comment-form {
+  display: flex;
+}
+
+.comment-form-input {
+  @extend .form-control;
+  flex: 1;
+}
+
+.comment-form-button {
+  @extend .primary-button;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+
+  &:disabled {
+    background: rgba($brand-primary, 0.3);
+  }
+}

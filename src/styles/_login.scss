@@ -1,9 +1,28 @@
 .login-view {
-  margin-top: 10vw;
-  margin-left: auto;
-  margin-right:auto;
-  background-color: #41A3EB;
-  border: 2px solid white;
-  height:30vw;
-  width: 15vw;
+  display: flex;
+  padding: 0 2rem;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    padding: 0;
+  }
+}
+
+.login-column {
+  flex: 1;
+}
+
+.login-left-column {
+  @extend .login-column;
+}
+
+.login-right-column {
+  @extend .login-column;
+  background: $brand-primary;
+}
+
+.login-logo {
+  display: block;
+  margin: 2rem auto;
+  width: auto;
+  max-height: 3rem;
 }

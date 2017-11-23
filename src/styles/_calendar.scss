@@ -1,0 +1,254 @@
+/* ------------------------------------------------------
+    Calendar Header
+  ------------------------------------------------------ */
+
+.calendar-header {
+  display: flex;
+}
+
+.calendar-header-title {
+  flex: 1;
+  padding: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    padding: 0;
+  }
+}
+
+.calendar-header-navigation {
+  display: flex;
+  flex: 1;
+
+  &:last-of-type {
+    align-items: flex-end;
+  }
+}
+
+.calendar-header-navigation-item {
+  flex: 1;
+
+  &:first-of-type .calendar-nav-item-button {
+    border: 1px solid $lighter-gray;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+
+  &:last-of-type .calendar-nav-item-button {
+    border-top: 1px solid $lighter-gray;
+    border-bottom: 1px solid $lighter-gray;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+}
+
+.calendar-nav-item-button {
+  width: 100%;
+  padding: 0.5rem;
+  font-weight: bold;
+  border: none;
+  border-top: 1px solid $lighter-gray;
+  border-right: 1px solid $lighter-gray;
+  border-bottom: 1px solid $lighter-gray;
+  background: #FFFFFF;
+}
+
+.calendar-nav-item-button-active {
+  color: #FFFFFF;
+  background: $brand-primary;
+}
+
+.calendar-header-single-navigation-item {
+  margin-left: 1rem;
+}
+
+.calendar-single-nav-item-button {
+  @extend .calendar-nav-item-button;
+  border-radius: $border-radius;
+  padding: 0.5rem 1rem;
+  color: #FFFFFF;
+  background: $brand-primary;
+}
+
+.calendar-content {
+  height: 65vh;
+  overflow-y: scroll;
+}
+
+.calendar-time-slots {
+  display: flex;
+  padding: 0.1rem;
+  border-bottom: 1px solid $lighter-gray;
+}
+
+.calendar-time-slot {
+  color: $dark-gray;
+  height: calc(4rem - (0.1rem * 2));
+}
+
+.calendar-time-slot-all-day {
+  height: 2rem;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    height: calc(4rem - (0.1rem * 2));
+  }
+}
+
+.calendar-weekdays {
+  margin-top: $md;
+  border-bottom: 1px solid $light-gray;
+}
+
+.calendar-weekday {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: $dark-gray;
+  text-align: center;
+
+  &:first-of-type {
+    padding-left: 0;
+    text-align: left;
+  }
+}
+
+/* ------------------------------------------------------
+    Calendar Day View
+  ------------------------------------------------------ */
+
+.calendar-day-view {
+  margin-top: $md;
+
+  .calendar-time-slot {
+    width: 10rem;
+
+    &:last-of-type {
+      flex: 1;
+    }
+  }
+}
+
+/* ------------------------------------------------------
+    Calendar Week View
+  ------------------------------------------------------ */
+
+.calendar-week-view {
+  .calendar-time-slot {
+    flex: 1;
+  }
+
+  .calendar-weekdays {
+    display: flex;
+  }
+
+  .calendar-weekday {
+    flex: 1;
+  }
+}
+
+/* ------------------------------------------------------
+    Calendar Month View
+  ------------------------------------------------------ */
+
+.calendar-month-view {
+  .calendar-dates {
+    @extend .clearfix;
+    margin-top: $md;
+    width: 100%;
+  }
+
+  .calendar-date-cell {
+    float: left;
+    padding: 0.3rem;
+    width: calc(100% / 7);
+    min-height: 20rem;
+    border-left: 1px solid $lighter-gray;
+    border-bottom: 1px solid $lighter-gray;
+
+    &:last-of-type {
+      border-right: 1px solid $lighter-gray;
+    }
+  }
+
+  .calendar-occurrence {
+    height: 4rem;
+
+    .calendar-occurrence-title {
+      height: 1.5rem;
+      overflow: hidden;
+    }
+  }
+}
+
+
+/* ------------------------------------------------------
+    Occurrence
+  ------------------------------------------------------ */
+
+.calendar-occurrences {
+  display: flex;
+}
+
+.calendar-occurrence-details {
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.calendar-occurrence {
+  @extend .elevate-1;
+  position: relative;
+  padding: 0.3rem;
+  flex: 1;
+  border-radius: $border-radius;
+  font-size: 0.9rem;
+  border-left: 2px solid transparent;
+  background: #FFFFFF;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover > .calendar-occurrence-details {
+    position: absolute;
+    padding: 0.5rem;
+    color: #FFFFFF;
+    border-radius: $border-radius;
+    background: rgba($black, 0.8);
+    opacity: 1;
+    z-index: 6;
+  }
+}
+
+.calendar-occurrence-cancelled {
+  color: $brand-danger;
+  background: rgba($brand-danger, 0.1);
+
+  .calendar-occurrence-time, .calendar-occurrence-title {
+    text-decoration: line-through;
+  }
+}
+
+.calendar-occurrence-passed {
+  color: $dark-gray;
+  background: $lighter-gray;
+}
+
+.calendar-occurrence-time {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.calendar-month-occurrences .calendar-occurrence {
+  margin-top: 0.5rem;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.calendar-now-indicator {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: $brand-primary;
+}

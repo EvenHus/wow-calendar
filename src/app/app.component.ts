@@ -1,26 +1,28 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, Input, OnChanges} from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
-  title = 'WoW Calendar';
-  isLoggedIn = false;
+export class AppComponent implements OnChanges {
+  isLoggedIn: boolean = true;
 
   constructor(private _router: Router) {
   }
 
-  ngOnInit() {
+  ngOnChanges() {
+    console.log(this.isLoggedIn);
   }
 
-  checkLogin(): void {
-    if (this.isLoggedIn) {
-      console.log('You are logged in');
+  checkAuth(args: boolean) {
+    console.log(args);
+    if (args) {
+      this.isLoggedIn = args;
+      this._router.navigate(['home']);
     } else {
-      console.log('hello');
-      this._router.navigate(['login']);
+      this.isLoggedIn = args;
     }
   }
 }

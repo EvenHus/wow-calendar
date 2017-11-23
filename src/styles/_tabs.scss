@@ -1,0 +1,98 @@
+.tabs {
+  display: flex;
+  margin: 1rem 0;
+  padding: 0.2rem;
+  border-radius: 2px;
+  background: darken(#FFFFFF, 5%);
+}
+
+.tab-item {
+  font-size: 0.9rem;
+  flex: 1;
+  text-align: center;
+  margin-right: 0.2rem;
+  border-radius: 2px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  a {
+    display: block;
+    padding: 0.5rem 1rem;
+    background: darken(#FFFFFF, 1%);
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    -ms-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+
+    &:link, &:visited {
+      color: rgba(black, 0.4);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.tab-selected {
+      color: #FFFFFF;
+      font-weight: bold;
+      background-color: $brand-primary;
+    }
+
+    .tab-icon {
+      display: block;
+      font-size: 2rem;
+      margin-top: -0.8rem;
+      margin-bottom: -0.8rem;
+    }
+
+    .tab-title {
+      display: block;
+    }
+  }
+}
+
+.tab-badge {
+  display: inline-block;
+  position: absolute;
+  width: 1.35rem;
+  height: 1.3rem;
+  margin-left: 0.5rem;
+  padding: 0rem 0.5rem;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  background: rgba($brand-primary, 0.7);
+}
+
+.tabs-top {
+  display: flex;
+  background: rgba($brand-primary, 0.9);
+}
+
+.tabs-top-item {
+  flex: 1;
+
+  a {
+    padding: 0.2rem 0.5rem;
+    display: block;
+    text-align: center;
+    color: #FFFFFF;
+
+    &:link, &:visited {
+      color: #FFFFFF;
+    }
+
+    &.tab-selected {
+      background: darken($brand-primary, 2%);
+    }
+  }
+}
+
+.tabs-top-item-icon {
+  font-family: "Ionicons";
+  font-size: 1.5rem;
+}

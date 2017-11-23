@@ -1,0 +1,68 @@
+.message {
+  padding: $sm;
+  border-bottom: 1px solid $light-gray;
+}
+
+.message-row {
+  display: flex;
+}
+
+.message-icons {
+  width: 36px;
+  margin-right: 1rem;
+}
+
+.message-content {
+  flex: 1;
+}
+
+.message-heading {
+  display: flex;
+  font-weight: bold;
+  color: $brand-primary;
+}
+
+.message-heading-content-object {
+  flex: 1;
+}
+
+.message-header-options {
+
+}
+
+.message-created {
+  font-size: $font-sm;
+}
+
+.message-body {
+  margin-top: $sm;
+}
+
+.message-icon {
+  text-align: center;
+}
+
+.message-icon-important {
+  @extend .message-icon;
+  color: $brand-danger;
+}
+
+.message-icon-unread {
+  @extend .message-icon;
+  color: $brand-info;
+}
+
+.message-comments {
+  margin-top: $sm;
+  color: $darker-grey;
+}
+
+.message-comments-enhanced {
+  color: $brand-primary;
+}
+
+.message-read-by {
+  margin-top: $sm;
+  font-size: $font-sm;
+  color: $darker-grey;
+}

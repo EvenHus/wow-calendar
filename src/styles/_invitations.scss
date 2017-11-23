@@ -1,0 +1,23 @@
+.invitation-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.invitation-item {
+  @extend .card;
+  @extend .card-block;
+}
+
+.invitation-relation-title {
+  @extend .muted-text;
+  margin-top: $sm;
+}
+
+.invitation-item-body {
+  display: flex;
+}
+
+.invitation-item-title {
+  flex: 1;
+}

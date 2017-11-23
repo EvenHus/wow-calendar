@@ -1,5 +1,16 @@
-<div class="login-wrapper">
-  <div class="login-view">
-    <label text="Hello"></label>
+<div class="login-view row full-height">
+  <div class="col-md-6 login-left-column full-height">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <form class="login-form" #loginForm="ngForm" (ngSubmit)="login()" novalidate>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input class="form-control" type="email" name="username" autofocus (keyup)="name = name.toLowerCase()" #username="ngModel" [(ngModel)]="name" required>
+            </div>
+          </div>
+          <button type="submit" class="primary-button button-block">Login</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

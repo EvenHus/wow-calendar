@@ -1,0 +1,70 @@
+.profile-header {
+  height: 6rem;
+  background-color: $brand-primary;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    height: 8rem;
+  }
+}
+
+.profile-content {
+  @extend .container;
+  margin-top: -4.5rem;
+}
+
+.profile-header-img {
+  @extend .rounded-img-lg;
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+
+  .spinner {
+    margin-top: 2.5rem;
+  }
+}
+
+.profile-name {
+  @extend .text-center;
+  margin: 0.5rem 0 0 0;
+}
+
+.profile-content-wrapper {
+  @media only screen and (min-width: $md-breakpoint) {
+    margin: 0 auto;
+    max-width: 75ch;
+  }
+}
+
+.profile-description {
+  padding: 1rem;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    margin: 1rem auto 1.5rem auto;
+    max-width: 75ch;
+  }
+}
+
+.profile-button {
+  @extend .button-small;
+  margin-top: 6rem;
+  margin-right: 0.5rem;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.profile-primary-button {
+  @extend .primary-button;
+  @extend .profile-button;
+}
+
+.profile-primary-button-outline {
+  @extend .primary-button-outline;
+  @extend .profile-button;
+}
+
+.profile-danger-button-outline {
+  @extend .danger-button-outline;
+  @extend .profile-button;
+}

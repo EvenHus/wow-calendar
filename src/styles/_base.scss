@@ -1,4 +1,145 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  touch-action: manipulation;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  color: #EAB62C;
-  background: #241512;
+  color: $black;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  background-color: $brand-primary;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    font-size: 16px;
+  }
+}
+
+p {
+  max-width: 75ch;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3rem;
+  margin-bottom: 1em;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.link {
+  color: $brand-primary;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid $brand-primary;
+
+  &:link, &:visited {
+    color: $brand-primary;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid $brand-primary;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+a {
+  &:link, &:visited {
+    color: $brand-primary;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+main {
+  height: 100%;
+}
+
+.main-authenticated {
+  @extend .native-scroll;
+  margin-top: 3rem;
+  height: calc(100% - 6rem);
+
+  @media only screen and (min-width: $md-breakpoint) {
+    margin-top: 4rem;
+    height: calc(100% - 4rem);
+  }
+}
+
+.main-authenticated-detailed {
+  height: 100%;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    height: calc(100% - 4rem);
+  }
+}
+
+.content {
+  padding: 1rem;
+}
+
+.section-heading-wrapper {
+  @extend .clearfix;
+  margin-bottom: $sm;
+
+  .section-heading {
+    float: left;
+  }
+}
+
+.section-heading {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: rgba($black, 0.5);
+}
+
+.section-heading-button {
+  float: right;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid $brand-primary;
+  border-radius: 2px;
+
+  &:hover {
+    color: #FFFFFF;
+    background: $brand-primary;
+  }
+}
+
+.icon {
+  font-family: "Ionicons";
 }

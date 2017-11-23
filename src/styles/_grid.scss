@@ -11,17 +11,15 @@
 }
 
 .container-fluid {
+  @extend .clearfix;
   width: 100%;
   overflow-x: hidden;
-
-  @media only screen and (min-width: $md-breakpoint) {
-    padding: 0 1rem;
-  }
 }
 
 .container {
   @extend .container-fluid;
-  max-width: 1200px;
+  margin: 0 auto;
+  max-width: 960px;
 }
 
 .row {
@@ -38,22 +36,126 @@
   min-height: 1px;
   // margin-bottom: 1rem;
 
-  @media only screen and (min-width: $md-breakpoint) {
-    padding-right: 1.5rem;
-    margin-bottom: 0;
-  }
+  //@media only screen and (min-width: $md-breakpoint) {
+  //  padding-right: 1.5rem;
+  //  margin-bottom: 0;
+  //}
 }
 
 $col-1-width: 1.44%;
 $col-2-width: 16.6666666667%;
 $col-3-width: 25%;
 $col-4-width: 33.3333333333%;
+$col-5-width: 41.6666666667%;
 $col-6-width: 50%;
 $col-8-width: 66.6666666667%;
 $col-9-width: 75%;
 $col-10-width: 83.3333333333%;
 $col-11-width: 91.6666666667%;
 $col-12-width: 100%;
+
+/* ------------------------------------------------------
+  SM
+------------------------------------------------------ */
+
+.col-sm-2 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    width: $col-2-width;
+  }
+}
+
+.col-sm-3 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    width: $col-3-width;
+  }
+}
+
+.col-sm-4 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    width: $col-4-width;
+  }
+}
+
+.col-sm-5 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    width: $col-5-width;
+  }
+}
+
+.col-sm-6 {
+  @extend .col;
+  width: $col-6-width;
+
+  &:nth-child(2n+1) {
+    padding-right: 1rem;
+    clear: left;
+  }
+}
+
+.col-sm-8 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    width: $col-8-width;
+  }
+}
+
+// Offset
+.col-sm-offset-2 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    margin-left: $col-2-width;
+  }
+}
+
+.col-sm-offset-3 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    margin-left: $col-3-width;
+  }
+}
+
+.col-sm-offset-4 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    margin-left: $col-4-width;
+  }
+}
+
+.col-sm-offset-6 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    margin-left: $col-6-width;
+  }
+}
+
+.col-sm-offset-8 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    margin-left: $col-8-width;
+  }
+}
+
+.col-sm-offset-9 {
+  @extend .col;
+
+  @media only screen and (min-width: $sm-breakpoint) {
+    margin-left: $col-9-width;
+  }
+}
 
 /* ------------------------------------------------------
   MD
@@ -80,6 +182,19 @@ $col-12-width: 100%;
 
   @media only screen and (min-width: $md-breakpoint) {
     width: $col-4-width;
+    padding-right: calc(2rem / 2);
+
+    &:nth-child(3n) {
+      padding-right: 0;
+    }
+  }
+}
+
+.col-md-5 {
+  @extend .col;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    width: $col-5-width;
   }
 }
 
@@ -88,9 +203,7 @@ $col-12-width: 100%;
 
   @media only screen and (min-width: $md-breakpoint) {
     width: $col-6-width;
-  }
 
-  @media only screen and (min-width: $md-breakpoint) and (max-width: $lg-breakpoint) {
     &:nth-child(2n+1) {
       padding-right: 1rem;
       clear: left;
@@ -183,6 +296,14 @@ $col-12-width: 100%;
   }
 }
 
+.col-lg-5 {
+  @extend .col;
+
+  @media only screen and (min-width: $lg-breakpoint) {
+    width: $col-5-width;
+  }
+}
+
 .col-lg-6 {
   @extend .col;
 
@@ -268,13 +389,19 @@ $col-12-width: 100%;
 
 .hidden-md-down {
   @media only screen and (max-width: $md-breakpoint) {
-    display: none;
+    display: none !important;
   }
 }
 
 .hidden-lg-down {
   @media only screen and (max-width: $lg-breakpoint) {
     display: none;
+  }
+}
+
+.hidden-lg-up {
+  @media only screen and (min-width: $md-breakpoint) {
+    display: none !important;
   }
 }
 

@@ -1,0 +1,282 @@
+.form-group {
+  margin-bottom: 1.8rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.form-label-group {
+  display: flex;
+
+  .form-label-group-label {
+    margin-bottom: 0.5rem;
+    flex: 1;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .form-label-feedback {
+    flex: 1;
+    text-align: right;
+  }
+
+  .form-label-feedback-text {
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: inherit;
+  border-radius: $border-radius;
+  border: 1px solid #CCCCCC;
+  background-color: transparent;
+}
+
+.select-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0;
+  height: 2.5rem;
+  font-size: inherit;
+}
+
+.error-text {
+  color: $brand-danger;
+}
+
+.success-text {
+  color: $brand-success;
+}
+
+.form-textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: inherit;
+  border-radius: $border-radius;
+  border: 1px solid #CCCCCC;
+  min-height: 6rem;
+  resize: none;
+}
+
+.images-wrapper {
+  @extend .clearfix;
+}
+
+.image {
+  float: left;
+  margin-right: 1rem;
+
+  &:hover > .image-overlay {
+    opacity: 1;
+  }
+}
+
+.image-preview {
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  border: 1px dashed #CCCCCC;
+  background: darken(#FFFFFF, 3%);
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.image-overlay {
+  position: relative;
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  top: -8rem;
+  text-align: center;
+  background: rgba($black, 0.6);
+  transition: all 0.25s ease-out;
+  opacity: 0;
+}
+
+.image-overlay-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  color: #FFFFFF;
+  border: none;
+  background: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  span {
+    display: block;
+    margin: 0 auto;
+    font-size: 4rem;
+  }
+}
+
+.file-button {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-button+label {
+  cursor: pointer;
+}
+
+.file-button:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.file-button + label {
+  @extend .image-preview;
+  float: left;
+  text-align: center;
+  transition: all 0.25s ease-out;
+
+  span {
+    display: inline-block;
+    margin-top: 1.6rem;
+    font-size: 2.5rem;
+  }
+
+  &:hover {
+    background: darken(#FFFFFF, 10%);
+  }
+}
+
+.form-control-error {
+  margin-top: 0.5rem;
+  color: $brand-danger;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.form-help-text {
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: rgba($black, 0.5);
+}
+
+.selected-targets {
+  @extend .clearfix;
+  display: block;
+  margin-bottom: $md;
+}
+
+.selected-target {
+
+}
+
+.selected-target:not(:first-of-type) {
+  .selected-target-img {
+    margin-left: -1rem;
+  }
+}
+
+.selected-target-img {
+  // @extend .list-profile-img;
+}
+
+.switch-wrapper {
+  @extend .clearfix;
+}
+
+.switch-value {
+  float: left;
+  margin-left: 1rem;
+}
+
+.switch {
+  float: left;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+input:checked + .slider {
+  background-color: $brand-primary;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px $brand-primary;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.credit-card-form {
+  padding: $md;
+  border-radius: 8px;
+  border: 1px solid $light-gray;
+  background: #FFFFFF;
+}
+
+.form-inline {
+  .form-control, .form-label {
+    display: inline-block;
+  }
+
+  .form-label {
+    margin-top: 0.3rem;
+    margin-right: 1rem;
+  }
+}
+
+.form-inline-group {
+  padding: 1rem 0;
+}

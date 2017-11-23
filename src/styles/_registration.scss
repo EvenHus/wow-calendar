@@ -1,0 +1,22 @@
+.registration-logo {
+  padding: $md 0;
+  width: 200px;
+  height: auto;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.registration-step {
+  // @extend .vertically-aligned;
+}
+
+.registration-step-title {
+  margin-bottom: $sm;
+}
+
+.registration-step-text {
+  margin-top: 0;
+}
