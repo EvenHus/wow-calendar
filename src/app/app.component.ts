@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {Observable} from "rxjs/Observable";
-import {Router} from "@angular/router";
+import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
