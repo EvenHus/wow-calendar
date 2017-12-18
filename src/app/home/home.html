@@ -12,8 +12,11 @@
   <button class="primary-button margin-top-md" (click)="dataButton()">See my mounts</button>
 
   <ul>
-    <li *ngFor="let mounts of data.mounts.collected; let i = index">
-      {{mounts[i].name}}
+    <li *ngFor="let mounts of data">
+      <p>{{mounts.name}}</p>
     </li>
   </ul>
+  <div >
+
+  </div>
 </div>

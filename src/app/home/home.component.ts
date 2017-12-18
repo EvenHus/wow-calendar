@@ -1,27 +1,25 @@
-import {Component, OnChanges} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {HttpClient} from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
   templateUrl: './home.html'
 })
 
-export class HomeComponent implements OnChanges{
-  data: any = [];
+export class HomeComponent {
+  data: any [] = [];
   name: string;
   realm: string;
 
   constructor(private _http: HttpClient) {
   }
 
-  ngOnChanges() {
-  }
-
   getWowData(url): void {
     this._getData(url).subscribe(data => {
-      this.data = data;
-      console.log(this.data.length);
+      this.data = data.mounts.collected;
+      console.log(this.data);
     });
   }
 
