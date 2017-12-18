@@ -1,5 +1,19 @@
 <div class="container">
-  <div class="row nav-header">
+  <form>
+    <div class="form-group">
+      <label class="form-label">Realm: </label>
+      <input type="text" class="form-control" name="title" [(ngModel)]="realm" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Character name: </label>
+      <input type="text" class="form-control" name="title" [(ngModel)]="name" required>
+    </div>
+  </form>
+  <button class="primary-button margin-top-md" (click)="dataButton()">See my mounts</button>
 
-  </div>
+  <ul>
+    <li *ngFor="let mounts of data.mounts.collected; let i = index">
+      {{mounts[i].name}}
+    </li>
+  </ul>
 </div>

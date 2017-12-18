@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import {appRoutes} from './app.router';
 import {LoginModule} from './login/login.module';
 import {CoreModule} from './core/core.module';
+import {NavModule} from './nav/nav.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {CoreModule} from './core/core.module';
     LoginModule,
     CoreModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    NavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
