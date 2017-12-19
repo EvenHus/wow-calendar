@@ -1,0 +1,21 @@
+
+<button type="submit" class="primary-button margin-top-md" (click)="setData()">See my raid progression</button>
+
+<div class="list row">
+  <div class="col-md-6" *ngFor="let raids of data">
+    <div class="list-item clickable">
+      <div class="list-item-content">
+        <div class="list-item-text">
+          <div class="list-item-heading">{{raids.name}}</div>
+          <div class="list-item-sub-heading"
+               *ngFor="let bosses of raids.bosses">
+            Boss: {{bosses.name}}
+            <br>Lfr kills: {{bosses.lfrKills}}<br>Normal Kills: {{bosses.normalKills}}
+            <br>Heroic Kills: {{bosses.heroicKills}}<br>Mytic Kills: {{bosses.mythicKills}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

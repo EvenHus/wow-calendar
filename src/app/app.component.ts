@@ -13,7 +13,6 @@ export class AppComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.isLoggedIn);
   }
 
   checkAuth(args: boolean) {

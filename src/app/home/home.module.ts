@@ -3,7 +3,8 @@ import {HomeComponent} from './home.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-
+import {MountsModule} from "../mounts/mounts.module";
+import {ProgressionModule} from "../progression/progression.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,9 @@ import {CommonModule} from '@angular/common';
   imports: [
     RouterModule.forChild([{path: '', component: HomeComponent}]),
     FormsModule,
-    CommonModule
+    CommonModule,
+    MountsModule,
+    ProgressionModule
   ]
 })
 

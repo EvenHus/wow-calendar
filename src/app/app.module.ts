@@ -21,7 +21,7 @@ import {NavModule} from './nav/nav.module';
     CoreModule,
     CommonModule,
     HttpClientModule,
-    NavModule
+    NavModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

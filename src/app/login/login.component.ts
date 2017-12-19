@@ -12,11 +12,9 @@ export class LoginComponent {
   name: string = null;
 
   constructor() {
-    console.log(name);
   }
 
   login(): void {
-    console.log('login');
     if (this.name === 'even') {
       this.authenticated.emit(true);
     } else {

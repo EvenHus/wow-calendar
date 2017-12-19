@@ -1,38 +1,34 @@
 import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs/Subscription';
+import {ApiService} from "../core/api.service";
+import {Subject} from "rxjs/Subject";
 
 @Component({
   moduleId: module.id,
   templateUrl: './home.html'
 })
 
-export class HomeComponent {
-  data: any [] = [];
+export class HomeComponent implements OnInit{
   name: string;
   realm: string;
+  tab: string;
 
-  constructor(private _http: HttpClient) {
+
+  realmList: string[] = ['Dragonblight', 'Aggramar', 'Outland', 'Stormscale'];
+
+  constructor(private _api: ApiService) {
+
   }
 
-  getWowData(url): void {
-    this._getData(url).subscribe(data => {
-      this.data = data.mounts.collected;
-      console.log(this.data);
-    });
-  }
-
-  dataButton(): void {
-    if (this.name && this.realm) {
-      const url = 'https://eu.api.battle.net/wow/character/'
-        + this.realm + '/' + this.name + '?fields=mounts&locale=en_GB&apikey=p28jsb432q4vdd3zb9xtcdss6bpgatt3';
-      this.getWowData(url);
+  ngOnInit() {
+    if (!this.tab) {
+      this.tab = 'mounts';
     }
+    console.log(this.realm);
   }
 
-  private _getData(url: any): Observable<any> {
-    return this._http.get(url);
+  setTab(tab: string): void {
+    this.tab = tab;
   }
-
 }

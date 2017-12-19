@@ -5,7 +5,7 @@
         <form class="login-form" #loginForm="ngForm" (ngSubmit)="login()" novalidate>
           <div class="form-group">
             <div class="form-label-group">
-              <input class="form-control" type="email" name="username" autofocus (keyup)="name = name.toLowerCase()" #username="ngModel" [(ngModel)]="name" required>
+              <input class="form-control" type=password name="username" autofocus (keyup)="name = name.toLowerCase()" #username="ngModel" [(ngModel)]="name" required>
             </div>
           </div>
           <button type="submit" class="primary-button button-block">Login</button>
