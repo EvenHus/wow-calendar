@@ -25,7 +25,8 @@ export class TitelsComponent {
 
   private _getProgressionData(url: string): void {
     this._api.getData(url).subscribe( data => {
-      this.data = data.progression.raids;
+      this.data = data;
+      console.log(this.data);
     });
   }
 }
