@@ -10,4 +10,8 @@ export class ApiService {
   getData(url: any): Observable<any> {
     return this._http.get(url);
   }
+
+  getKey() {
+    return 'p28jsb432q4vdd3zb9xtcdss6bpgatt3';
+  }
 }
