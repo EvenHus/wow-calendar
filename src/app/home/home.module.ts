@@ -6,6 +6,7 @@ import {CommonModule} from '@angular/common';
 import {MountsModule} from "../mounts/mounts.module";
 import {ProgressionModule} from "../progression/progression.module";
 
+
 @NgModule({
   declarations: [
     HomeComponent

@@ -2,9 +2,10 @@
   <form class="row">
     <div class="form-group col-md-6">
       <label class="form-label">Realm: </label>
-      <select [name]="realm" class="form-control">
-        <option *ngFor="let realmValue of realmList" value="{{realmValue}}">{{realmValue}}</option>
+      <select [(ngModel)]="realm" name="Select realm" class="form-control">
+        <option *ngFor="let realms of realmList" [attr.value]="realms">{{realms}}</option>
       </select>
+      <!--<input type="text" class="form-control" name="realm" [(ngModel)]="realm" required>-->
     </div>
     <div class="form-group col-md-6">
       <label class="form-label">Character name: </label>
@@ -21,7 +22,7 @@
 
   <div class="container">
     <div *ngIf="tab === 'mounts'">
-      <app-mounts [realm]="valueOf(realm)" [name]="name"></app-mounts>
+      <app-mounts [realm]="realm" [name]="name"></app-mounts>
     </div>
     <div *ngIf="tab === 'progression'">
       <app-progression [name]="name" [realm]="realm"></app-progression>
