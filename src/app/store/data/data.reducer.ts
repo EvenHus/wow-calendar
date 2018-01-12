@@ -1,36 +1,73 @@
 import * as DataActions from './data.actions';
+import {Data} from "@angular/router";
 
 export type action = DataActions.All;
 
 export interface DataState {
   loading: boolean;
   errorMessage: string;
-  data: any;
+  mounts: any;
+  progression: any;
+  titles: any;
 }
 
 const initalState: DataState = {
   loading: null,
   errorMessage: null,
-  data: null
+  mounts: null,
+  progression: null,
+  titles: null
 };
 
 export function reducer(state: DataState = initalState, {type, payload}: action): DataState {
   switch (type) {
-    case DataActions.LOAD_DATA:
+    case DataActions.LOAD_MOUNTS:
       return Object.assign({}, state, {
         loading: true,
         erroMessage: null
       });
-    case DataActions.LOAD_DATA_FAILURE:
+    case DataActions.LOAD_MOUNTS_FAILURE:
       return Object.assign({}, state, {
         errorMessage: 'An error ha occurred, try again',
         loading: false
       });
-    case DataActions.LOAD_DATA_SUCCESS:
+    case DataActions.LOAD_MOUNTS_SUCCESS:
       return Object.assign({}, state, {
         loading: false,
         errorMessage: null,
-        data: payload
+        mounts: payload
+      });
+    case DataActions.LOAD_PROGRESSION:
+      return Object.assign({}, state, {
+        loading: true,
+        errorMessage: null
+      });
+    case DataActions.LOAD_PROGRESSION_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        errorMessage: null,
+        progression: payload
+      });
+    case DataActions.LOAD_PROGRESSION_FAILED:
+      return Object.assign({}, state, {
+        loading: false,
+        errorMessage: 'An error occurred' + payload,
+      });
+    case DataActions.LOAD_TITLES:
+      return Object.assign({}, state, {
+        loading: true,
+        errorMessage: null
+      });
+    case DataActions.LOAD_TITLES_FAILED:
+      return Object.assign({}, state, {
+        loading: false,
+        errorMessage: 'An error occurred' + payload
+      });
+    case DataActions.LOAD_TITLES_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        titles: payload,
+        errorMessage: null
       });
     default:
       return state;
@@ -39,4 +76,6 @@ export function reducer(state: DataState = initalState, {type, payload}: action)
 
 export const getLoadingState = (state: DataState) => state.loading;
 export const getErrorMessage = (state: DataState) => state.errorMessage;
-export const getData = (state: DataState) => state.data;
+export const getMounts = (state: DataState) => state.mounts;
+export const getProgression = (state: DataState) => state.progression;
+export const getTitles = (state: DataState) => state.titles;

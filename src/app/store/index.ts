@@ -23,5 +23,7 @@ export const metaReducers: MetaReducer<any>[] = [resetReducer];
 export const getDataState = (state: IAppState) => state.data;
 export const getDataLoadingState = createSelector(getDataState, fromData.getLoadingState);
 export const getDataErrorState = createSelector(getDataState, fromData.getErrorMessage);
-export const getDataContentState = createSelector(getDataState, fromData.getData);
+export const getMounts = createSelector(getDataState, fromData.getMounts);
+export const getProgression = createSelector(getDataState, fromData.getProgression);
+export const getTitles = createSelector(getDataState, fromData.getTitles);
 

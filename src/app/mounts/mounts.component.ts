@@ -1,5 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../core/api.service';
+import * as rootState from '../store/index';
+import * as DataActions from '../store/data/data.actions';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
@@ -7,27 +12,35 @@ import {ApiService} from '../core/api.service';
   templateUrl: './mounts.html'
 })
 
-export class MountsComponent {
+export class MountsComponent implements OnDestroy, OnChanges{
   @Input() realm: string;
   @Input() name: string;
 
   data: any [] = [];
+  loading$: Observable<boolean>;
+  mountSubscription: Subscription;
 
-  constructor(private _api: ApiService) {
+
+  constructor(private _api: ApiService, private _store: Store<rootState.IAppState>) {
+    this.loading$ = this._store.select(rootState.getDataLoadingState);
   }
 
-  getWowData(url): void {
-    this._api.getData(url).subscribe(data => {
-      this.data = data.mounts.collected;
-      console.log(this.data);
-    });
-  }
-
-  dataButton(): void {
-    if (this.name && this.realm) {
-      const url = 'https://eu.api.battle.net/wow/character/'
-        + this.realm + '/' + this.name + '?fields=mounts&locale=en_GB&apikey=p28jsb432q4vdd3zb9xtcdss6bpgatt3';
-      this.getWowData(url);
+  ngOnChanges(): void {
+    if (this.realm && this.name) {
+      this.mountSubscription = this._store.select(rootState.getMounts).subscribe(data => {
+        if (data) {
+          this.data = data.mounts.collected;
+        }
+      });
+      this._store.dispatch(new DataActions.LoadMounts({name: this.name, realm: this.realm}));
     }
   }
+
+  ngOnDestroy(): void {
+    if (this.mountSubscription) {
+      this.mountSubscription.unsubscribe();
+    }
+  }
+
+
 }

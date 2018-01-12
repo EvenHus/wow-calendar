@@ -1,5 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../core/api.service';
+import {Subscription} from "rxjs/Subscription";
+import {Store} from "@ngrx/store";
+import * as rootState from '../store/index';
+import * as DataActions from '../store/data/data.actions';
 
 @Component({
   moduleId: module.id,
@@ -7,26 +11,34 @@ import {ApiService} from '../core/api.service';
   templateUrl: './titles.html'
 })
 
-export class TitelsComponent {
+export class TitelsComponent implements OnChanges, OnDestroy {
   @Input() name: string;
   @Input() realm: string;
 
   data: any[] = [];
+  tempData: any[] = [];
+  titlesSubscription: Subscription;
 
-  constructor(private _api: ApiService, ) {}
+  constructor(private _api: ApiService, private _store: Store<rootState.IAppState>) {}
 
-  setData(): void {
+  ngOnChanges(): void {
     if (this.name && this.realm) {
-      const url = 'https://eu.api.battle.net/wow/character/' +
-        this.realm + '/' + this.name + '?fields=titles&locale=en_GB&apikey=' + this._api.getKey() + '';
-      this._getProgressionData(url);
+      this.titlesSubscription = this._store.select(rootState.getTitles).subscribe( data => {
+        if (data) {
+          data.titles.map(titles => {
+            const title = titles.name.replace('%s', this.name);
+            this.data.push(title);
+            console.log(title);
+          });
+        }
+      });
+      this._store.dispatch(new DataActions.LoadTitles({name: this.name, realm: this.realm}));
     }
   }
 
-  private _getProgressionData(url: string): void {
-    this._api.getData(url).subscribe( data => {
-      this.data = data;
-      console.log(this.data);
-    });
+  ngOnDestroy(): void {
+    if (this.titlesSubscription) {
+      this.titlesSubscription.unsubscribe();
+    }
   }
 }

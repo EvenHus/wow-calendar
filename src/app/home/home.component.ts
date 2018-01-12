@@ -9,9 +9,9 @@ import {Subject} from "rxjs/Subject";
   templateUrl: './home.html'
 })
 
-export class HomeComponent implements OnInit{
-  name: string;
-  realm: string;
+export class HomeComponent implements OnInit {
+  name: string = 'Salasade';
+  realm: string = 'aggramar';
   tab: string;
 
 
