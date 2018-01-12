@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {MountsModule} from "../mounts/mounts.module";
 import {ProgressionModule} from "../progression/progression.module";
+import {TitlesModule} from "../titles/titles.module";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {ProgressionModule} from "../progression/progression.module";
     FormsModule,
     CommonModule,
     MountsModule,
-    ProgressionModule
+    ProgressionModule,
+    TitlesModule
   ]
 })
 

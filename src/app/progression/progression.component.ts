@@ -1,5 +1,10 @@
-import {Component, Input} from "@angular/core";
-import {ApiService} from "../core/api.service";
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {ApiService} from '../core/api.service';
+import * as rootState from '../store/index';
+import * as DataActions from '../store/data/data.actions';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
@@ -7,25 +12,31 @@ import {ApiService} from "../core/api.service";
   templateUrl: './progression.html'
 })
 
-export class ProgressionComponent {
-  data: any[] = [];
+export class ProgressionComponent implements OnDestroy, OnChanges {
   @Input() name: string;
   @Input() realm: string;
+  data: any[] = [];
+  loading$: Observable<boolean>;
+  progressionSubscription: Subscription;
 
-  constructor(private _api: ApiService) {
+  constructor(private _api: ApiService, private _store: Store<rootState.IAppState>) {
+    this.loading$ = this._store.select(rootState.getDataLoadingState);
   }
 
-  setData(): void {
+  ngOnChanges(): void {
     if (this.name && this.realm) {
-      const url = 'https://eu.api.battle.net/wow/character/'
-        + this.realm + '/' + this.name + '?fields=progression&locale=en_GB&apikey=p28jsb432q4vdd3zb9xtcdss6bpgatt3';
-      this._getProgressionData(url);
+      this.progressionSubscription = this._store.select(rootState.getProgression).subscribe( data => {
+        if (data) {
+          this.data = data.progression.raids;
+        }
+      });
+      this._store.dispatch(new DataActions.LoadProgression({name: this.name, realm: this.realm}));
     }
   }
 
-  private _getProgressionData(url: string): void {
-    this._api.getData(url).subscribe( data => {
-      this.data = data.progression.raids;
-    });
+  ngOnDestroy(): void {
+    if (this.progressionSubscription) {
+      this.progressionSubscription.unsubscribe();
+    }
   }
 }
