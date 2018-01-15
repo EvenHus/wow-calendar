@@ -10,8 +10,8 @@ import {Subject} from "rxjs/Subject";
 })
 
 export class HomeComponent implements OnInit {
-  name: string = 'Salasade';
-  realm: string = 'aggramar';
+  name: string;
+  realm: string;
   tab: string;
 
 
@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
     if (!this.tab) {
       this.tab = 'mounts';
     }
-    console.log(this.realm);
   }
 
   setTab(tab: string): void {
