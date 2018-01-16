@@ -8,15 +8,19 @@ import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 
 export class LoginComponent {
   @ViewChild('loginForm') loginForm;
-  @Output() authenticated: EventEmitter<boolean> = new EventEmitter();
+  @Output() authenticated: EventEmitter<any> = new EventEmitter();
+  password: string;
   name: string;
+  realm: string;
 
   constructor() {
+
   }
 
   login(): void {
-    if (this.name === 'even') {
-      this.authenticated.emit(true);
+    if (this.password === 'even') {
+      const send = {valid: true, user: this.name};
+      this.authenticated.emit(send);
     } else {
       alert('Login failed');
     }

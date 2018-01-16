@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     if (!this.tab) {
       this.tab = 'mounts';
     }
+    this.realm = this.realmList[1];
   }
 
   setTab(tab: string): void {

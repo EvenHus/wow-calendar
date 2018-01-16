@@ -9,11 +9,12 @@ import * as RecordRtc from 'recordrtc';
 
 export class CameraComponent implements AfterViewInit {
   @ViewChild('video') video: any;
-  canDownload: boolean = false;
-  stream: any;
+  canDownload: boolean;
+  stream: MediaStream;
   recordRTC: any;
-
+  
   constructor() {
+    this.canDownload = true;
   }
 
   ngAfterViewInit(): void {
@@ -64,12 +65,13 @@ export class CameraComponent implements AfterViewInit {
     const stream = this.stream;
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
+    this.canDownload = false;
   }
 
-  processVideo(): void {
+  processVideo(audioVideoWebMURL): void {
     const video: HTMLVideoElement = this.video.nativeElement;
     const recordRTC = this.recordRTC;
-    console.log(video.src);
+    video.src = audioVideoWebMURL;
     this.toggleControls();
     const recordedBlob = recordRTC.getBlob();
     recordRTC.getDataURL(dataURL => {});
