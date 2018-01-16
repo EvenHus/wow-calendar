@@ -9,7 +9,7 @@ import {TitlesModule} from "../titles/titles.module";
 
 export const homeRoutes: Route[] = [
   {path: '', component: HomeComponent},
-  {path: ':user', component: HomeComponent}
+  {path: ':user/:realm', component: HomeComponent}
 ];
 
 @NgModule({
