@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnChanges {
-  isLoggedIn: boolean;
+  isLoggedIn: boolean = true;
 
   constructor(private _router: Router) {
   }
