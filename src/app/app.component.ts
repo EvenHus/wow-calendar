@@ -18,7 +18,7 @@ export class AppComponent implements OnChanges {
   checkAuth(args: any) {
     if (args) {
       this.isLoggedIn = args.valid;
-      this._router.navigate(['home', args.user]);
+      this._router.navigate(['home', args.user, args.realm]);
     } else {
       this.isLoggedIn = args;
     }
