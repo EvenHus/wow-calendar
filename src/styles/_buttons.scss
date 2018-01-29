@@ -7,7 +7,7 @@
   transition: all 0.25s ease-out;
 }
 
-.primary-button {
+.primary-button { //TODO: find primary color
   @extend .button-base;
   color: #FFFFFF;
   background: $brand-primary;
