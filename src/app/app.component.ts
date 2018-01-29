@@ -15,10 +15,10 @@ export class AppComponent implements OnChanges {
   ngOnChanges() {
   }
 
-  checkAuth(args: boolean) {
+  checkAuth(args: any) {
     if (args) {
-      this.isLoggedIn = args;
-      this._router.navigate(['home']);
+      this.isLoggedIn = args.valid;
+      this._router.navigate(['home', args.user, args.realm]);
     } else {
       this.isLoggedIn = args;
     }

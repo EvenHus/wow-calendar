@@ -2,7 +2,7 @@
   <form class="row">
     <div class="form-group col-md-6">
       <label class="form-label">Realm: </label>
-      <select [(ngModel)]="realm" name="Select realm" class="form-control">
+      <select [(ngModel)]="realm" name="Select realm" class="select-control">
         <option *ngFor="let realms of realmList" [attr.value]="realms">{{realms}}</option>
       </select>
     </div>
