@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {Action} from '@ngrx/store';
 import {ApiService} from '../../core/api.service';
 import 'rxjs/add/operator/map';
-import {Data} from "@angular/router";
+import 'rxjs/add/operator/switchMap';
 
 @Injectable()
 export class DataEffects {
