@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs/Rx";
+import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable()
@@ -24,6 +24,6 @@ export class ApiService {
   getTitles(name: string, realm: string): Observable<any> {
     const url = 'https://eu.api.battle.net/wow/character/' +
       realm + '/' + name + '?fields=titles&locale=en_GB&apikey=' + this._key;
-    return this._http.get(url);
+    return  this._http.get(url);
   }
 }

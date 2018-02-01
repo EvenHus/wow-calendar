@@ -28,7 +28,6 @@ export class TitelsComponent implements OnChanges, OnDestroy {
           data.titles.map(titles => {
             const title = titles.name.replace('%s', this.name);
             this.data.push(title);
-            console.log(title);
           });
         }
       });

@@ -6,6 +6,7 @@ import {Action} from '@ngrx/store';
 import {ApiService} from '../../core/api.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class DataEffects {
