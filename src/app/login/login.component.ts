@@ -18,7 +18,7 @@ export class LoginComponent {
   }
 
   login(): void {
-    if (this.password === 'password') {
+    if (this.password === 'even') {
       const send = {valid: true, user: this.name, realm: this.realm};
       this.authenticated.emit(send);
     } else {
