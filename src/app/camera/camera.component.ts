@@ -7,12 +7,12 @@ import * as RecordRtc from 'recordrtc';
   templateUrl: './camera.html'
 })
 
-export class CameraComponent implements AfterViewInit {
+export class CameraComponent {} /* implements AfterViewInit {
   @ViewChild('video') video: any;
   canDownload: boolean;
   stream: MediaStream;
   recordRTC: any;
-  
+
   constructor() {
     this.canDownload = true;
   }
@@ -84,4 +84,4 @@ export class CameraComponent implements AfterViewInit {
   errorCallback(error: any) {
     console.log('error', error);
   }
-}
+}*/

@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('wow-calendar App', () => {
+describe('wow-team-calendar App', () => {
   let page: AppPage;
 
   beforeEach(() => {

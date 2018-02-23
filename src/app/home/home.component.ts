@@ -1,8 +1,6 @@
 import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
-import {Subscription} from 'rxjs/Subscription';
-import {ApiService} from "../core/api.service";
-import {Subject} from "rxjs/Subject";
+import {ApiService} from '../core/api.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -17,11 +15,13 @@ export class HomeComponent implements OnInit {
 
   realmList: string[] = ['Dragonblight', 'Aggramar', 'Outland', 'Stormscale'];
 
-  constructor(private _api: ApiService) {
-
+  constructor(private _activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    const params = this._activatedRoute.snapshot.params;
+    this.name = params.user;
+    this.realm = params.realm;
     if (!this.tab) {
       this.tab = 'mounts';
     }
