@@ -1,0 +1,152 @@
+$cell-size: 4rem;
+$padding: 1.6rem;
+
+.date-picker {
+  position: relative;
+
+  &__inputs {
+    display: flex;
+  }
+
+  &__date-input {
+    flex: 1;
+  }
+
+  &__time-input {
+    flex: 1;
+  }
+
+  &__input {
+    @extend .form__control;
+  }
+
+  // CALENDAR
+  &__calendar {
+    @include elevate-1;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    padding: $padding;
+    width: calc((#{$cell-size} * 7) + (#{$padding} * 2));
+    background: $color-white;
+    border-radius: 4px;
+    z-index: 1;
+  }
+
+  &__header {
+    display: flex;
+  }
+
+  &__header-section {
+
+    &--1 {
+      flex: 1;
+      font-size: $default-font-size;
+      font-weight: bold;
+    }
+
+    &--2 {
+      font-size: $default-font-size;
+      text-align: right;
+
+      button {
+        font-family: "Ionicons";
+        font-size: $default-font-size;
+        border: none;
+        background: $color-white;
+        outline: none;
+        transition: all;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:hover, &:active {
+          border-radius: 50%;
+          background-color: $color-light-gray;
+        }
+      }
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  &__weekdays {
+    @include clearfix;
+    padding: 0.5rem 0;
+  }
+
+  &__weekday {
+    float: left;
+    width: $cell-size;
+    color: $color-dark-grey;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  &__dates {
+    @include clearfix;
+    font-size: $default-font-size;
+    max-height: calc(#{$cell-size} * 5);
+    overflow-y: scroll;
+  }
+
+  &__date {
+    float: left;
+    padding-top: 0.4rem;
+    width: $cell-size;
+    height: $cell-size;
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover, &:active {
+      border-radius: 50%;
+      background-color: $color-light-gray;
+    }
+  }
+
+  &__selected-date {
+    border-radius: 50%;
+    background-color: $color-light-gray;
+  }
+}
+
+// TIME
+.time-picker {
+  &__input {
+    @extend .form__control;
+  }
+
+  &__hour-list {
+    @include elevate-1;
+    position: absolute;
+    top: 4rem;
+    right: 0;
+    width: 20rem;
+    height: 15rem;
+    font-size: $default-font-size;
+    background: $color-white;
+    border-radius: 4px;
+    z-index: 1;
+    overflow-y: auto;
+  }
+
+  &__hour-list-item {
+    padding: $padding;
+    transition: all 0.25s;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-lighter-gray;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-lighter-gray;
+    }
+  }
+}

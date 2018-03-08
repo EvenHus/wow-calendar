@@ -1,0 +1,96 @@
+.comments {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.comment {
+  display: flex;
+  padding: $md;
+  border-top: 1px solid $color-lighter-gray;
+  background: darken($color-white, 1%);
+
+  &__avatar {
+    margin-right: 1rem;
+  }
+
+  &__avatar-img {
+    @extend .rounded-img-sm;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__content-header {
+    display: flex;
+  }
+
+  &__creator {
+    flex: 1;
+    font-size: $small-font-size;
+    font-weight: 700;
+    color: $color-brand-primary;
+  }
+
+  &__options {
+
+  }
+
+  &__text {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__meta {
+    font-size: $small-font-size;
+    color: rgba($color-blackish, 0.5);
+  }
+
+  &__buttons {
+    float: right;
+  }
+}
+
+.comment-form-wrapper {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding: 0.5rem;
+  border-top: 1px solid $color-lighter-gray;
+  background-color: darken($color-white, 1%);
+
+  @media only screen and (min-width: $md-breakpoint) {
+    position: static;
+    padding: 0;
+    border: none;
+  }
+}
+
+.comment-form {
+  display: flex;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    margin-top: $md;
+  }
+
+  &__input {
+    @extend .form__control;
+    flex: 1;
+  }
+
+  &__button {
+    @extend .button;
+    @extend .button--primary;
+    padding: 0.8rem 1.6rem;
+    font-size: $small-font-size;
+    margin-left: 1rem;
+
+    &:disabled {
+      background: rgba($color-brand-primary, 0.3);
+    }
+  }
+}

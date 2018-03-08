@@ -1,0 +1,79 @@
+.image-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($color-blackish, 0.8);
+  z-index: 4;
+
+  &__close-button {
+    position: absolute;
+    top: 6rem;
+    right: 6rem;
+    width: 4rem;
+    height: 4rem;
+    padding-top: 0.3rem;
+    font-family: "Ionicons";
+    font-size: 2rem;
+    text-align: center;
+    color: darken($color-white, 10%);
+    border: none;
+    background: transparent;
+    transition: all 0.25s;
+
+    &:hover, &:active {
+      cursor: pointer;
+      color: $color-white;
+    }
+  }
+
+  &__box {
+    position: absolute;
+    width: 80vw;
+    height: 70vh;
+    top: 50%;
+    left: 50%;
+    border-radius: $border-radius;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
+
+  &__slider {
+    width: auto;
+    height: 70vh;
+
+    img {
+      margin: 0 auto;
+      display: block;
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  &__button {
+    font-family: "Ionicons";
+    font-size: 5rem;
+    color: darken($color-white, 10%);
+    border: none;
+    background: transparent;
+    transition: all 0.25s;
+
+    &:hover, &:active {
+      cursor: pointer;
+      color: $color-white;
+    }
+  }
+
+  &__prev-button {
+    @include center-vertically;
+    @extend .image-viewer__button;
+    left: 4rem;
+  }
+
+  &__next-button {
+    @include center-vertically;
+    @extend .image-viewer__button;
+    right: 4rem;
+  }
+}

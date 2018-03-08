@@ -1,0 +1,192 @@
+.calendar {
+  position: relative;
+  margin-top: $md;
+  width: 100%;
+
+  &__header {
+    display: flex;
+  }
+
+  &__header-navigation {
+    display: flex;
+    flex: 1;
+
+    &:last-of-type {
+      align-items: flex-end;
+    }
+  }
+
+  &__header-navigation-item {
+    flex: 1;
+
+    &:first-of-type > &__header-navigation-item-button {
+      border: 1px solid $color-lighter-gray;
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+
+    &:last-of-type > &__header-navigation-item-button {
+      border-top: 1px solid $color-lighter-gray;
+      border-bottom: 1px solid $color-lighter-gray;
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
+  &__header-navigation-item-button {
+    width: 100%;
+    padding: $sm;
+    font-weight: bold;
+    border: none;
+    border-top: 1px solid $color-lighter-gray;
+    border-right: 1px solid $color-lighter-gray;
+    border-bottom: 1px solid $color-lighter-gray;
+    background: $color-white;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--active {
+      color: $color-white;
+      background: $color-brand-primary;
+    }
+  }
+
+  &__header-single-navigation-item {
+    margin-left: $md;
+  }
+
+  &__header-single-navigation-item-button {
+    @extend .calendar__header-navigation-item-button;
+    border-radius: $border-radius;
+    padding: $sm $md;
+    color: $color-white;
+    background: $color-brand-primary;
+  }
+
+  &__header-title {
+    flex: 1;
+    padding: $md;
+    font-weight: bold;
+    font-size: $default-font-size;
+    text-align: center;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      padding: 0;
+    }
+  }
+
+  &__now-indicator {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: $color-brand-primary;
+  }
+
+  &__timeline {
+    float: left;
+    width: calc(100% / 8);
+  }
+
+  &__weekday-heading {
+    padding-top: $md;
+    font-size: $default-font-size;
+    text-align: center;
+    height: $calendar-cell-height;
+    border-bottom: 1px solid $color-lighter-gray;
+  }
+
+  &__timeline-slot {
+    font-size: $default-font-size;
+    height: $calendar-cell-height;
+    border-bottom: 1px solid $color-lighter-gray;
+  }
+
+  &__weekday {
+    float: left;
+    width: calc(100% / 8);
+    height: $calendar-cell-height;
+    font-size: $default-font-size;
+    border-bottom: 1px solid $color-lighter-gray;
+
+    &--today {
+      font-weight: bold;
+      background: darken($color-white, 5%);
+    }
+
+    &--day-view {
+      float: left;
+      width: calc(100% - (100% / 8));
+    }
+
+    &--month-view {
+      float: left;
+      padding: $sm;
+      width: calc(100% / 7);
+      height: 16rem;
+      border-bottom: 1px solid $color-lighter-gray;
+      border-right: 1px solid $color-lighter-gray;
+    }
+  }
+
+  &__date {
+    font-size: $small-font-size;
+  }
+
+  &__weekday-slot {
+    height: $calendar-cell-height;
+    border-bottom: 1px solid $color-lighter-gray;
+  }
+
+  &__occurrences {
+    display: flex;
+  }
+
+  &__occurrence-title {
+
+  }
+
+  &__occurrence-time {
+
+  }
+
+  &__occurrence {
+    @include elevate-1;
+    flex: 1;
+    position: relative;
+    padding: 0.5rem;
+    font-size: $default-font-size;
+    border-left: 2px solid $color-brand-info;
+    background: rgba($color-brand-info, 0.1);
+    overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--passed {
+      color: $color-dark-grey;
+      border-left-color: $color-dark-grey;
+      background: $color-lighter-gray;
+    }
+
+    &--cancelled {
+      color: $color-brand-danger;
+      border-left-color: $color-brand-danger;
+      background: rgba($color-brand-danger, 0.1);
+      text-decoration: line-through;
+    }
+
+    &--month-view {
+      @include elevate-1;
+      margin-bottom: 0.2rem;
+      padding: 0.5rem;
+      border-radius: $border-radius;
+      font-size: $small-font-size;
+      border-left: 2px solid transparent;
+      background: $color-white;
+      overflow: hidden;
+    }
+  }
+}

@@ -1,0 +1,116 @@
+.profile {
+  &__content-wrapper {
+    @media only screen and (min-width: $md-breakpoint) {
+      margin: 0 auto;
+      max-width: 100ch;
+    }
+  }
+
+  &__header {
+    height: 10rem;
+    background-color: $color-brand-primary;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      height: 12rem;
+    }
+  }
+
+  &__header-image-wrapper {
+    position: relative;
+  }
+
+  &__header-img {
+    @extend .rounded-img-lg;
+    display: block;
+    margin: 0 auto;
+    background-color: white;
+
+    .spinner {
+      margin-top: 2.5rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__header-img > input[type="file"] {
+    height: 0;
+    visibility: hidden;
+  }
+
+  &__header-heading {
+    font-size: 3.2rem;
+    color: $color-white;
+    text-align: center;
+  }
+
+  &__header-sub-heading {
+    font-size: $default-font-size;
+    color: $color-white;
+    text-align: center;
+  }
+
+  &__menu {
+    @include elevate-1;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    top: 2rem;
+    left: 0;
+    width: 100%;
+    background-color: $color-white;
+  }
+
+  &__menu-item {
+    display: block;
+    padding: $sm $md;
+    font-size: $default-font-size;
+    transition: all 0.25s ease-out;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-lighter-gray;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: darken($color-white, 10%);
+    }
+  }
+
+  &__content {
+    @extend .container;
+    margin-top: -6.5rem;
+  }
+
+  &__name {
+    margin: $sm 0 0 0;
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  &__subheading {
+    font-size: $default-font-size;
+    text-align: center;
+  }
+
+  &__description {
+    padding: $md 0;
+    font-size: $default-font-size;
+  }
+
+  &__buttons {
+    flex: 1;
+    margin-top: 8rem;
+    text-align: right;
+  }
+
+  &__buttons > .button {
+    margin-right: $sm;
+
+    &:not(:last-child) {
+      margin-right: 0;
+    }
+  }
+}

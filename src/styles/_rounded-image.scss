@@ -1,38 +1,14 @@
 .rounded-img-wrapper {
-  @extend .elevate-1;
+  @include elevate-1;
   border-radius: 50%;
   overflow: hidden;
 }
 
 .rounded-img-xs {
   @extend .rounded-img-wrapper;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid #FFFFFF;
-
-  img {
-    width: auto;
-    height: 2rem;
-  }
-}
-
-.rounded-img-sm {
-  @extend .rounded-img-wrapper;
-  width: 3rem;
-  height: 3rem;
-  border: 2px solid #FFFFFF;
-
-  img {
-    width: auto;
-    height: 3rem;
-  }
-}
-
-.rounded-img-md {
-  @extend .rounded-img-wrapper;
   width: 4rem;
   height: 4rem;
-  border: 2px solid #FFFFFF;
+  border: 1px solid #FFFFFF;
 
   img {
     width: auto;
@@ -40,15 +16,39 @@
   }
 }
 
+.rounded-img-sm {
+  @extend .rounded-img-wrapper;
+  width: 5rem;
+  height: 5rem;
+  border: 2px solid $color-white;
+
+  img {
+    width: auto;
+    height: 5rem;
+  }
+}
+
+.rounded-img-md {
+  @extend .rounded-img-wrapper;
+  width: 6rem;
+  height: 6rem;
+  border: 3px solid #FFFFFF;
+
+  img {
+    width: auto;
+    height: 6rem;
+  }
+}
+
 .rounded-img-lg {
   @extend .rounded-img-wrapper;
-  width: 8rem;
-  height: 8rem;
+  width: 13rem;
+  height: 13rem;
   border: 6px solid #FFFFFF;
 
   img {
     margin: 0 auto;
     width: auto;
-    height: 7.5rem;
+    height: 12.5rem;
   }
 }

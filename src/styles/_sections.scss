@@ -1,0 +1,45 @@
+.section {
+  padding: $md 0;
+}
+
+.section-checklist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.section-checklist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: $sm;
+}
+
+.section-checklist-item-icon {
+  @extend .icon;
+  margin-right: $sm;
+}
+
+.section-checklist-item-icon-checked {
+  @extend .section-checklist-item-icon;
+  color: $color-brand-success;
+}
+
+.section-checklist-item-icon-unchecked {
+  @extend .section-checklist-item-icon;
+  color: $color-brand-danger;
+}
+
+.section-checklist-item-text {
+  flex: 1;
+}
+
+.section-image {
+  width: 8rem;
+  height: 8rem;
+  overflow: hidden;
+
+  img {
+    width: 8rem;
+    height: auto;
+  }
+}

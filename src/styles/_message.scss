@@ -1,68 +1,72 @@
 .message {
-  padding: $sm;
-  border-bottom: 1px solid $light-gray;
-}
+  padding: 1.6rem;
+  border-bottom: 1px solid $color-light-gray;
+  background: $color-white;
 
-.message-row {
-  display: flex;
-}
+  &__row {
+    display: flex;
+  }
 
-.message-icons {
-  width: 36px;
-  margin-right: 1rem;
-}
+  &__icons {
+    width: 36px;
+    margin-right: 1rem;
+  }
 
-.message-content {
-  flex: 1;
-}
+  &__content {
+    flex: 1;
+  }
 
-.message-heading {
-  display: flex;
-  font-weight: bold;
-  color: $brand-primary;
-}
+  &__heading {
+    display: flex;
+    font-weight: bold;
+    color: $color-brand-primary;
+  }
 
-.message-heading-content-object {
-  flex: 1;
-}
+  &__heading-content-object {
+    flex: 1;
+    font-size: $default-font-size;
+  }
 
-.message-header-options {
+  &__header-options {
 
-}
+  }
 
-.message-created {
-  font-size: $font-sm;
-}
+  &__created {
+    font-size: $small-font-size;
+  }
 
-.message-body {
-  margin-top: $sm;
-}
+  &__body {
+    margin-top: $sm;
+    font-size: $default-font-size;
+  }
 
-.message-icon {
-  text-align: center;
-}
+  &__icon {
+    margin-right: $sm;
+    font-size: $default-font-size;
+    text-align: center;
 
-.message-icon-important {
-  @extend .message-icon;
-  color: $brand-danger;
-}
+    &--important {
+      color: $color-brand-danger;
+    }
 
-.message-icon-unread {
-  @extend .message-icon;
-  color: $brand-info;
-}
+    &--unread {
+      color: $color-brand-info;
+    }
+  }
 
-.message-comments {
-  margin-top: $sm;
-  color: $darker-grey;
-}
+  &__comments {
+    margin-top: $sm;
+    font-size: $default-font-size;
+    color: $color-darker-grey;
 
-.message-comments-enhanced {
-  color: $brand-primary;
-}
+    &--enhanced {
+      color: $color-brand-primary;
+    }
+  }
 
-.message-read-by {
-  margin-top: $sm;
-  font-size: $font-sm;
-  color: $darker-grey;
+  &__read-by {
+    margin-top: $sm;
+    font-size: $small-font-size;
+    color: $color-darker-grey;
+  }
 }

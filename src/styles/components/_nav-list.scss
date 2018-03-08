@@ -1,0 +1,25 @@
+.nav-list-group-heading {
+  font-weight: 700;
+  font-size: $small-font-size;
+  color: $color-dark-grey;
+  margin-bottom: $sm;
+  margin-left: $sm;
+}
+
+.nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: block;
+    padding: 1.6rem;
+    font-size: $default-font-size;
+    border-top: 1px solid $color-lighter-gray;
+    background: $color-white;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

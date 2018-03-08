@@ -1,0 +1,73 @@
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  height: 100%;
+  box-sizing: border-box;
+  background: darken($color-white, 1%);
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.link {
+  color: $color-brand-primary;
+  font-size: $default-font-size;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid $color-brand-primary;
+
+  &:link, &:visited {
+    color: $color-brand-primary;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid $color-brand-primary;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+a {
+  &:link, &:visited {
+    color: $color-brand-primary;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+.main {
+  @include native-scroll;
+  height: 100%;
+
+  &--authenticated {
+    padding-top: $mob-header-height;
+    height: calc(100% - #{$tab-bar-height});
+
+    @media only screen and (min-width: $md-breakpoint) {
+      margin-top: 0;
+      padding-top: $header-height;
+      height: 100%;
+    }
+  }
+
+  &--authenticated-detailed {
+    height: 100%;
+  }
+}
+
+.icon {
+  font-family: "Ionicons";
+}
+

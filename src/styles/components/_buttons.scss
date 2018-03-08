@@ -1,0 +1,119 @@
+.button {
+  border: 1px solid transparent;
+  padding: $sm $md;
+  font-size: $default-font-size;
+  border-radius: $border-radius;
+  text-align: center;
+  transition: all 0.25s ease-out;
+
+  &--primary {
+    color: $color-white;
+    background: $color-brand-primary;
+
+    &:active, &:visited {
+      color: #FFFFFF;
+      background: $color-brand-primary;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: darken($color-brand-primary, 10%);
+    }
+
+    &:disabled {
+      background: rgba($color-brand-primary, 0.3);
+    }
+  }
+
+  &--primary-outline {
+    color: $color-brand-primary;
+    border-color: $color-brand-primary;
+    background: #FFFFFF;
+
+    &:hover {
+      color: #FFFFFF;
+      background: $color-brand-primary;
+    }
+
+    &:disabled {
+      color: $color-blackish;
+      border-color: $color-light-gray;
+      background: rgba(black, 0.07);
+    }
+  }
+
+  &--secondary {
+    border: 1px solid $color-blackish;
+    color: #444444;
+    background: $color-white;
+
+    &:hover {
+      background: darken($color-white, 10%);
+      cursor: pointer;
+    }
+
+    &:disabled {
+      background: rgba(black, 0.07);
+    }
+  }
+
+  &--danger {
+    border: 1px solid $color-brand-danger;
+    color: #FFFFFF;
+    background: $color-brand-danger;
+
+    &:hover {
+      background: darken($color-brand-danger, 10%);
+    }
+
+    &:disabled {
+      background: rgba(black, 0.07);
+    }
+  }
+
+  &--danger-outline {
+    color: $color-brand-danger;
+    border: 1px solid $color-brand-danger;
+    background: #FFFFFF;
+
+    &:hover {
+      color: #FFFFFF;
+      background: $color-brand-danger;
+    }
+  }
+}
+
+.button--block {
+  display: block;
+  width: 100%;
+}
+
+.button--small {
+  padding: 0.5rem;
+  font-size: $small-font-size;
+}
+
+.button--icon-left {
+  span {
+    float: left;
+  }
+}
+
+.button--icon-right {
+  span {
+    float: right;
+  }
+}
+
+.options-button {
+  padding: 0.3rem 0.8rem;
+  border-radius: $border-radius;
+  border: 1px solid $color-dark-grey;
+  background: $color-white;
+  transition: all 0.25s ease-out;
+
+  &:hover {
+    cursor: pointer;
+    background: darken($color-white, 5%);
+  }
+}

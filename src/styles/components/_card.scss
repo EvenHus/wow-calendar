@@ -1,0 +1,147 @@
+.card {
+  @include elevate-1;
+  display: block;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  border: none;
+  font-size: $default-font-size;
+  background: $color-white;
+
+  &__block {
+    @include clearfix;
+    width: 100%;
+    padding: $md;
+  }
+
+  // Header
+  &__header {
+    display: flex;
+    padding: $md $md 0 $md;
+    font-weight: bold;
+  }
+
+  &__header-content-object {
+    flex: 1;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__header-img {
+    @extend .rounded-img-xs;
+    float: left;
+    margin-right: $md;
+  }
+
+  &__header-text {
+    float: left;
+    margin-top: 0.6rem;
+    font-size: $small-font-size;
+    color: $color-brand-primary;
+  }
+
+  &__header-button {
+
+  }
+
+  // Image
+  &__image-slider {
+    width: 100%;
+  }
+
+  &__image-slider-bg {
+    width: 100%;
+    background: rgba(#000000, 0.8);
+  }
+
+  &__image-slider-number {
+    position: relative;
+    margin-top: -2.6rem;
+    height: 3rem;
+    padding: 0.2rem 1rem;
+    color: #FFFFFF;
+    text-align: right;
+    background: rgba(#000000, 0.8);
+    z-index: 4;
+  }
+
+  // Content
+  &__text {
+    margin: $sm 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__text-detail {
+    color: $color-brand-primary;
+  }
+
+  // Footer
+  &__footer {
+    display: flex;
+    padding: 0 $md $md $md;
+  }
+
+  &__footer-img {
+    @extend .rounded-img-md;
+    margin-top: -1.5rem;
+  }
+
+  &__footer-text {
+    flex: 1;
+    font-size: $small-font-size;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__link {
+    color: $color-brand-primary;
+
+    &:link, &:visited {
+      color: $color-brand-primary;
+      text-decoration: none;
+    }
+  }
+
+  &__meta {
+    margin-top: -1rem;
+    padding: 0 $md $md $md;
+    font-size: $small-font-size;
+  }
+
+  &__meta-btn {
+    display: inline-block;
+    margin-right: $lg;
+
+    span {
+      margin-right: 0.2rem;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__liked-by {
+    padding: 0 1rem 1rem 1rem;
+    font-size: $small-font-size;
+    color: $color-darker-grey;
+  }
+}
+
+.swiper-wrapper {
+  width: 100%;
+}

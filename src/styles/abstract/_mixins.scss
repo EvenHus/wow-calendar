@@ -1,0 +1,91 @@
+@mixin clearfix {
+  &:after, &:before {
+    display: table;
+    clear: both;
+    content: '';
+  }
+}
+
+@mixin center-vertically {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin not-selectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin native-scroll {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin full-height {
+  height: 100%;
+}
+
+@mixin page-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 7;
+  background: rgba($color-blackish, 0.4);
+}
+
+@mixin reset-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@mixin elevate-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+@mixin elevate-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+/* ---- MEDIA QUERY MANAGER ----
+0 - 600px:        Phone
+600px - 900px:    Tablet portrait
+900px - 1200px:   Tablet landscape
+1200px - 1800px:  Default styles
+1800px + :        Large desktop
+$breakpoint argument choices
+- phone
+- tablet-portrait
+- tablet-landscape
+- laptop
+- desktop
+ */
+@mixin respond($breakpoint) {
+  @if ($breakpoint == phone) {
+    @media (max-width: 37.5em) { @content }; // 600px
+  } @else if ($breakpoint == tablet-portrait) {
+    @media (max-width: 56.25em) { @content }; // 900px
+  } @else if ($breakpoint == tablet-landscape) {
+    @media (max-width: 75em) { @content }; // 1200px
+  } @else if ($breakpoint == desktop) {
+    @media (max-width: 112.5em) { @content }; // 1800px
+  }
+}

@@ -1,0 +1,54 @@
+.tab-bar {
+  @include clearfix;
+  position: fixed;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  bottom: 0;
+  height: $tab-bar-height;
+  border-top: 1px solid $color-lighter-gray;
+  background-color: darken($color-white, 2%);
+  z-index: 4;
+
+  &__item {
+    float: left;
+    width: calc(100% / 5);
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    text-align: center;
+
+    .icon {
+      color: $color-blackish;
+      font-size: 2rem;
+    }
+
+    &--active {
+      .icon, .tab-bar-title {
+        color: $color-brand-primary;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__title {
+    margin-top: -0.7rem;
+    display: block;
+    font-size: 1rem;
+    color: $color-blackish;
+    font-weight: normal;
+  }
+
+  &__link-badge {
+    position: relative;
+    padding: 0.2rem 0.5rem;
+    top: -0.5rem;
+    font-size: 0.9rem;
+    color: $color-white;
+    border-radius: 30%;
+    background: $color-brand-danger;
+  }
+}

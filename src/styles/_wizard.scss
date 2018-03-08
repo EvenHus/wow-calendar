@@ -32,38 +32,39 @@
 }
 
 .wizard-step-muted {
-  color: $dark-gray;
-  border-color: $dark-gray;
+  color: $color-dark-grey;
+  border-color: $color-dark-grey;
 }
 
 .wizard-step-current {
   font-weight: bold;
-  color: $brand-primary;
+  color: $color-brand-primary;
 
   .wizard-icon {
     color: #FFFFFF;
-    border-color: $brand-primary;
-    background: $brand-primary;
+    border-color: $color-brand-primary;
+    background: $color-brand-primary;
   }
 }
 
 .wizard-step-completed {
   font-weight: bold;
-  color: $brand-success;
+  color: $color-brand-primary;
 
   .wizard-icon {
-    border-color: $brand-success;
-    background: rgba($brand-success, 0.1);
+    color: #FFFFFF;
+    border-color: $color-brand-primary;
+    background: $color-brand-primary;
   }
 }
 
 .wizard-step-invalid {
   font-weight: bold;
-  color: $brand-danger;
+  color: $color-brand-danger;
 
   .wizard-icon {
-    color: $brand-danger;
-    border-color: $brand-danger;
-    background: rgba($brand-danger, 0.1);
+    color: $color-brand-danger;
+    border-color: $color-brand-danger;
+    background: rgba($color-brand-danger, 0.1);
   }
 }

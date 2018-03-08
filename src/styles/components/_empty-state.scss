@@ -1,0 +1,40 @@
+.empty-state {
+  @extend .container;
+  padding-top: 4rem;
+
+  &__image {
+    margin: 4rem 0;
+    text-align: center;
+
+    img {
+      width: auto;
+      height: 30vh;
+    }
+  }
+
+  &__icon {
+    width: 100%;
+    text-align: center;
+
+    span {
+      color: $color-dark-grey;
+      font-size: 5rem;
+    }
+  }
+
+  &__heading {
+    font-size: $default-font-size;
+    color: $color-dark-grey;
+    text-align: center;
+  }
+
+  &__body {
+    p {
+      color: $color-dark-grey;
+      margin: 0 auto;
+      max-width: 75ch;
+      text-align: center;
+    }
+  }
+
+}

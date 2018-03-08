@@ -1,0 +1,27 @@
+.login {
+  @include full-height;
+  display: flex;
+  padding: 0 2rem;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    padding: 0;
+  }
+
+  &__logo {
+    display: block;
+    margin: 3.6rem auto;
+    width: auto;
+    max-height: 5rem;
+  }
+
+  &__left-column {
+    @include full-height;
+    flex: 1;
+  }
+
+  &__right-column {
+    @include full-height;
+    flex: 1;
+    background: $color-brand-primary;
+  }
+}

@@ -1,0 +1,215 @@
+.nav {
+  &__header {
+    @include clearfix;
+    position: fixed;
+    width: 100%;
+    height: $header-height;
+    background: #3C7583;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    z-index: 6;
+  }
+
+  &__container {
+    @extend .container;
+    height: $header-height;
+  }
+
+  &__logo {
+    margin-top: 1rem;
+    float: left;
+
+    img {
+      width: auto;
+      height: 4rem;
+    }
+  }
+
+  &__lg {
+    float: left;
+    margin: 0.8rem 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: inline-block;
+    font-size: $nav-font-size;
+  }
+
+  &__link {
+    position: relative;
+    display: block;
+    padding: 0.8rem 1.5rem;
+    margin-left: 1.5rem;
+    border-radius: 2px;
+    text-align: center;
+    font-weight: normal;
+
+    &:link, &:visited {
+      color: $color-white;
+      text-decoration: none;
+      transition: all 0.25s ease-out;
+    }
+
+    &:hover, &--active {
+      cursor: pointer;
+      color: $color-white;
+      background: darken($color-brand-primary, 20%);
+    }
+  }
+
+  &__link-badge {
+    position: absolute;
+    padding: 0.2rem 0.5rem;
+    top: 0.4rem;
+    right: -0.5rem;
+    font-size: 0.9rem;
+    color: $color-white;
+    border-radius: 30%;
+    background: $color-brand-danger;
+  }
+
+  &__logged-in-user {
+    float: right;
+    margin: 0.5rem 0 0 0;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2px;
+    list-style: none;
+
+    &:hover {
+      cursor: pointer;
+      color: $color-white;
+      background: darken($color-brand-primary, 20%);
+    }
+
+    &--active {
+      color: $color-white;
+      background: darken($color-brand-primary, 20%);
+    }
+  }
+
+  &__logged-in-user-img {
+    @extend .rounded-img-xs;
+    float: left;
+    margin-right: 1.5rem;
+  }
+
+  &__logged-in-user-name {
+    float: left;
+    margin-top: 0.5rem;
+    color: $color-white;
+    font-size: $nav-font-size;
+    overflow: hidden;
+  }
+
+  &__sub-menu {
+    position: absolute;
+    top: $header-height;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-width: 20rem;
+    max-width: 25rem;
+    background: $color-white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    z-index: 6;
+
+    &:after, &:before {
+      bottom: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &:after {
+      border-color: rgba(136, 183, 213, 0);
+      border-bottom-color: $color-white;
+      border-width: 15px;
+      margin-left: -15px;
+    }
+
+    &:before {
+      border-color: rgba(194, 225, 245, 0);
+      border-bottom-color: $color-dark-grey;
+      border-width: 1px;
+      margin-left: -21px;
+    }
+  }
+
+  &__sub-menu-item-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    font-size: $nav-font-size;
+    color: $color-blackish;
+    text-align: left;
+    border-bottom: 1px solid $color-lighter-gray;
+
+    &:link, &:visited {
+      font-weight: normal;
+      color: $color-brand-primary;
+      text-decoration: none;
+    }
+  }
+
+  &__mobile-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $mob-header-height;
+    background: $color-brand-primary;
+    z-index: 6;
+  }
+
+  &__mobile-nav {
+    display: flex;
+    height: $mob-header-height;
+    color: $color-white;
+    overflow: hidden;
+  }
+
+  &__mobile-title {
+    @include not-selectable;
+    padding-top: $sm;
+    width: 50%;
+    height: $mob-header-height;
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.8rem;
+  }
+
+  &__mobile-item {
+    @include not-selectable;
+    display: block;
+    padding: 0.7rem;
+    width: 25%;
+    height: $mob-header-height;
+    text-align: center;
+    border-radius: $border-radius;
+
+    &--left {
+      padding-left: $md;
+      text-align: left;
+    }
+
+    &--right {
+      padding-right: $md;
+      text-align: right;
+    }
+  }
+
+  &__mobile-item-icon {
+    display: block;
+    font-size: 1.8rem;
+  }
+
+  &__mobile-item-text {
+    display: block;
+    padding: 0.23rem 0.5rem 0.5rem 0.5rem;
+    font-size: $default-font-size;
+  }
+}

@@ -6,7 +6,9 @@
 
 .invitation-item {
   @extend .card;
-  @extend .card-block;
+  @include clearfix;
+  width: 100%;
+  padding: 1rem;
 }
 
 .invitation-relation-title {

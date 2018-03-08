@@ -1,0 +1,25 @@
+.auto-complete {
+  @extend .card;
+  position: absolute;
+
+  @media only screen and (min-width: $md-breakpoint) {
+    max-height: 50vh;
+  }
+
+  &__list {
+    @include reset-list;
+  }
+
+  &__list-item {
+    padding: 1rem;
+    border-bottom: 1px solid $color-light-gray;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

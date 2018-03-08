@@ -1,23 +1,33 @@
 .tabs {
   display: flex;
-  margin: 1rem 0;
+  margin: $lg 0;
   padding: 0.2rem;
-  border-radius: 2px;
+  border-radius: $border-radius;
   background: darken(#FFFFFF, 5%);
 }
 
-.tab-item {
-  font-size: 0.9rem;
-  flex: 1;
-  text-align: center;
-  margin-right: 0.2rem;
-  border-radius: 2px;
+.tab {
+  &__item {
+    margin-right: 0.2rem;
+    flex: 1;
+    font-size: $small-font-size;
+    text-align: center;
 
-  &:last-of-type {
-    margin-right: 0;
+    &:first-of-type {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+      overflow: hidden;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+      overflow: hidden;
+    }
   }
 
-  a {
+  &__item-link {
     display: block;
     padding: 0.5rem 1rem;
     background: darken(#FFFFFF, 1%);
@@ -36,12 +46,6 @@
       cursor: pointer;
     }
 
-    &.tab-selected {
-      color: #FFFFFF;
-      font-weight: bold;
-      background-color: $brand-primary;
-    }
-
     .tab-icon {
       display: block;
       font-size: 2rem;
@@ -51,6 +55,12 @@
 
     .tab-title {
       display: block;
+    }
+
+    &--selected {
+      color: #FFFFFF;
+      font-weight: bold;
+      background-color: $color-brand-primary;
     }
   }
 }
@@ -65,18 +75,21 @@
   color: #FFFFFF;
   font-size: 0.7rem;
   border-radius: 50%;
-  background: rgba($brand-primary, 0.7);
+  background: rgba($color-brand-primary, 0.7);
 }
 
 .tabs-top {
+  position: fixed;
   display: flex;
-  background: rgba($brand-primary, 0.9);
-}
+  width: 100%;
+  background: #4B838E;
+  z-index: 5;
 
-.tabs-top-item {
-  flex: 1;
+  &__item {
+    flex: 1;
+  }
 
-  a {
+  &__item-link {
     padding: 0.2rem 0.5rem;
     display: block;
     text-align: center;
@@ -85,14 +98,17 @@
     &:link, &:visited {
       color: #FFFFFF;
     }
-
-    &.tab-selected {
-      background: darken($brand-primary, 2%);
-    }
   }
-}
 
-.tabs-top-item-icon {
-  font-family: "Ionicons";
-  font-size: 1.5rem;
+  &__item-link--selected {
+    background: darken($color-brand-primary, 2%);
+  }
+
+  &__item-icon {
+    padding: $sm;
+    font-family: "Ionicons";
+    font-size: 1.8rem;
+    color: $color-white;
+    text-align: center;
+  }
 }

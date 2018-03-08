@@ -5,7 +5,7 @@
 .updating-animation {
   position: fixed;
   display: block;
-  top: 3rem;
+  top: $mob-header-height;
   left: 0;
   width: 0;
   height: 0.3rem;
@@ -15,7 +15,7 @@
   animation: goLeft 3s infinite;
 
   @media only screen and (min-width: $md-breakpoint) {
-    top: 4rem;
+    top: $header-height;
   }
 }
 
@@ -47,7 +47,7 @@
   width: 40px;
   height: 40px;
   margin: 5rem auto;
-  background-color: $brand-primary;
+  background-color: $color-brand-primary;
   border-radius: 100%;
   -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
   animation: sk-scaleout 1.0s infinite ease-in-out;
@@ -90,7 +90,7 @@
 
 .loader {
   margin: 0 auto 6rem auto;
-  color: $brand-primary;
+  color: $color-brand-primary;
   font-size: 10px;
   position: relative;
   text-indent: -9999em;

@@ -1,28 +1,44 @@
-@import 'colors';
-@import 'variables';
-@import 'base';
-@import 'grid';
-@import 'elevate';
-@import 'nav-bar';
+@import '~ionicons/scss/ionicons';
+
+@import 'abstract/variables';
+@import 'abstract/mixins';
+@import 'abstract/colors';
+
+@import 'base/base';
+@import 'base/typography';
+@import 'base/utils';
+
+@import 'layout/grid';
+@import 'layout/flex';
+@import 'layout/nav-bar';
+@import 'layout/tab-bar';
+
+//@import 'base';
 @import 'loaders';
-@import 'card';
-@import 'forms';
-@import 'buttons';
-@import 'empty-state';
-@import 'alerts';
-@import 'tabs';
-@import 'tab-bar';
-@import 'utils';
 @import 'rounded-image';
-@import 'list';
-@import 'profile';
 @import 'message';
-@import 'comments';
 @import 'modal';
-@import 'calendar';
 @import 'wizard';
-@import 'login';
 @import 'registration';
 @import 'invitations';
-@import 'camera';
-@import '../../node_modules/angular-calendar/scss/angular-calendar.scss';
+@import 'sections';
+@import 'auto-complete';
+
+@import "components/action-sheet";
+@import "components/add-images";
+@import 'components/alerts';
+@import 'components/buttons';
+@import 'components/calendar';
+@import 'components/card';
+@import 'components/comments';
+@import 'components/date-picker';
+@import 'components/empty-state';
+@import 'components/forms';
+@import 'components/image-viewer';
+@import 'components/nav-list';
+@import 'components/list';
+@import 'components/profile';
+@import 'components/tabs';
+@import 'components/target-selector';
+
+@import 'pages/login';

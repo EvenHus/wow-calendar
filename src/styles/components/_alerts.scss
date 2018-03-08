@@ -1,0 +1,42 @@
+.alert {
+  width: 100%;
+
+  &__body {
+    @extend .container;
+    padding: 1rem;
+    font-size: $default-font-size;
+
+    @media only screen and (min-width: $md-breakpoint) {
+      padding: 1rem 0;
+    }
+  }
+
+  &--error {
+    color: $color-white;
+    background: $color-brand-danger;
+  }
+
+  &--error-outline {
+    color: $color-brand-danger;
+  }
+
+  &--success-outline {
+    color: $color-brand-success;
+  }
+
+  &--outline-link {
+    color: $color-blackish;
+    font-weight: bold;
+    border-bottom: 1px solid $color-blackish;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &--info {
+    @extend .alert;
+    color: #FFFFFF;
+    background: lighten($color-brand-primary, 2%);
+  }
+}

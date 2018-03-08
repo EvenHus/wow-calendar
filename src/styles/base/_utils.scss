@@ -1,0 +1,180 @@
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.heading {
+  margin-top: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.padding-left-sm {
+  padding-left: $sm;
+}
+
+.padding-left-md {
+  padding-left: $md;
+}
+
+.padding-top-sm {
+  padding-top: $sm;
+}
+
+.padding-bottom-sm {
+  padding-bottom: $sm;
+}
+
+.padding-top-md {
+  padding-top: $md;
+}
+
+.padding-bottom-md {
+  padding-bottom: $md;
+}
+
+.padding-top-lg {
+  padding-top: 2rem;
+}
+
+.padding-bottom-lg {
+  padding-top: 2rem;
+}
+
+.padding-top-xxl {
+  padding-top: 8rem;
+}
+
+.margin-top-sm {
+  margin-top: $sm;
+}
+
+.margin-top-md {
+  margin-top: $md;
+}
+
+.margin-top-lg {
+  margin-top: $lg;
+}
+
+.margin-bottom-lg {
+  margin-bottom: $lg;
+}
+
+.margin-left-sm {
+  margin-left: $sm;
+}
+
+.margin-right-sm {
+  margin-right: $sm;
+}
+
+.margin-right-md {
+  margin-right: $md;
+}
+
+.margin-left-md {
+  margin-left: $md;
+}
+
+.margin-bottom-sm {
+  margin-bottom: $sm;
+}
+
+.margin-bottom-md {
+  margin-bottom: $md;
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.emphasized {
+  color: $color-brand-primary;
+}
+
+@media only screen and (max-width: $md-breakpoint) {
+  .no-padding-sm {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.vertically-aligned {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.primary-bg {
+  background: $color-brand-primary;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.muted-text {
+  color: $color-dark-grey;
+}
+
+.text-link {
+  font-weight: 600;
+  border-bottom: 1px solid $color-blackish;
+  transition: all 0.25s ease-out;
+
+  &:hover {
+    cursor: pointer;
+    color: $color-brand-primary;
+    border-color: $color-brand-primary;
+  }
+}
+
+.text-primary {
+  color: $color-brand-primary;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.collapse {
+  display: none;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.padding-md-mobile {
+  @media only screen and (max-width: $md-breakpoint) {
+    padding: $md;
+  }
+}
+
+.padding-left-md-mobile {
+  @media only screen and (max-width: $md-breakpoint) {
+    padding-left: $md;
+  }
+}
+
+.padding-right-md-mobile {
+  @media only screen and (max-width: $md-breakpoint) {
+    padding-right: $md;
+  }
+}
+
+.has-tabs-top {
+  padding-top: 6rem;
+}

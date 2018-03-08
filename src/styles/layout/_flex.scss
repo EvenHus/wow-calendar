@@ -1,0 +1,11 @@
+.flex {
+  display: flex;
+
+  &__col {
+
+    &--1 {
+      flex: 1;
+    }
+  }
+}
+
