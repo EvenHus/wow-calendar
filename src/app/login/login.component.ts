@@ -9,7 +9,7 @@ import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 export class LoginComponent {
   @ViewChild('loginForm') loginForm;
   @Output() authenticated: EventEmitter<any> = new EventEmitter();
-  password: string;
+  password: string = 'even';
   name: string;
   realm: string;
 

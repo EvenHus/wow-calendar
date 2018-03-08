@@ -1,5 +1,5 @@
 <app-nav *ngIf="isLoggedIn"></app-nav>
 <app-login (authenticated)="checkAuth($event)" *ngIf="!isLoggedIn"></app-login>
-<main *ngIf="isLoggedIn" class="main-authenticated">
+<main *ngIf="isLoggedIn" class="main--authenticated">
   <router-outlet></router-outlet>
 </main>

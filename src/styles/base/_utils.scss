@@ -48,6 +48,16 @@
   padding-top: 8rem;
 }
 
+padding-sm {
+  padding: $sm;
+}
+padding-md {
+  padding: $md;
+}
+padding-lg {
+  padding: $lg;
+}
+
 .margin-top-sm {
   margin-top: $sm;
 }
@@ -86,6 +96,18 @@
 
 .margin-bottom-md {
   margin-bottom: $md;
+}
+
+.margin-sm {
+  marign: $sm;
+}
+
+.margin-md {
+  margin: $md;
+}
+
+.margin-lg {
+  marign: $lg;
 }
 
 .no-margin-top {

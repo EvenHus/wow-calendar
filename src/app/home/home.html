@@ -1,14 +1,16 @@
 <div class="container content">
-  <form class="row">
-    <div class="form-group col-md-6">
-      <label class="form-label">Realm: </label>
-      <select [(ngModel)]="realm" name="Select realm" class="select-control">
-        <option *ngFor="let realms of realmList" [attr.value]="realms">{{realms}}</option>
-      </select>
-    </div>
-    <div class="form-group col-md-6">
-      <label class="form-label">Character name: </label>
-      <input type="text" class="form-control" name="title" [(ngModel)]="name" required>
+  <form class="form">
+    <div class="form__label-group">
+      <div class="form__label-group-label margin-md">
+        <label class="form__label">Realm: </label>
+        <select [(ngModel)]="realm" name="Select realm" class="form__select-control">
+          <option *ngFor="let realms of realmList" [attr.value]="realms">{{realms}}</option>
+        </select>
+      </div>
+      <div class="form__label-group-label margin-md">
+        <label class="form__label">Character name: </label>
+        <input type="text" class="form__control" name="title" [(ngModel)]="name" required>
+      </div>
     </div>
   </form>
 
