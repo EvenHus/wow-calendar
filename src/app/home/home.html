@@ -1,10 +1,11 @@
+<div class="updating-animation" *ngIf="loading$ | async"></div>
 <div class="container content">
   <form class="form">
     <div class="form__label-group">
       <div class="form__label-group-label margin-md">
         <label class="form__label">Realm: </label>
         <select [(ngModel)]="realm" name="Select realm" class="form__select-control">
-          <option *ngFor="let realms of realmList" [attr.value]="realms">{{realms}}</option>
+          <option class="form__select-control-option" *ngFor="let realms of realmList" [attr.value]="realms">{{realms}}</option>
         </select>
       </div>
       <div class="form__label-group-label margin-md">
@@ -14,13 +15,11 @@
     </div>
   </form>
 
-  <div class="container">
     <div class="tabs margin-bottom-md">
-      <div class="tab-item"><a (click)="setTab('mounts')" [ngClass]="{ 'tab-selected': tab === 'mounts' }">Mounts</a></div>
-      <div class="tab-item"><a (click)="setTab('progression')" [ngClass]="{ 'tab-selected': tab === 'progression' }">Progression Raids</a></div>
-      <div class="tab-item"><a (click)="setTab('titles')" [ngClass]="{ 'tab-selected': tab === 'titles' }">Titles</a></div>
+      <div class="tab tab__item"><a (click)="setTab('mounts')" class="tab__item-link" [ngClass]="{ 'tab__item-link--selected': tab === 'mounts' }">Mounts</a></div>
+      <div class="tab tab__item"><a (click)="setTab('progression')" class="tab__item-link" [ngClass]="{ 'tab__item-link--selected': tab === 'progression' }">Progression Raids</a></div>
+      <div class="tab tab__item"><a (click)="setTab('titles')" class="tab__item-link" [ngClass]="{ 'tab__item-link--selected': tab === 'titles' }">Titles</a></div>
     </div>
-  </div>
 
   <div class="container">
     <div *ngIf="tab === 'mounts'">

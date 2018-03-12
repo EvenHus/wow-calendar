@@ -102,10 +102,16 @@
   &__select-control {
     display: block;
     width: 100%;
-    padding: 0.8rem 0;
-    height: 3.2rem;
+    padding: 1rem;
+    height: 4rem;
     font-size: $default-font-size;
     background: $color-white;
+    border-radius: $border-radius;
+    border: 1px solid #CCCCCC;
+  }
+
+  &__select-control-option {
+    background: $color-brand-primary;
   }
 }
 
