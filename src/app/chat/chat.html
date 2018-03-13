@@ -1,8 +1,10 @@
 <div class="container">
-  <ul class="list">
-    <li class="list__item" *ngFor="let message of messages | async">{{message.content}}</li>
-  </ul>
-  <form class="form flex">
+  <div class="chat__window">
+    <ul class="chat__list">
+      <li class="chat__list--item" *ngFor="let message of messages | async">{{message.content}}</li>
+    </ul>
+  </div>
+  <form class="form flex margin-top-md">
     <input class="form__control flex-2" type="text" name="data" [(ngModel)]="data">
     <button (click)="send()" class="button button--block button--secondary flex-1">Send</button>
   </form>

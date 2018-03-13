@@ -1,0 +1,25 @@
+.chat {
+  &__window {
+    height: 50vh;
+    border: 2px solid $color-dark-grey;
+    border-radius: 2px;
+    background-color: darken($color-white, 10%);
+  }
+
+  &__list {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &--item {
+      @include clearfix;
+      width: 100%;
+      padding: $md;
+      border-top: 1px solid $color-lighter-gray;
+      background: $color-white;
+      color: $color-brand-danger;
+    }
+  }
+}
