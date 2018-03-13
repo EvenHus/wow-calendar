@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -14,6 +14,9 @@ import {metaReducers, reducers} from './store';
 import {EffectsModule} from '@ngrx/effects';
 
 import {DataEffects} from './store/data/data.effects';
+import {AngularFireModule} from 'angularfire2';
+import {environment} from '../environments/environment';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import {DataEffects} from './store/data/data.effects';
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([
       DataEffects
-    ])
+    ]),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
