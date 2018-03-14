@@ -1,5 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Component, OnChanges} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({

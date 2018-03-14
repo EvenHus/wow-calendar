@@ -1,9 +1,10 @@
 .chat {
   &__window {
     height: 50vh;
-    border: 2px solid $color-dark-grey;
     border-radius: 2px;
-    background-color: darken($color-white, 10%);
+    background-color: darken($color-white, 6%);
+    overflow: scroll;
+    padding: $md;
   }
 
   &__list {
@@ -20,6 +21,47 @@
       border-top: 1px solid $color-lighter-gray;
       background: $color-white;
       color: $color-brand-danger;
+      border-radius: 5px;
+      margin-top: $sm;
+      flex-direction: row-reverse;
+
+    }
+
+    &--item-heading {
+      @include ellipsis;
+      font-size: $default-font-size;
+      font-weight: bold;
+    }
+
+    &--item-text {
+      flex: 1;
+      font-size: $default-font-size;
+      background-color: darken($color-white, 3%);
+      border-radius: 2px;
+      padding: $sm;
+    }
+
+    &--item-clock {
+      float: right;
+    }
+
+    &--item-heading-reverse {
+      @include ellipsis;
+      font-size: $default-font-size;
+      font-weight: bold;
+      float: right;
+    }
+
+    &--item-text-reverse {
+      flex: 1;
+      font-size: $default-font-size;
+      background-color: darken($color-white, 5%);
+      border-radius: 2px;
+      padding: $sm;
+    }
+
+    &--item-clock-reverse {
+      float: left;
     }
   }
 }

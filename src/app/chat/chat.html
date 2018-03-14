@@ -1,11 +1,28 @@
-<div class="container">
-  <div class="chat__window">
-    <ul class="chat__list">
-      <li class="chat__list--item" *ngFor="let message of messages | async">{{message.content}}</li>
-    </ul>
+<!--<form class="form margin-top-lg" *ngIf="!toggle">
+  <div class="container">
+    <div class="col-md-4 col-md-offset-4">
+      <input placeholder="Enter a nickname" class="form__control"  type="text" name="user" [(ngModel)]="user" required>
+      <button type="submit" class="button button-block button--primary-outline margin-top-sm" (click)="enterChat()">Enter chat</button>
+    </div>
   </div>
-  <form class="form flex margin-top-md">
-    <input class="form__control flex-2" type="text" name="data" [(ngModel)]="data">
-    <button (click)="send()" class="button button--block button--secondary flex-1">Send</button>
-  </form>
+</form>-->
+
+<div class="margin-top-md">
+  <div class="container">
+    <div #chatWindow class="chat__window">
+      <ol class="chat__list">
+        <li class="chat__list--item" *ngFor="let message of chats | async">
+          <ul class="chat__list">
+            <li class="chat__list--item-heading">{{message.user}}</li>
+            <li class="chat__list--item-text">{{message.message}}</li>
+            <li class="chat__list--item-clock">{{message.time}}</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <form class="form flex margin-top-md">
+      <input placeholder="Say something {{ user }}!" class="form__control flex-2 margin-right-md" type="text" name="message" [(ngModel)]="message">
+      <button (click)="send()" class="button button--block button--secondary flex-1">Send</button>
+    </form>
+  </div>
 </div>
