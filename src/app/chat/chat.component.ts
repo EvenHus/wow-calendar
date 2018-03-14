@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   chatRef: any;
   message: any;
 
-  user: string = 'Etiam';
+  user: string;
   toggle: boolean;
 
   itemsSubscription: Subscription;
