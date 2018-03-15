@@ -1,5 +1,4 @@
 import * as DataActions from './data.actions';
-import {Data} from "@angular/router";
 
 export type action = DataActions.All;
 

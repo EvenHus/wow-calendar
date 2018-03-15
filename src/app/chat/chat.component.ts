@@ -34,6 +34,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       message.map(data => {
         });
     });
+    this.scrollToBottom();
   }
 
   ngAfterViewInit(): void {
@@ -43,7 +44,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   scrollToBottom = () => {
     try {
       console.log(this.chatWindow);
-      this.chatWindow.nativeElement.scrollTop = this.chatWindow.nativeElement.scrollHeight + 10000;
+      this.chatWindow.nativeElement.scrollTop = this.chatWindow.nativeElement.scrollHeight;
     } catch (err) {}
   }
 
