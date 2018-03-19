@@ -17,6 +17,7 @@ import {DataEffects} from './store/data/data.effects';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AuthEffects} from './store/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
     NavModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([
-      DataEffects
+      DataEffects,
+      AuthEffects
     ]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule

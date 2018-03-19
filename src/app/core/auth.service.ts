@@ -8,22 +8,16 @@ export class AuthService {
   setAuthDb: any;
   getAuthDb$: Observable<any>;
 
-  regUsers: any[];
 
-  authDbSub: Subscription;
 
   constructor(private _db: AngularFireDatabase) {
     this.setAuthDb = _db.list('authDb');
     this.getAuthDb$ = _db.list('authDb').valueChanges();
-
-    this.authDbSub = this.getAuthDb$.subscribe(data => {
-      this.regUsers.push(data.username);
-    });
   }
 
-  register(user: any): Observable<any> {
-    if (this.regUsers.indexOf(user.username) !== -1) {
-      return this.setAuthDb.push(user);
+  register(user: any, regUsers: any[]): Observable<any> {
+    if (regUsers.indexOf(user.username) !== -1) {
+      return Observable.of(this.setAuthDb.push(user));
     } else {
       console.log('Error, can not make new user');
     }

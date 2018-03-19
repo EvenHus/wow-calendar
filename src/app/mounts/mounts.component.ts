@@ -30,7 +30,7 @@ export class MountsComponent implements OnDestroy, OnChanges{
       this.mountSubscription = this._store.select(rootState.getMounts).subscribe(data => {
         if (data) {
           this.data = data.mounts.collected;
-          console.log(data);
+          console.log(this.data);
         }
       });
       this._store.dispatch(new DataActions.LoadMounts({name: this.name, realm: this.realm}));
