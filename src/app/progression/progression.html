@@ -1,14 +1,18 @@
-<div class="list row">
-  <div class="col-md-6" *ngFor="let raids of data">
-    <div class="list-item clickable">
-      <div class="list-item-content">
+<div class="list">
+  <div class="col-md-6" *ngFor="let raid of data">
+    <div class="list__item--clickable padding-md">
+      <div class="list__item-content">
         <div class="list-item-text">
-          <div class="list-item-heading">{{raids.name}}</div>
-          <div class="list-item-sub-heading"
-               *ngFor="let bosses of raids.bosses">
-            Boss: {{bosses.name}}
-            <br>Lfr kills: {{bosses.lfrKills}}<br>Normal Kills: {{bosses.normalKills}}
-            <br>Heroic Kills: {{bosses.heroicKills}}<br>Mytic Kills: {{bosses.mythicKills}}
+          <div class="list__item-heading">{{raid.name}}</div>
+          <div class="list__item-sub-heading"
+               *ngFor="let boss of raid.bosses">
+            <ul class="list">
+              <li><h4 style="color: #528881">Boss: {{boss.name}}</h4></li>
+              <li *ngIf="boss.lfrKills">Lfr kills: {{boss.lfrKills}}</li>
+              <li *ngIf="boss.normalKills">Normal Kills: {{boss.normalKills}}</li>
+              <li *ngIf="boss.heroicKills">Heroic Kills: {{boss.heroicKills}}</li>
+              <li *ngIf="boss.mythicKills">Mytic Kills: {{boss.mythicKills}}</li>
+            </ul>
           </div>
         </div>
       </div>
