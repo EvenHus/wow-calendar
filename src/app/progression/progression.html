@@ -1,13 +1,14 @@
 <div class="list">
   <div class="col-md-6" *ngFor="let raid of data">
     <div class="list__item--clickable padding-md">
+      <a target="_blank" href="http://www.google.com/search?q={{raid.name}}">
       <div class="list__item-content">
         <div class="list-item-text">
           <div class="list__item-heading">{{raid.name}}</div>
           <div class="list__item-sub-heading"
                *ngFor="let boss of raid.bosses">
             <ul class="list">
-              <li><h4 style="color: #528881">Boss: {{boss.name}}</h4></li>
+              <li><h4 style="color: #528881"></h4></li>
               <li *ngIf="boss.lfrKills">Lfr kills: {{boss.lfrKills}}</li>
               <li *ngIf="boss.normalKills">Normal Kills: {{boss.normalKills}}</li>
               <li *ngIf="boss.heroicKills">Heroic Kills: {{boss.heroicKills}}</li>
@@ -16,6 +17,7 @@
           </div>
         </div>
       </div>
+      </a>
     </div>
   </div>
 </div>
