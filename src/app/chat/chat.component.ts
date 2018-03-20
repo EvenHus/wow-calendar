@@ -56,7 +56,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     };
     this.chatRef.push(chat);
     this.message = '';
-    this.scrollToBottom();
+    setTimeout(_ => {
+      this.scrollToBottom();
+    }, 100);
   }
 
   enterChat(): void {

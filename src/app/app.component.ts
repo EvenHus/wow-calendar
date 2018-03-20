@@ -1,25 +1,30 @@
-import {Component, OnChanges} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {Store} from '@ngrx/store';
+import * as rootState from './store/index';
+import {AuthService} from './core/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnChanges {
+export class AppComponent implements OnInit {
   isLoggedIn: boolean;
+  authSubscription: Subscription;
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _store: Store<rootState.IAppState>,
+              private _authService: AuthService) {
   }
 
-  ngOnChanges() {
-  }
-
-  checkAuth(args: any) {
-    if (args) {
-      this.isLoggedIn = args.valid;
-      this._router.navigate(['home', args.user, args.realm]);
-    } else {
-      this.isLoggedIn = args;
-    }
+  ngOnInit(): void {
+    this.authSubscription = this._store.select(rootState.getAuthentication).subscribe(authenticated => {
+      if (!authenticated) {
+        this._router.navigate(['login']);
+      } else {
+        this._router.navigate(['home']);
+      }
+    });
+    this._authService.checkTimeToken();
   }
 }

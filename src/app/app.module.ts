@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {Ng2Webstorage} from 'ngx-webstorage';
 import {HttpClientModule} from '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
 import { AppComponent } from './app.component';
@@ -38,7 +39,8 @@ import {AuthEffects} from './store/auth/auth.effects';
       AuthEffects
     ]),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    Ng2Webstorage
   ],
   providers: [],
   bootstrap: [AppComponent]

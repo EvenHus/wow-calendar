@@ -5,6 +5,8 @@ import * as AuthActions from '../store/auth/auth.actions';
 import {Subscription} from 'rxjs/Subscription';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/operator/map';
+import moment = require('moment');
 
 @Component({
   moduleId: module.id,
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
   name: string;
   realm: string;
   isAuthenticated: boolean;
-  regUsers: any[];
+  regUsers: any[] = [];
   getAuthDb$: Observable<any>;
 
   authDbSub: Subscription;
@@ -42,23 +44,28 @@ export class LoginComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit(): void {
     this.authDbSub = this.getAuthDb$.subscribe(data => {
-      console.log(data);
-      this.regUsers.push(data.username);
-      console.log(this.regUsers);
+      data.map(user => {
+        this.regUsers.push(user.username);
+      });
     });
   }
 
   login(): void {
-    if (this.password === 'even') {
-      const send = {valid: true, user: this.name, realm: this.realm};
-      this.authenticated.emit(send);
+    this.name.toLowerCase();
+    this.realm.toLowerCase();
+    if (this.regUsers.indexOf(this.name) !== -1) {
+      alert('That username allready exist');
     } else {
-      alert('Login failed');
+      this._store.dispatch(new AuthActions.IsAuth({
+        username: this.name, realm: this.realm, password: this.password
+      }));
     }
   }
 
   signUp(): void {
-    this._store.dispatch(new AuthActions.Auth({username: this.name, realm: this.realm, password: this.password}));
+    this._store.dispatch(new AuthActions.Auth({
+      username: this.name, realm: this.realm, password: this.password, timetoken: moment().add(1, 'h').toString()
+    }));
   }
 
 }

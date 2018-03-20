@@ -22,10 +22,11 @@ export class AuthEffects {
   @Effect() isAuth$: Observable<Action> = this._actions$.ofType(AuthActions.IS_AUTH)
     .map((action: AuthActions.IsAuth) => action.payload)
     .switchMap(payload => {
-      return this._service.isAuth(payload)
+      return this._service.isAuthorised(payload)
         .map(result => new AuthActions.IsAuthSuccess(result))
         .catch(error => Observable.of(new AuthActions.AuthFailure(error)));
     });
+
 
   constructor(private _actions$: Actions, private _service: AuthService) {
   }

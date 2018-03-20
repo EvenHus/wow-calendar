@@ -5,7 +5,7 @@ export type action = AuthActions.All;
 export interface AuthState {
   loading: boolean;
   error: string;
-  authentication: any;
+  authentication: boolean;
 }
 
 const initialState: AuthState = {
@@ -26,13 +26,13 @@ export function reducer(state: AuthState = initialState, {type, payload}: action
       return Object.assign({}, state, {
         loading: false,
         error: null,
-        authentication: payload
+        authentication: true
       });
     case AuthActions.AUTH_FAILURE:
       return Object.assign({}, state, {
         loading: false,
         error: 'Error with creating',
-        authentication: null
+        authentication: false
       });
     case AuthActions.IS_AUTH:
       return Object.assign({}, state, {
@@ -44,13 +44,13 @@ export function reducer(state: AuthState = initialState, {type, payload}: action
       return Object.assign({}, state, {
         loading: false,
         error: null,
-        authentication: payload
+        authentication: true
       });
     case AuthActions.IS_AUTH_FAILURE:
       return Object.assign({}, state, {
         loading: false,
         error: 'Error with creating',
-        authentication: null
+        authentication: false
       });
     default:
       return state;

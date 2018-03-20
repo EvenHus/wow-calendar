@@ -11,21 +11,21 @@
             <div class="form__label__group">
               <label class="form__label-group-label">{{ 'Name of your main charecter' }}</label>
             </div>
-            <input class="form__control" type=text name="username" autofocus (keyup)="name = name.toLowerCase()"
+            <input class="form__control text-capitalize" type=text name="username" autofocus
                    #username="ngModel" [(ngModel)]="name" required>
           </div>
           <div class="form__group">
             <div class="form__label-group">
               <label class="form__label-group-label">{{ 'Name of your main realm' }}</label>
             </div>
-            <input class="form__control" type=text name="realm" autofocus (keyup)="realm = realm.toLowerCase()"
+            <input class="form__control" type=text name="realm" autofocus
                    #username="ngModel" [(ngModel)]="realm" required>
           </div>
           <div class="form__group">
             <div class="form__label-group">
               <label class="form__label-group-label">{{ 'Password' }}</label>
             </div>
-            <input class="form__control" type=password name="password" autofocus
+            <input class="form__control text-capitalize" type=password name="password" autofocus
                    (keyup)="password = password.toLowerCase()" #username="ngModel" [(ngModel)]="password" required>
           </div>
           <div class="flex">
