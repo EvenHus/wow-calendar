@@ -23,23 +23,19 @@ export class LoginComponent implements OnInit, AfterContentInit {
   isAuthenticated: boolean;
   regUsers: any[] = [];
   getAuthDb$: Observable<any>;
+  loading$: Observable<any>;
+  error$: Observable<any>;
 
   authDbSub: Subscription;
 
 
-  constructor(private _store: Store<rootState.IAppState>, private _db: AngularFireDatabase) {}
+  constructor(private _store: Store<rootState.IAppState>, private _db: AngularFireDatabase) {
+  }
 
   ngOnInit(): void {
-    this._store.select(rootState.getAuthentication).subscribe(data => {
-      if (data === null) {
-        console.log('not authenticated');
-        this.isAuthenticated = false;
-      } else {
-        console.log(data);
-        this.isAuthenticated = true;
-      }
-    });
-    this.getAuthDb$ = this._db.list('authDb').valueChanges();
+    this.getAuthDb$ = this._db.list('auth').valueChanges();
+    this.loading$ = this._store.select(rootState.getAuthLoadingState);
+    this.error$ = this._store.select(rootState.getAuthError);
   }
 
   ngAfterContentInit(): void {
@@ -53,19 +49,19 @@ export class LoginComponent implements OnInit, AfterContentInit {
   login(): void {
     this.name.toLowerCase();
     this.realm.toLowerCase();
-    if (this.regUsers.indexOf(this.name) !== -1) {
-      alert('That username allready exist');
-    } else {
-      this._store.dispatch(new AuthActions.IsAuth({
-        username: this.name, realm: this.realm, password: this.password
-      }));
-    }
+    this._store.dispatch(new AuthActions.IsAuth({
+      username: this.name, realm: this.realm, password: this.password
+    }));
   }
 
   signUp(): void {
-    this._store.dispatch(new AuthActions.Auth({
-      username: this.name, realm: this.realm, password: this.password, timetoken: moment().add(1, 'h').toString()
-    }));
+    if (this.regUsers.indexOf(this.name) !== -1) {
+      alert('That username allready exist');
+    } else {
+      this._store.dispatch(new AuthActions.Auth({
+        username: this.name, realm: this.realm, password: this.password
+      }));
+    }
   }
 
 }

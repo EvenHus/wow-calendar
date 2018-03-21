@@ -33,3 +33,4 @@ export const getAuthState = (state: IAppState) => state.auth;
 export const getAuthLoadingState = createSelector(getAuthState, fromAuth.getLoading);
 export const getAuthError = createSelector(getAuthState, fromAuth.getError);
 export const getAuthentication = createSelector(getAuthState, fromAuth.getAuthentication);
+export const getLoggedInUser = createSelector(getAuthState, fromAuth.getLoggedInUser);

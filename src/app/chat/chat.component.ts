@@ -34,18 +34,11 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       message.map(data => {
         });
     });
-    this.scrollToBottom();
+    this._scrollToBottom();
   }
 
   ngAfterViewInit(): void {
-    this.scrollToBottom();
-  }
-
-  scrollToBottom = () => {
-    try {
-      console.log(this.chatWindow);
-      this.chatWindow.nativeElement.scrollTop = this.chatWindow.nativeElement.scrollHeight;
-    } catch (err) {}
+    this._scrollToBottom();
   }
 
   send(): void {
@@ -57,8 +50,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.chatRef.push(chat);
     this.message = '';
     setTimeout(_ => {
-      this.scrollToBottom();
-    }, 100);
+      this._scrollToBottom();
+    }, 0);
   }
 
   enterChat(): void {
@@ -81,4 +74,11 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  private _scrollToBottom() {
+    if (this.chatWindow) {
+      try {
+        this.chatWindow.nativeElement.scrollTop = this.chatWindow.nativeElement.scrollHeight;
+      } catch (err) {}
+    }
+  }
 }

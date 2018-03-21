@@ -1,3 +1,5 @@
+<div class="updating-animation" *ngIf="loading$ |async"></div>
+<div class="error-text" *ngIf="error$ | async">{{error$ | async}}</div>
 <div class="container">
   <div class="text-center">
     <h1 class="no-margin-bottom heading--1">Welcome WoW-Calendar</h1>
@@ -26,11 +28,11 @@
               <label class="form__label-group-label">{{ 'Password' }}</label>
             </div>
             <input class="form__control text-capitalize" type=password name="password" autofocus
-                   (keyup)="password = password.toLowerCase()" #username="ngModel" [(ngModel)]="password" required>
+                   #username="ngModel" [(ngModel)]="password" required>
           </div>
           <div class="flex">
             <button class="button button--secondary button--block flex-1 margin-right-md" (click)="signUp()">Sign Up</button>
-            <button class="button button--primary button--block flex-1" (click)="login()" [disabled]="!loginForm.form.valid || isAuthenticated">Login</button>
+            <button class="button button--primary button--block flex-1" (click)="login()" [disabled]="!loginForm.form.valid || (loading$ | async)">Login</button>
           </div>
         </form>
       </div>

@@ -6,7 +6,9 @@
         <li class="nav__item"><a class="nav__link" routerLink="home" [routerLinkActive]="['nav__link--active']">Home</a></li>
         <li class="nav__item"><a class="nav__link" routerLink="chat" [routerLinkActive]="['nav__link--active']">Chat</a></li>
         <li class="nav__item"><a class="nav__link" routerLink="team-calendar" [routerLinkActive]="['nav__link--active']">Calendar</a></li>
-        <li class="nav__logged-in-user"></li>
+      </ul>
+      <ul class="nav__logged-in-user">
+        <li class="nav__logged-in-user-name" (click)="logout()">Logout</li>
       </ul>
     </nav>
   </div>

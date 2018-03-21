@@ -11,38 +11,55 @@ import * as rootState from '../store/index';
 
 @Injectable()
 export class AuthService {
-  setAuthDb: any;
+  authRef: any;
   getAuthDb$: Observable<any>;
+  user$: Observable<any[]>;
 
   authDbSubscription: Subscription;
 
 
   constructor(private _db: AngularFireDatabase, private _ls: LocalStorageService,
               private _store: Store<rootState.IAppState>) {
-    this.setAuthDb = _db.list('authDb');
-    this.getAuthDb$ = _db.list('authDb').valueChanges();
+    this.authRef = _db.list('auth');
+    this.getAuthDb$ = _db.list('auth').valueChanges();
   }
 
   register(user: any) {
-    this._ls.store('TIME_TOKEN', user.timetoken);
-    this.setAuthDb.push(user);
-    return Observable.of(true);
+    return Observable.fromPromise(
+      this.authRef.push(user).then(() => {
+        this.authenticate(user);
+      }).catch(error => {
+        return Observable.throw(error);
+      })
+    );
   }
 
-  isAuthorised(user: any) {
-    const dbUser = this._db.list('/authDb', ref => ref.orderByChild('username').equalTo(user.username));
-    console.log(dbUser);
-    //return Observable.throw('You do not have a user account, you need to register first.');
-
+  authenticate(user: any): Observable<any> {
+    this._ls.store('TOKEN', moment().add(1, 'd').toString());
+    return this._db.list('/auth', ref => ref.orderByChild('username').equalTo(user.username)).valueChanges()
+      .map(events => {
+        if (events.length > 0) {
+          return events[0];
+        } else {
+          return Observable.throw('User do not exsist, pls register');
+        }
+      })
+      .map((dbUser: any) => {
+        if (dbUser.password !== user.password) {
+          return Observable.throw('Wrong username or password');
+        }
+        return dbUser;
+      });
   }
 
-  checkTimeToken(): void {
-    const timetoken = this._ls.retrieve('TIME_TOKEN');
+  checkToken(): void {
+    const token = this._ls.retrieve('TOKEN');
 
-    if (timetoken) {
-      if (moment().isAfter(timetoken)) {
+    if (token) {
+      if (moment().isAfter(token)) {
         this._store.dispatch(new AuthActions.IsAuthFailure());
-        this._ls.clear('TIME_TOKEN');
+        this._ls.clear('TOKEN');
+        console.log('token i cleared');
       } else {
         console.log('is now');
         this._store.dispatch(new AuthActions.IsAuthSuccess());
@@ -50,5 +67,10 @@ export class AuthService {
     } else {
       this._store.dispatch(new AuthActions.IsAuthFailure());
     }
+  }
+
+  logout() {
+    this._ls.clear('TOKEN');
+    this._store.dispatch(new AuthActions.IsAuthFailure());
   }
 }
