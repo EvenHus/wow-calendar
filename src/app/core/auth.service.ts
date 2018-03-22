@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
-import 'rxjs/operator/map';
 import {LocalStorageService} from 'ngx-webstorage';
 import moment = require('moment');
 import * as AuthActions from '../store/auth/auth.actions';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService {

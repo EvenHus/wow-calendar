@@ -5,8 +5,7 @@ import * as AuthActions from '../store/auth/auth.actions';
 import {Subscription} from 'rxjs/Subscription';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/operator/map';
-import moment = require('moment');
+import 'rxjs/add/operator/map';
 
 @Component({
   moduleId: module.id,
