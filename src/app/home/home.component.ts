@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loading$ = this._store.select(rootState.getDataLoadingState);
     this.loggedInUserSubscription = this._store.select(rootState.getLoggedInUser).subscribe(loggedInUser => {
-      console.log(loggedInUser);
       if (loggedInUser) {
         this.name = loggedInUser.username;
         this.realm = loggedInUser.realm;

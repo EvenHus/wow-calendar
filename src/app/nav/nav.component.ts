@@ -14,15 +14,14 @@ import {Router} from '@angular/router';
 export class NavComponent implements OnInit {
   isAuth$: Observable<any>;
 
-  constructor(private _store: Store<rootState.IAppState>, private _service: AuthService, private _router: Router) {}
+  constructor(private _store: Store<rootState.IAppState>, private _service: AuthService) {}
 
   ngOnInit(): void {
-    this.isAuth$ = this._store.select(rootState.getAuthentication);
+    this.isAuth$ = this._store.select(rootState.getAuthenticated);
   }
 
   logout(): void {
     this._service.logout();
-    //this._router.navigate(['login']);
   }
 
 }

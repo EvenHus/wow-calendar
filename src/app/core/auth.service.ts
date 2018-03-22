@@ -13,10 +13,6 @@ import * as rootState from '../store/index';
 export class AuthService {
   authRef: any;
   getAuthDb$: Observable<any>;
-  user$: Observable<any[]>;
-
-  authDbSubscription: Subscription;
-
 
   constructor(private _db: AngularFireDatabase, private _ls: LocalStorageService,
               private _store: Store<rootState.IAppState>) {
@@ -35,7 +31,6 @@ export class AuthService {
   }
 
   authenticate(user: any): Observable<any> {
-    this._ls.store('TOKEN', moment().add(1, 'd').toString());
     return this._db.list('/auth', ref => ref.orderByChild('username').equalTo(user.username)).valueChanges()
       .map(events => {
         if (events.length > 0) {
@@ -48,8 +43,24 @@ export class AuthService {
         if (dbUser.password !== user.password) {
           return Observable.throw('Wrong username or password');
         }
+        this.setNewToken(dbUser.username);
         return dbUser;
       });
+  }
+
+  loadLoggedInUser() {
+    const token = this._ls.retrieve('TOKEN');
+    if (token) {
+      const username = token[1];
+      return this._db.list('/auth', ref => ref.orderByChild('username').equalTo(username))
+        .valueChanges()
+        .map(events => {
+          return events[0];
+        })
+        .map((dbUser: any) => {
+          return dbUser;
+        });
+    }
   }
 
   checkToken(): void {
@@ -59,13 +70,19 @@ export class AuthService {
       if (moment().isAfter(token)) {
         this._store.dispatch(new AuthActions.IsAuthFailure());
         this._ls.clear('TOKEN');
-        console.log('token i cleared');
       } else {
-        console.log('is now');
         this._store.dispatch(new AuthActions.IsAuthSuccess());
       }
     } else {
       this._store.dispatch(new AuthActions.IsAuthFailure());
+    }
+  }
+
+  setNewToken(user: any): void {
+    const token = this._ls.retrieve('TOKEN');
+    if (!token) {
+      const momentToken = moment().add(1, 'd').toString();
+      this._ls.store('TOKEN', [momentToken, user]);
     }
   }
 

@@ -14,7 +14,7 @@
               <label class="form__label-group-label">{{ 'Name of your main charecter' }}</label>
             </div>
             <input class="form__control text-capitalize" type=text name="username" autofocus
-                   #username="ngModel" [(ngModel)]="name" required>
+                   #username="ngModel" [(ngModel)]="name" (ngModelChange)="onUsernameChange($event)" required>
           </div>
           <div class="form__group">
             <div class="form__label-group">
@@ -32,7 +32,7 @@
           </div>
           <div class="flex">
             <button class="button button--secondary button--block flex-1 margin-right-md" (click)="signUp()">Sign Up</button>
-            <button class="button button--primary button--block flex-1" (click)="login()" [disabled]="!loginForm.form.valid || (loading$ | async)">Login</button>
+            <button class="button button--primary button--block flex-1" (click)="login()" [disabled]="!loginForm.form.valid && isUser">Login</button>
           </div>
         </form>
       </div>

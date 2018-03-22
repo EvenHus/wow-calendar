@@ -20,30 +20,38 @@ export class LoginComponent implements OnInit, AfterContentInit {
   password: string;
   name: string;
   realm: string;
-  isAuthenticated: boolean;
+  isUser: boolean;
   regUsers: any[] = [];
-  getAuthDb$: Observable<any>;
+  auth$: Observable<any>;
   loading$: Observable<any>;
   error$: Observable<any>;
 
-  authDbSub: Subscription;
+  authSubscription: Subscription;
 
 
   constructor(private _store: Store<rootState.IAppState>, private _db: AngularFireDatabase) {
   }
 
   ngOnInit(): void {
-    this.getAuthDb$ = this._db.list('auth').valueChanges();
+    this.auth$ = this._db.list('auth').valueChanges();
     this.loading$ = this._store.select(rootState.getAuthLoadingState);
     this.error$ = this._store.select(rootState.getAuthError);
   }
 
   ngAfterContentInit(): void {
-    this.authDbSub = this.getAuthDb$.subscribe(data => {
+    this.authSubscription = this.auth$.subscribe(data => {
       data.map(user => {
         this.regUsers.push(user.username);
       });
     });
+  }
+
+
+  onUsernameChange(username: any): void {
+    console.log(username);
+    if (this.regUsers.indexOf(username) !== -1) {
+      this.isUser = false;
+    }
   }
 
   login(): void {

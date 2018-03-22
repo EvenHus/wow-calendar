@@ -32,5 +32,5 @@ export const getTitles = createSelector(getDataState, fromData.getTitles);
 export const getAuthState = (state: IAppState) => state.auth;
 export const getAuthLoadingState = createSelector(getAuthState, fromAuth.getLoading);
 export const getAuthError = createSelector(getAuthState, fromAuth.getError);
-export const getAuthentication = createSelector(getAuthState, fromAuth.getAuthentication);
+export const getAuthenticated = createSelector(getAuthState, fromAuth.getAuthenticated);
 export const getLoggedInUser = createSelector(getAuthState, fromAuth.getLoggedInUser);
