@@ -1,0 +1,4 @@
+https://render-eu.worldofwarcraft.com/character/ get character profile image
+
+http://media.blizzard.com/wow/ get icons
+

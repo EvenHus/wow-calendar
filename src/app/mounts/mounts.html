@@ -1,7 +1,9 @@
 <div class="col-md-6 col-md-offset-3">
   <ul class="list">
-    <li class="list__item list__item--clickable text-center" *ngFor="let mounts of data">
-      <p>{{mounts.name}}</p>
+    <li class="list__item list__item--clickable text-center" *ngFor="let mount of data">
+      <a target="_blank" href="http://www.wowhead.com/item={{mount.itemId}}/">
+        <p>{{mount.name}}</p>
+      </a>
     </li>
   </ul>
 </div>

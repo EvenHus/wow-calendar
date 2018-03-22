@@ -78,14 +78,14 @@
 
     &:hover {
       cursor: pointer;
-      color: $color-white;
-      background: darken($color-brand-primary, 20%);
+      color: $color-dark-grey;
+      //background: darken($color-brand-primary, 20%);
     }
 
-    &--active {
+    /*&--active {
       color: $color-white;
       background: darken($color-brand-primary, 20%);
-    }
+    }*/
   }
 
   &__logged-in-user-img {
@@ -100,6 +100,9 @@
     color: $color-white;
     font-size: $nav-font-size;
     overflow: hidden;
+    &:hover {
+      color: $color-light-gray;
+    }
   }
 
   &__sub-menu {

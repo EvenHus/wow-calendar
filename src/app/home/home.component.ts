@@ -4,17 +4,20 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
   templateUrl: './home.html'
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   name: string;
   realm: string;
   tab: string;
   loading$: Observable<any>;
+
+  loggedInUserSubscription: Subscription;
 
   realmList: string[] = ['Dragonblight', 'Aggramar', 'Outland', 'Stormscale'];
 
@@ -23,9 +26,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loading$ = this._store.select(rootState.getDataLoadingState);
-    const params = this._activatedRoute.snapshot.params;
-    this.name = params.user;
-    this.realm = params.realm;
+    this.loggedInUserSubscription = this._store.select(rootState.getLoggedInUser).subscribe(loggedInUser => {
+      if (loggedInUser) {
+        this.name = loggedInUser.username;
+        this.realm = loggedInUser.realm;
+      }
+    });
     if (!this.tab) {
       this.tab = 'mounts';
     }
@@ -34,5 +40,11 @@ export class HomeComponent implements OnInit {
 
   setTab(tab: string): void {
     this.tab = tab;
+  }
+
+  ngOnDestroy(): void {
+    if (this.loggedInUserSubscription) {
+      this.loggedInUserSubscription.unsubscribe();
+    }
   }
 }

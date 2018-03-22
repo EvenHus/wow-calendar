@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {Ng2Webstorage} from 'ngx-webstorage';
 import {HttpClientModule} from '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import {DataEffects} from './store/data/data.effects';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AuthEffects} from './store/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,12 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
     NavModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([
-      DataEffects
+      DataEffects,
+      AuthEffects
     ]),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    Ng2Webstorage
   ],
   providers: [],
   bootstrap: [AppComponent]

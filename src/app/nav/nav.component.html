@@ -1,4 +1,4 @@
-<header class="nav nav__header">
+<header class="nav nav__header" *ngIf="isAuth$ | async">
   <div class="nav__container">
     <a href="/" class="nav__logo margin-right-md"><img src="assets/images/wow-icon3.png"></a>
     <nav role="navigation">
@@ -6,6 +6,9 @@
         <li class="nav__item"><a class="nav__link" routerLink="home" [routerLinkActive]="['nav__link--active']">Home</a></li>
         <li class="nav__item"><a class="nav__link" routerLink="chat" [routerLinkActive]="['nav__link--active']">Chat</a></li>
         <li class="nav__item"><a class="nav__link" routerLink="team-calendar" [routerLinkActive]="['nav__link--active']">Calendar</a></li>
+      </ul>
+      <ul class="nav__logged-in-user">
+        <li class="nav__logged-in-user-name" (click)="logout()">Logout</li>
       </ul>
     </nav>
   </div>
