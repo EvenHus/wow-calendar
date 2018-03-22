@@ -36,7 +36,7 @@ export class AuthService {
         if (events.length > 0) {
           return events[0];
         } else {
-          return Observable.throw('User do not exsist, pls register');
+          return Observable.throw('User do not exsist, pls register!');
         }
       })
       .map((dbUser: any) => {
