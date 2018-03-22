@@ -27,6 +27,13 @@ export class AuthEffects {
         .catch(error => Observable.of(new AuthActions.AuthFailure(error)));
     });
 
+  @Effect() loadLoggedInUser$: Observable<Action> = this._actions$.ofType(AuthActions.LOAD_LOGGED_IN_USER)
+    .switchMap(_ => {
+      return this._service.loadLoggedInUser()
+        .map(result => new AuthActions.LoadLoggedInUserSuccess(result))
+        .catch(error => Observable.of(new AuthActions.LoadLoggedInUserFailure(error)));
+    });
+
 
   constructor(private _actions$: Actions, private _service: AuthService) {
   }
