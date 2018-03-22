@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
   password: string;
   name: string;
   realm: string;
-  isUser: boolean;
+  isNotUser: boolean;
   regUsers: any[] = [];
   auth$: Observable<any>;
   loading$: Observable<any>;
@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit, AfterContentInit {
     this.auth$ = this._db.list('auth').valueChanges();
     this.loading$ = this._store.select(rootState.getAuthLoadingState);
     this.error$ = this._store.select(rootState.getAuthError);
+    this.isNotUser = false;
   }
 
   ngAfterContentInit(): void {
@@ -47,17 +48,19 @@ export class LoginComponent implements OnInit, AfterContentInit {
 
 
   onUsernameChange(username: any): void {
-    console.log(username);
-    if (this.regUsers.indexOf(username) !== -1) {
-      this.isUser = false;
+    if (this.regUsers.indexOf(this.name) !== -1) {
+      this.isNotUser = false;
+    } else {
+      this.isNotUser = true;
     }
   }
 
   login(): void {
     this.name.toLowerCase();
     this.realm.toLowerCase();
+    const encryptedPassword = btoa(this.password);
     this._store.dispatch(new AuthActions.IsAuth({
-      username: this.name, realm: this.realm, password: this.password
+      username: this.name, realm: this.realm, password: encryptedPassword
     }));
   }
 
@@ -65,8 +68,9 @@ export class LoginComponent implements OnInit, AfterContentInit {
     if (this.regUsers.indexOf(this.name) !== -1) {
       alert('That username allready exist');
     } else {
+      const encryptedPassword = btoa(this.password);
       this._store.dispatch(new AuthActions.Auth({
-        username: this.name, realm: this.realm, password: this.password
+        username: this.name, realm: this.realm, password: encryptedPassword
       }));
     }
   }

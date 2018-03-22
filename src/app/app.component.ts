@@ -23,7 +23,6 @@ export class AppComponent implements OnInit, OnDestroy {
    this._setCurrentUrl(this._router.events);
    this._checkAuthentication();
    this._handleAuthentication();
-   this._store.dispatch(new AuthActions.LoadLoggedInUser());
   }
 
   ngOnDestroy(): void {
@@ -43,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authSubscription = this._store.select(rootState.getAuthenticated).subscribe(isAuthenticated => {
       if (isAuthenticated !== null) {
         if (isAuthenticated) {
+          this._store.dispatch(new AuthActions.LoadLoggedInUser());
           this._router.navigate(['home']);
         } else {
           this._router.navigate(['login']);

@@ -19,7 +19,7 @@ export class AuthService {
     this.getAuthDb$ = _db.list('auth').valueChanges();
   }
 
-  register(user: any) {
+  register(user: any): Observable<any> {
     return Observable.fromPromise(
       this.authRef.push(user).then(() => {
         this.authenticate(user);
