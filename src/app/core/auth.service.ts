@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import {LocalStorageService} from 'ngx-webstorage';
-import moment = require('moment');
-import * as AuthActions from '../store/auth/auth.actions';
+import * as moment from 'moment';
 import {Store} from '@ngrx/store';
+import * as AuthActions from '../store/auth/auth.actions';
 import * as rootState from '../store/index';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/fromPromise';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
     this.getAuthDb$ = _db.list('auth').valueChanges();
   }
 
-  register(user: any): Observable<any> {
+  register(user: any) {
     return Observable.fromPromise(
       this.authRef.push(user).then(() => {
         this.authenticate(user);

@@ -20,8 +20,10 @@
             <div class="form__label-group">
               <label class="form__label-group-label">{{ 'Name of your main realm' }}</label>
             </div>
-            <input class="form__control" type=text name="realm" autofocus
-                   #username="ngModel" [(ngModel)]="realm" required>
+            <select [(ngModel)]="realm" name="Select realm" class="form__select-control">
+              <option [ngValue]="null">Choose realm</option>
+              <option class="form__select-control-option" *ngFor="let realms of realmList" [attr.value]="realms">{{realms}}</option>
+            </select>
           </div>
           <div class="form__group">
             <div class="form__label-group">

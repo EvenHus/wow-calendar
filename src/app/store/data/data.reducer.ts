@@ -8,6 +8,7 @@ export interface DataState {
   mounts: any;
   progression: any;
   titles: any;
+  realms: any;
 }
 
 const initalState: DataState = {
@@ -15,7 +16,8 @@ const initalState: DataState = {
   errorMessage: null,
   mounts: null,
   progression: null,
-  titles: null
+  titles: null,
+  realms: null
 };
 
 export function reducer(state: DataState = initalState, {type, payload}: action): DataState {
@@ -68,6 +70,22 @@ export function reducer(state: DataState = initalState, {type, payload}: action)
         titles: payload,
         errorMessage: null
       });
+    case DataActions.LOAD_REALMS:
+      return Object.assign({}, state, {
+        loading: true,
+        errorMessage: null
+      });
+    case DataActions.LOAD_REALMS_FAILED:
+      return Object.assign({}, state, {
+        loading: false,
+        errorMessage: 'An error occurred' + payload
+      });
+    case DataActions.LOAD_REALMS_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        realms: payload,
+        errorMessage: null
+      });
     default:
       return state;
   }
@@ -78,3 +96,4 @@ export const getErrorMessage = (state: DataState) => state.errorMessage;
 export const getMounts = (state: DataState) => state.mounts;
 export const getProgression = (state: DataState) => state.progression;
 export const getTitles = (state: DataState) => state.titles;
+export const getRealms = (state: DataState) => state.realms;
