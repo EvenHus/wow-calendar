@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authSubscription = this._store.select(rootState.getAuthenticated).subscribe(isAuthenticated => {
       if (isAuthenticated !== null) {
         if (isAuthenticated) {
-          this._router.navigate(['home']);
+          this._router.navigate(['chat']);
         } else {
           this._router.navigate(['login']);
         }

@@ -3,11 +3,12 @@ import {Observable} from 'rxjs/Observable';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
+import {now} from 'moment';
 
 @Component({
   moduleId: module.id,
   selector: 'app-chat',
-  templateUrl: './chat.html'
+  templateUrl: './chat.component.html'
 })
 
 export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -16,8 +17,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   chatRef: any;
   message: any;
 
-  user: string;
-  toggle: boolean;
+  user: string = 'salasade';
+  toggle: boolean = true;
 
   itemsSubscription: Subscription;
   messageSubscription: Subscription;
@@ -45,7 +46,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     const chat = {
       user: this.user,
       message: this.message,
-      time: moment().format('LTS')
+      time: moment().format()
     };
     this.chatRef.push(chat);
     this.message = '';
@@ -57,8 +58,20 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   enterChat(): void {
     if (!this.toggle) {
       this.toggle = true;
+      setTimeout(_ => {
+        this._scrollToBottom();
+      }, 0);
     } else {
       this.toggle = false;
+    }
+  }
+
+  setTime(time: any) {
+    const now = moment().startOf('day');
+    if (moment(time).isBefore(now)) {
+      return moment(time).format('lll');
+    } else {
+      return moment(time).format('LT');
     }
   }
 

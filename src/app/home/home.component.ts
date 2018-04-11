@@ -8,16 +8,17 @@ import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
-  templateUrl: './home.html'
+  templateUrl: './home.component.html'
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
   name: string;
   realm: string;
   tab: string;
-  loading$: Observable<any>;
+  loading: boolean;
 
   loggedInUserSubscription: Subscription;
+  loadingSubscription: Subscription;
 
   realmList: string[] = ['Dragonblight', 'Aggramar', 'Outland', 'Stormscale'];
 
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading$ = this._store.select(rootState.getDataLoadingState);
+    this.loadingSubscription = this._store.select(rootState.getDataLoadingState).subscribe(loading => this.loading = loading);
     this.loggedInUserSubscription = this._store.select(rootState.getLoggedInUser).subscribe(loggedInUser => {
       if (loggedInUser) {
         this.name = loggedInUser.username;
@@ -45,6 +46,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.loggedInUserSubscription) {
       this.loggedInUserSubscription.unsubscribe();
+    }
+
+    if (this.loadingSubscription) {
+      this.loadingSubscription.unsubscribe();
     }
   }
 }

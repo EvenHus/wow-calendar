@@ -8,7 +8,7 @@ import * as DataActions from '../store/data/data.actions';
 @Component({
   moduleId: module.id,
   selector: 'app-titles',
-  templateUrl: './titles.html'
+  templateUrl: './titles.component.html'
 })
 
 export class TitelsComponent implements OnChanges, OnDestroy {
