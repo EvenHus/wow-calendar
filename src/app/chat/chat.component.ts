@@ -9,7 +9,7 @@ import {Store} from '@ngrx/store';
 @Component({
   moduleId: module.id,
   selector: 'app-chat',
-  templateUrl: './chat.html'
+  templateUrl: './chat.component.html'
 })
 
 export class ChatComponent implements OnInit, OnDestroy {
@@ -17,7 +17,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   chats: Observable<any[]>;
   chatRef: any;
   message: any;
-  user: string;
+
+  user: string = 'salasade';
+  toggle: boolean = true;
 
   itemsSubscription: Subscription;
   messageSubscription: Subscription;
@@ -38,11 +40,22 @@ export class ChatComponent implements OnInit, OnDestroy {
     const chat = {
       user: this.user,
       message: this.message,
-      time: moment().format('LTS')
+      time: moment().format()
     };
     this.chatRef.push(chat);
     this.message = '';
-    this._scrollToBottom();
+    setTimeout(_ => {
+      this._scrollToBottom();
+    }, 0);
+  }
+
+  setTime(time: any) {
+    const now = moment().startOf('day');
+    if (moment(time).isBefore(now)) {
+      return moment(time).format('lll');
+    } else {
+      return moment(time).format('LT');
+    }
   }
 
   ngOnDestroy(): void {

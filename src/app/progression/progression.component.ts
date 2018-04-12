@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 @Component({
   moduleId: module.id,
   selector: 'app-progression',
-  templateUrl: './progression.html'
+  templateUrl: './progression.component.html'
 })
 
 export class ProgressionComponent implements OnDestroy, OnChanges {

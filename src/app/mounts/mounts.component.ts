@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 @Component({
   moduleId: module.id,
   selector: 'app-mounts',
-  templateUrl: './mounts.html'
+  templateUrl: './mounts.component.html'
 })
 
 export class MountsComponent implements OnDestroy, OnChanges{

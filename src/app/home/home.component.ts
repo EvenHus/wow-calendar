@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
-  templateUrl: './home.html'
+  templateUrl: './home.component.html'
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
