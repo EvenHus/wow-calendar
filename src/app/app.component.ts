@@ -5,6 +5,8 @@ import {Store} from '@ngrx/store';
 import * as rootState from './store/index';
 import {AuthService} from './core/auth.service';
 import * as AuthActions from './store/auth/auth.actions';
+import {Observable} from 'rxjs/Rx';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-root',
@@ -13,51 +15,75 @@ import * as AuthActions from './store/auth/auth.actions';
 export class AppComponent implements OnInit, OnDestroy {
   authSubscription: Subscription;
   routerEventSubscription: Subscription;
-  currentUrl: string;
+  currentUrl$: Subject<string> = new Subject();
 
   constructor(private _router: Router, private _store: Store<rootState.IAppState>,
               private _authService: AuthService) {
   }
 
   ngOnInit(): void {
-   this._setCurrentUrl(this._router.events);
-   this._checkAuthentication();
-   this._handleAuthentication();
+    this.routerEventSubscription = this._router.events.map(event => this._setCurrentUrl(event)).subscribe();
+
+    const isAuthenticated$ = this._store.select(rootState.getAuthenticated)
+      .map(isAuthenticated => {
+        return this._handleIsAuthenticated(isAuthenticated);
+      });
+    const loggedInUser$ = this._store.select(rootState.getLoggedInUser);
+
+    this.authSubscription = Observable
+      .combineLatest(this.currentUrl$, isAuthenticated$, loggedInUser$)
+      .map(value => ({
+        currentUrl: value[0],
+        isAuthenticated: value[1],
+        loggedInUser: value[2]
+      }))
+      .subscribe(values => {
+        this._handleRoute(values.currentUrl, values.isAuthenticated, values.loggedInUser);
+      });
+
+    this._authService.checkToken();
   }
 
   ngOnDestroy(): void {
     if (this.routerEventSubscription) {
       this.routerEventSubscription.unsubscribe();
     }
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 
   private _setCurrentUrl(event): void {
     if (event instanceof NavigationStart) {
-      this.currentUrl = event.url;
-      console.log(this.currentUrl);
+      this.currentUrl$.next(event.url);
     }
   }
 
-  private _checkAuthentication(): void {
-    this.authSubscription = this._store.select(rootState.getAuthenticated).subscribe(isAuthenticated => {
-      if (isAuthenticated !== null) {
-        if (isAuthenticated) {
-          this._store.dispatch(new AuthActions.LoadLoggedInUser());
+  private _handleIsAuthenticated(isAuthenticated: boolean): boolean {
+    if (isAuthenticated !== null) {
+      if (isAuthenticated) {
+        this._store.dispatch(new AuthActions.LoadLoggedInUser());
+      }
+
+      return isAuthenticated;
+    }
+  }
+
+  private _handleRoute(currentUrl: string, isAuthenticated: boolean, loggedInUser: any): void {
+    if (isAuthenticated) {
+      if (loggedInUser && currentUrl) {
+        const routes = ['/', '/login'];
+        const redirect = routes.indexOf(currentUrl) !== -1;
+        if (redirect) {
           this._router.navigate(['home']);
-        } else {
+        }
+      }
+    } else {
+      if (currentUrl) {
+        if (currentUrl !== '/login') {
           this._router.navigate(['login']);
         }
       }
-    });
-  }
-
-  private _handleAuthentication(): void {
-    this.routerEventSubscription = this._router.events.subscribe(events => {
-      if (events instanceof NavigationStart) {
-        if (events.url !== '/login') {
-          this._authService.checkToken();
-        }
-      }
-    });
+    }
   }
 }

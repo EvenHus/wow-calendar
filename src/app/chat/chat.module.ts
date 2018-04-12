@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {ChatComponent} from './chat.component';
 import {FormsModule} from '@angular/forms';
+import {Customdatepipe} from '../pipes/customdatepipe';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   declarations: [
-    ChatComponent
+    ChatComponent,
+    Customdatepipe
   ]
 })
 

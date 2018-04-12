@@ -2,11 +2,11 @@
   <div class="container">
     <div #chatWindow class="chat__window">
       <ol class="chat__list">
-        <li class="chat__list--item" *ngFor="let message of chats | async">
-          <ul class="chat__list">
+        <li class="chat__list--item" *ngFor="let message of chats | async" [ngClass]="{'chat__list--item--sent': message.user === user, 'chat__list--item--received': message.user !== user}">
+          <ul class="chat__list" (onchange)="onListChanged()">
             <li class="chat__list--item-heading">{{message.user}}</li>
             <li class="chat__list--item-text">{{message.message}}</li>
-            <li class="chat__list--item-clock">{{setTime(message.time)}}</li>
+            <li class="chat__list--item-clock">{{message.time | datepipe: message.time }}</li>
           </ul>
         </li>
       </ol>
@@ -15,6 +15,7 @@
       <input placeholder="Say something {{ user }}!" class="form__control flex-2 margin-right-md" type="text" name="message" [(ngModel)]="message">
       <button (click)="send()" class="button button--block button--success flex-1">Send</button>
     </form>
-    <button (click)="toBottom()" class="button button--block button--secondary margin-top-md">Scroll to bottom of Chat</button>
   </div>
 </div>
+
+

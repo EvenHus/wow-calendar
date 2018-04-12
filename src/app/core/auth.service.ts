@@ -63,7 +63,7 @@ export class AuthService {
     }
   }
 
-  checkToken(): void {
+  checkToken() {
     const token = this._ls.retrieve('TOKEN');
 
     if (token) {
