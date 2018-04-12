@@ -1,13 +1,4 @@
-<form class="form margin-top-lg" *ngIf="!toggle">
-  <div class="container">
-    <div class="col-md-4 col-md-offset-4">
-      <input placeholder="Enter a nickname" class="form__control"  type="text" name="user" [(ngModel)]="user" required>
-      <button type="submit" class="button button-block button--primary-outline margin-top-sm" (click)="enterChat()">Enter chat</button>
-    </div>
-  </div>
-</form>
-
-<div class="margin-top-md" *ngIf="toggle">
+<div class="margin-top-md">
   <div class="container">
     <div #chatWindow class="chat__window">
       <ol class="chat__list">
@@ -22,7 +13,8 @@
     </div>
     <form class="form flex margin-top-md">
       <input placeholder="Say something {{ user }}!" class="form__control flex-2 margin-right-md" type="text" name="message" [(ngModel)]="message">
-      <button (click)="send()" class="button button--block button--secondary flex-1">Send</button>
+      <button (click)="send()" class="button button--block button--success flex-1">Send</button>
     </form>
+    <button (click)="toBottom()" class="button button--block button--secondary margin-top-md">Scroll to bottom of Chat</button>
   </div>
 </div>

@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
-import 'rxjs/operator/map';
 import {LocalStorageService} from 'ngx-webstorage';
-import moment = require('moment');
-import * as AuthActions from '../store/auth/auth.actions';
+import * as moment from 'moment';
 import {Store} from '@ngrx/store';
+import * as AuthActions from '../store/auth/auth.actions';
 import * as rootState from '../store/index';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/fromPromise';
 
 @Injectable()
 export class AuthService {
@@ -36,7 +36,7 @@ export class AuthService {
         if (events.length > 0) {
           return events[0];
         } else {
-          return Observable.throw('User do not exsist, pls register');
+          return Observable.throw('User do not exsist, pls register!');
         }
       })
       .map((dbUser: any) => {

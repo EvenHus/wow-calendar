@@ -26,4 +26,15 @@ export class ApiService {
       realm + '/' + name + '?fields=titles&locale=en_GB&apikey=' + this._key;
     return  this._http.get(url);
   }
+
+  getRealms(): Observable<any> {
+    const url = 'https://eu.api.battle.net/wow/realm/status?locale=en_GB&apikey=' + this._key;
+    return this._http.get(url);
+  }
+
+  getProfile(name: string, realm: string): Observable<any> {
+    const url = 'https://eu.api.battle.net/wow/character/aggramar/salasade?locale=en_GB&apikey=' + this._key;
+    return this._http.get(url);
+  }
+
 }

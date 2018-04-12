@@ -3,7 +3,8 @@ import {Observable} from 'rxjs/Observable';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
-import {now} from 'moment';
+import * as rootState from '../store/index';
+import {Store} from '@ngrx/store';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,7 @@ import {now} from 'moment';
   templateUrl: './chat.component.html'
 })
 
-export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('chatWindow') chatWindow: ElementRef;
   chats: Observable<any[]>;
   chatRef: any;
@@ -23,24 +24,17 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   itemsSubscription: Subscription;
   messageSubscription: Subscription;
   messagesSubscription: Subscription;
+  loggedInUserSubscription: Subscription;
 
-  constructor(private _db: AngularFireDatabase) {
+  constructor(private _db: AngularFireDatabase, private _store: Store<rootState.IAppState>) {
   }
 
   ngOnInit(): void {
     this.chatRef = this._db.list('chat');
     this.chats = this._db.list('chat').valueChanges();
-
-    this.messageSubscription = this.chats.subscribe(message => {
-      message.map(data => {
-        });
-    });
-    this._scrollToBottom();
+    this.loggedInUserSubscription = this._store.select(rootState.getLoggedInUser).subscribe(user => this.user = user.username);
   }
 
-  ngAfterViewInit(): void {
-    this._scrollToBottom();
-  }
 
   send(): void {
     const chat = {
@@ -53,17 +47,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(_ => {
       this._scrollToBottom();
     }, 0);
-  }
-
-  enterChat(): void {
-    if (!this.toggle) {
-      this.toggle = true;
-      setTimeout(_ => {
-        this._scrollToBottom();
-      }, 0);
-    } else {
-      this.toggle = false;
-    }
   }
 
   setTime(time: any) {
@@ -87,11 +70,17 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  toBottom(): void {
+    this._scrollToBottom();
+  }
+
   private _scrollToBottom() {
     if (this.chatWindow) {
-      try {
-        this.chatWindow.nativeElement.scrollTop = this.chatWindow.nativeElement.scrollHeight;
-      } catch (err) {}
+      setTimeout(_ => {
+        try {
+          this.chatWindow.nativeElement.scrollTop = this.chatWindow.nativeElement.scrollHeight;
+        } catch (err) {}
+      }, 0);
     }
   }
 }

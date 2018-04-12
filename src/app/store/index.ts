@@ -2,7 +2,6 @@ import {createSelector} from 'reselect';
 import {ActionReducer, ActionReducerMap, MetaReducer} from '@ngrx/store';
 import * as fromData from './data/data.reducer';
 import * as fromAuth from './auth/auth.reducer';
-import 'rxjs';
 
 export interface IAppState {
   data: fromData.DataState;
@@ -28,6 +27,7 @@ export const getDataErrorState = createSelector(getDataState, fromData.getErrorM
 export const getMounts = createSelector(getDataState, fromData.getMounts);
 export const getProgression = createSelector(getDataState, fromData.getProgression);
 export const getTitles = createSelector(getDataState, fromData.getTitles);
+export const getRealms = createSelector(getDataState, fromData.getRealms);
 
 export const getAuthState = (state: IAppState) => state.auth;
 export const getAuthLoadingState = createSelector(getAuthState, fromAuth.getLoading);

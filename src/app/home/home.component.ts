@@ -1,9 +1,8 @@
-import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import {ApiService} from '../core/api.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store';
+import * as DataActions from '../store/data/data.actions';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
@@ -19,25 +18,36 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loggedInUserSubscription: Subscription;
   loadingSubscription: Subscription;
+  realmSubscription: Subscription;
 
-  realmList: string[] = ['Dragonblight', 'Aggramar', 'Outland', 'Stormscale'];
+  realmList: string[] = [];
 
   constructor(private _activatedRoute: ActivatedRoute, private _store: Store<rootState.IAppState>) {
   }
 
   ngOnInit() {
-    this.loadingSubscription = this._store.select(rootState.getDataLoadingState).subscribe(loading => this.loading = loading);
-    this.loggedInUserSubscription = this._store.select(rootState.getLoggedInUser).subscribe(loggedInUser => {
-      if (loggedInUser) {
-        this.name = loggedInUser.username;
-        this.realm = loggedInUser.realm;
-      }
-    });
+    this.loadingSubscription = this._store.select(rootState.getDataLoadingState)
+      .subscribe(loading => this.loading = loading);
+    this.loggedInUserSubscription = this._store.select(rootState.getLoggedInUser)
+      .subscribe(loggedInUser => {
+        if (loggedInUser) {
+          this.name = loggedInUser.username;
+          this.realm = loggedInUser.realm;
+        }
+      });
     if (!this.tab) {
       this.tab = 'mounts';
     }
-    this.realm = this.realmList[1];
+    this.realmSubscription = this._store.select(rootState.getRealms).subscribe(data => {
+      if (data) {
+        data.realms.map(realm => {
+          this.realmList.push(realm.name);
+        });
+      }
+    });
+    this._store.dispatch(new DataActions.LoadRealms());
   }
+
 
   setTab(tab: string): void {
     this.tab = tab;
@@ -47,9 +57,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.loggedInUserSubscription) {
       this.loggedInUserSubscription.unsubscribe();
     }
-
     if (this.loadingSubscription) {
       this.loadingSubscription.unsubscribe();
+    }
+    if (this.realmSubscription) {
+      this.realmSubscription.unsubscribe();
     }
   }
 }

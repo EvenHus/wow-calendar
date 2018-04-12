@@ -7,8 +7,24 @@
         <li class="nav__item"><a class="nav__link" routerLink="chat" [routerLinkActive]="['nav__link--active']">Chat</a></li>
         <li class="nav__item"><a class="nav__link" routerLink="team-calendar" [routerLinkActive]="['nav__link--active']">Calendar</a></li>
       </ul>
-      <ul class="nav__logged-in-user">
-        <li class="nav__logged-in-user-name" (click)="logout()">Logout</li>
+      <ul id="nav__logged-in-user" class="nav__logged-in-user" (click)="toggleShowSubMenu()">
+        <li>
+          <a>
+            <div class="nav__logged-in-user-img">
+              <img src="{{ profileImage }}">
+            </div>
+            <div class="nav__logged-in-user-name">{{username}}</div>
+
+            <ul *ngIf="showSubMenu" class="nav__sub-menu" [ngStyle]="{ 'left': subMenuXPosition }">
+              <li class="nav__sub-menu-item">
+                <a class="nav__sub-menu-item-link">My Profile</a>
+              </li>
+              <li class="nav__sub-menu-item">
+                <a class="nav__sub-menu-item-link" (click)="logout()">Logout</a>
+              </li>
+            </ul>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
