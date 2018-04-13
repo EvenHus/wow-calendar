@@ -1,0 +1,46 @@
+.add-event-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($color-blackish, 0.8);
+  z-index: 4;
+
+  &__box {
+    position: absolute;
+    width: 50vw;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    border-radius: $border-radius;
+    transform: translate(-50%, -50%);
+    overflow: scroll;
+    background: $color-white;
+    color: $color-blackish;
+    padding: $lg;
+  }
+
+  &__colors {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    margin: auto;
+
+    &--primary {
+      background: $color-brand-primary;
+    }
+
+    &--danger {
+      background: $color-brand-danger;
+    }
+
+    &--success {
+      background: $color-brand-success;
+    }
+
+    &--info {
+      background: $color-brand-info;
+    }
+  }
+}

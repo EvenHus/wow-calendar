@@ -26,10 +26,14 @@
 
       &--received {
         background: $color-white;
+        width: 60%;
+        float: left;
       }
 
       &--sent {
         background: lighten($color-brand-success, 35%);
+        width: 60%;
+        float: right;
       }
 
     }

@@ -33,7 +33,7 @@ export class ApiService {
   }
 
   getProfile(name: string, realm: string): Observable<any> {
-    const url = 'https://eu.api.battle.net/wow/character/aggramar/salasade?locale=en_GB&apikey=' + this._key;
+    const url = 'https://eu.api.battle.net/wow/character/' + realm + '/' + name + '?locale=en_GB&apikey=' + this._key;
     return this._http.get(url);
   }
 

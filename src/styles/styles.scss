@@ -13,7 +13,6 @@
 @import 'layout/nav-bar';
 @import 'layout/tab-bar';
 
-//@import 'base';
 @import 'loaders';
 @import 'rounded-image';
 @import 'message';
@@ -41,5 +40,6 @@
 @import 'components/tabs';
 @import 'components/target-selector';
 @import 'components/chat';
+@import 'components/add-event-viewer';
 
 @import 'pages/login';

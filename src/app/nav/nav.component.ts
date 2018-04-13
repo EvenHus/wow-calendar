@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
 import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../core/auth.service';
 import {Router} from '@angular/router';
 import {ApiService} from '../core/api.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
@@ -12,19 +13,22 @@ import {ApiService} from '../core/api.service';
   templateUrl: './nav.component.html'
 })
 
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
   isAuth$: Observable<any>;
   showSubMenu: boolean;
   subMenuXPosition: string;
   profileImage: string;
   username: string;
 
-  constructor(private _store: Store<rootState.IAppState>, private _service: AuthService, private _apiService: ApiService) {}
+  userSubscription: Subscription;
+
+  constructor(private _store: Store<rootState.IAppState>, private _service: AuthService, private _apiService: ApiService) {
+  }
 
   ngOnInit(): void {
     this.isAuth$ = this._store.select(rootState.getAuthenticated);
     this.setSubMenuPosition();
-    this._store.select(rootState.getLoggedInUser).subscribe(user => {
+    this.userSubscription = this._store.select(rootState.getLoggedInUser).subscribe(user => {
       if (user) {
         this.username = user.username;
         this._apiService.getProfile(user.username, user.realm).subscribe(data => {
@@ -36,6 +40,7 @@ export class NavComponent implements OnInit {
 
   logout(): void {
     this._service.logout();
+    this.toggleShowSubMenu();
   }
 
   toggleShowSubMenu(): void {
@@ -46,6 +51,14 @@ export class NavComponent implements OnInit {
     const navLoggedInUser = document.getElementById('nav__logged-in-user');
     if (navLoggedInUser) {
       this.subMenuXPosition = (navLoggedInUser.offsetLeft - 70) + 'px';
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.profileImage = '';
+
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
     }
   }
 

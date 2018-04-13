@@ -28,12 +28,14 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loggedInUserSubscription = this._store.select(rootState.getLoggedInUser).subscribe(user => this.user = user.username);
-    if (this.user) {
-      this.chatRef = this._db.list('chat');
-      this.chats = this._db.list('chat').valueChanges();
-      this.chatSubscription = this.chats.subscribe(data => this._scrollToBottom());
-    }
+    this.loggedInUserSubscription = this._store.select(rootState.getLoggedInUser).subscribe(user => {
+      if (user) {
+        this.user = user.username;
+        this.chatRef = this._db.list('chat');
+        this.chats = this._db.list('chat').valueChanges();
+        this.chatSubscription = this.chats.subscribe(data => this._scrollToBottom());
+      }
+    });
   }
 
   send(): void {

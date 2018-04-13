@@ -3,7 +3,7 @@
     <div #chatWindow class="chat__window">
       <ol class="chat__list">
         <li class="chat__list--item" *ngFor="let message of chats | async" [ngClass]="{'chat__list--item--sent': message.user === user, 'chat__list--item--received': message.user !== user}">
-          <ul class="chat__list" (onchange)="onListChanged()">
+          <ul class="chat__list">
             <li class="chat__list--item-heading">{{message.user}}</li>
             <li class="chat__list--item-text">{{message.message}}</li>
             <li class="chat__list--item-clock">{{message.time | datepipe: message.time }}</li>
