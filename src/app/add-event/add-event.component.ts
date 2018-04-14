@@ -9,27 +9,22 @@ import moment = require('moment');
 
 export class AddEventComponent implements OnInit {
   @ViewChild('eventForm') eventForm;
-  toggleViewer: boolean = true;
-  title: string;
-  start: any;
-  end: any;
-  color: string;
+  toggleViewer: boolean;
+  event: {title: string, start: any, end: any, color: string};
   draggable: boolean;
   resizable: {beforestart: boolean, afterEnd: boolean };
-  colors: any = {
-    red: '#ad2121',
-    blue: '#1e90ff',
-    yellow: '#e3bc08'
-  };
-
-  validTime: boolean;
+  validTime = true;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.start = moment();
-    this.end = moment().add(0.5, 'hour');
+    this.event = {title: null, start: null, end: null, color: null};
+
+    if (this.event && !this.event.start) {
+      this.event.start = moment();
+      this.event.end = moment().add(0.5, 'hour');
+    }
   }
 
   @HostListener('document:click', ['$event'])
@@ -41,13 +36,13 @@ export class AddEventComponent implements OnInit {
     }
   }
 
-  onStartDateChanged(args: any): void {
-    console.log(args);
+  onStartDateChanged(startDate: any): void {
+    this.event.start = startDate;
     this._prepareEvent();
   }
 
-  onEndDateChanged(args: any): void {
-    console.log(args);
+  onEndDateChanged(endDate: any): void {
+    this.event.end = endDate;
     this._prepareEvent();
   }
 
@@ -56,7 +51,12 @@ export class AddEventComponent implements OnInit {
   }
 
   setColor(color: string) {
-    console.log(color);
+    this.event.color = color;
+    this._prepareEvent();
+  }
+
+  addNewEvent(): void {
+    console.log(this.event);
   }
 
   private _prepareEvent(): void {
@@ -64,14 +64,12 @@ export class AddEventComponent implements OnInit {
   }
 
   private _validateStartEndDate(): boolean {
-    if (this.start && this.end) {
-      if (this.start.isBefore(this.end)) {
-        const start = moment(this.start);
-        const end = moment(this.end);
-        return start.isBefore(end);
-      } else {
-        return true;
-      }
+    if (this.event.start && this.event.end) {
+      const start = moment(this.event.start);
+      const end = moment(this.event.end);
+      return start.isBefore(end);
+    } else {
+      return true;
     }
   }
 }
