@@ -16,18 +16,18 @@ const initalState: EventState = {
 
 export function reducer(state: EventState = initalState, {type, payload}: action): EventState {
   switch (type) {
-    case EventActions.CreateEvent:
+    case EventActions.CREATE_EVENT:
       return Object.assign({}, state, {
         loading: true,
         error: null
       });
-    case EventActions.CreateEventSuccess:
+    case EventActions.CREATE_EVENT_SUCCESS:
       return Object.assign({}, state, {
         loading: false,
         events: payload,
         error: null
       });
-    case EventActions.CreateEventFailure:
+    case EventActions.CREATE_EVENT_FAILURE:
       return Object.assign({}, state, {
         loading: false,
         error: payload
