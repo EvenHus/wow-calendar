@@ -1,31 +1,8 @@
-import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
-import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
-import {Subject} from 'rxjs/Subject';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent
-} from 'angular-calendar';
+import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
 import * as EventActions from '../store/event/event.actions';
-
-//Temporary
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
-};
+import moment = require('moment');
 
 @Component({
   moduleId: module.id,
@@ -33,113 +10,29 @@ const colors: any = {
   templateUrl: './team-calendar.html'
 })
 
-export class TeamCalendarComponent {
-  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+export class TeamCalendarComponent implements OnInit{
+  startDate: any;
+  endDate: any;
+  today: any;
+  
 
-  view: string = 'month';
-  viewDate: Date = new Date();
-
-  modalData: {
-    action: string;
-    event: CalendarEvent
-  };
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      }
-    },
-    {
-      label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Edited', event);
-      }
-    }
-  ];
-
-  refresh: Subject<any> = new Subject();
-
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
-
-  activeDayIsOpen: boolean = true;
-
-  constructor(private modal: NgbModal, private _store: Store<rootState.IAppState>) {
+  constructor(private _store: Store<rootState.IAppState>) {
   }
 
-  dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-        this.viewDate = date;
-      }
-    }
+  ngOnInit(): void {
+    this.startDate = moment().startOf('month').startOf('day');
+    this.endDate = moment().endOf('month').endOf('day');
+    this.today = {fullDate: moment().format('YYYY-MM-DD')};
   }
 
-  eventTimesChanged({event, newStart, newEnd}: CalendarEventTimesChangedEvent): void {
-    event.start = newStart;
-    event.end = newEnd;
-    this.handleEvent('Dropped or resized', event);
-    this.refresh.next();
+  prev(): void {
+    this.startDate = moment(this.startDate).subtract(1, 'month');
+    this.endDate = moment(this.endDate).subtract(1, 'month');
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
-  }
-
-  addEvent(): void {
-    this.events.push({
-      title: 'New event',
-      start: startOfDay(new Date()),
-      end: endOfDay(new Date()),
-      color: colors.red,
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      }
-    });
-    this.refresh.next();
+  next(): void {
+    this.startDate = moment(this.startDate).add(1, 'month');
+    this.endDate = moment(this.endDate).add(1, 'month');
   }
 
   createEvent(event: any) {

@@ -1,0 +1,31 @@
+<div class="date-range">
+  <div *ngFor="let date of dateRange" (click)="setSelectedDate(date)" class="date-range__col date-range__col--1"
+  [ngClass]="{'date-range__today': date.fullDate === today}">
+    <div [ngClass]="{ 'date-range__button--active': date.fullDate === selectedDate.fullDate, 'date-range__button': date.fullDate !== selectedDate.fullDate}">
+      {{date.weekday | translate}} <br> {{date.day}}
+    </div>
+  </div>
+</div>
+
+<div class="calendar">
+  <div class="calendar__weekday--month-view" *ngFor="let date of dateRange" [ngClass]="{'calendar__weekday--today': date.fullDate === today}">
+    <span *ngIf="date.day" class="calendar__date">{{ date.day }}</span>
+
+    <!--<div class="calendar__occurrences" *ngIf="allDayOccurrences && allDayOccurrences[date.fullDate]">
+      <div class="calendar__occurrence&#45;&#45;month-view"
+           [ngClass]="{ 'calendar__occurrence&#45;&#45;passed': occurrence.has_passed, 'calendar__occurrence&#45;&#45;cancelled': occurrence.cancelled }"
+           [ngStyle]="{ 'border-color': occurrence.color }" *ngFor="let occurrence of allDayOccurrences[date.fullDate]" (click)="goToEventDetail(occurrence)">
+        <span class="calendar__occurrence-title">{{ occurrence.title }}</span>
+      </div>
+    </div>
+
+    <div class="calendar__occurrences-month-view">
+      <div class="calendar__occurrence--month-view"
+           [ngClass]="{ 'calendar__occurrence-passed': occurrence.has_passed, 'calendar__occurrence-cancelled': occurrence.cancelled }"
+           [ngStyle]="{ 'border-color':  }" *ngFor="let occurrence of occurrences[date.fullDate].occurrences">
+        <span class="calendar__occurrence-time">{{ occurrence.start | date: 'HH:mm' }} </span>
+        <span class="calendar__occurrence-title">{{ occurrence.title }}</span>
+      </div>
+    </div>-->
+  </div>
+</div>

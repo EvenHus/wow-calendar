@@ -1,0 +1,33 @@
+.date-range {
+  display: flex;
+  text-align: center;
+  font-size: $md;
+  margin-right: $md;
+  margin-left: $md;
+
+  &__col {
+
+   &--1 {
+     flex: 1;
+   }
+  }
+
+  &__item {
+
+  }
+
+  &__button {
+
+    &--active {
+      color: $color-brand-primary;
+      border-bottom: 2px solid $color-brand-primary;
+    }
+  }
+
+  &__today {
+    color: darken($color-darker-grey, 10%);
+    font-weight: bold;
+  }
+
+
+}
