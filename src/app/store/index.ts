@@ -2,15 +2,18 @@ import {createSelector} from 'reselect';
 import {ActionReducer, ActionReducerMap, MetaReducer} from '@ngrx/store';
 import * as fromData from './data/data.reducer';
 import * as fromAuth from './auth/auth.reducer';
+import * as fromEvent from './event/event.reducer';
 
 export interface IAppState {
   data: fromData.DataState;
   auth: fromAuth.AuthState;
+  event: fromEvent.EventState;
 }
 
 export const reducers: ActionReducerMap<IAppState> = {
   data: fromData.reducer,
-  auth: fromAuth.reducer
+  auth: fromAuth.reducer,
+  event: fromEvent.reducer
 };
 
 export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -34,3 +37,8 @@ export const getAuthLoadingState = createSelector(getAuthState, fromAuth.getLoad
 export const getAuthError = createSelector(getAuthState, fromAuth.getError);
 export const getAuthenticated = createSelector(getAuthState, fromAuth.getAuthenticated);
 export const getLoggedInUser = createSelector(getAuthState, fromAuth.getLoggedInUser);
+
+export const getEventState = (state: IAppState) => state.event;
+export const getEventLoading = createSelector(getEventState, fromEvent.getLoadingState);
+export const getEventError = createSelector(getEventState, fromEvent.getErrorState);
+export const getEvents = createSelector(getEventState, fromEvent.getEvents);

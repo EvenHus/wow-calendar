@@ -7,6 +7,9 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
+import {Store} from '@ngrx/store';
+import * as rootState from '../store/index';
+import * as EventActions from '../store/event/event.actions';
 
 //Temporary
 const colors: any = {
@@ -95,7 +98,7 @@ export class TeamCalendarComponent {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {
+  constructor(private modal: NgbModal, private _store: Store<rootState.IAppState>) {
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -139,4 +142,7 @@ export class TeamCalendarComponent {
     this.refresh.next();
   }
 
+  createEvent(event: any) {
+    this._store.dispatch(new EventActions.CreateEvent(event));
+  }
 }

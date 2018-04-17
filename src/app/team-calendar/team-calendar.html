@@ -55,7 +55,7 @@
     <div class="col-md-4">
       <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
       <div class="col-md-6 col-md-offset-3">
-        <app-add-event></app-add-event>
+        <app-add-event (createEvent)="createEvent($event)"></app-add-event>
       </div>
     </div>
     <div class="col-md-4">

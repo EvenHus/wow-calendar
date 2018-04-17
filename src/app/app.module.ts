@@ -21,6 +21,7 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AuthEffects} from './store/auth/auth.effects';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {EventEffects} from './store/event/event.effects';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,7 +50,8 @@ export function createTranslateLoader(http: HttpClient) {
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([
       DataEffects,
-      AuthEffects
+      AuthEffects,
+      EventEffects
     ]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

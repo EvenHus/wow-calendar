@@ -8,6 +8,7 @@ import * as AuthActions from '../store/auth/auth.actions';
 import * as rootState from '../store/index';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class AuthService {
@@ -67,7 +68,7 @@ export class AuthService {
     const token = this._ls.retrieve('TOKEN');
 
     if (token) {
-      if (moment().isAfter(token)) {
+      if (moment().isAfter(token[0])) {
         this._store.dispatch(new AuthActions.IsAuthFailure());
         this._ls.clear('TOKEN');
       } else {

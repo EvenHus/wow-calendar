@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output, ViewChild} from '@angular/core';
 import moment = require('moment');
 
 @Component({
@@ -9,14 +9,14 @@ import moment = require('moment');
 
 export class AddEventComponent implements OnInit {
   @ViewChild('eventForm') eventForm;
+  @Output() createEvent: EventEmitter<any> = new EventEmitter<any>();
   toggleViewer: boolean;
   event: {title: string, start: any, end: any, color: string};
   draggable: boolean;
   resizable: {beforestart: boolean, afterEnd: boolean };
   validTime = true;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.event = {title: null, start: null, end: null, color: null};
@@ -56,7 +56,8 @@ export class AddEventComponent implements OnInit {
   }
 
   addNewEvent(): void {
-    console.log(this.event);
+    this.createEvent.emit(this.event);
+    this.toggleAddNew();
   }
 
   private _prepareEvent(): void {
