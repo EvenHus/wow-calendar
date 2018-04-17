@@ -1,16 +1,25 @@
 <div class="container padding-top-lg">
   <app-add-event (createEvent)="createEvent($event)"></app-add-event>
 
+
   <div class="flex padding-top-md">
     <div class="flex-1">
       <button class="button button--block button--primary-outline" (click)="prev()">Prev</button>
     </div>
+    <h1 class="text-center flex-1">{{dateView}}</h1>
     <div class="flex-1">
       <button class="button button--block button--primary-outline" (click)="next()">Next</button>
     </div>
   </div>
 
+
+
   <div class="margin-top-lg">
-    <app-date-range [startDate]="startDate" [endDate]="endDate" [selectedDate]="today"></app-date-range>
+    <div class="flex">
+      <div class="flex-1 text-center" *ngFor="let day of weekDays">
+        {{day}}
+      </div>
+    </div>
+    <app-date-range [startDate]="startDate" [endDate]="endDate" [selectedDate]="today" (onDateSelected)="onDateClicked($event)"></app-date-range>
   </div>
 </div>

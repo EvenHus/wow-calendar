@@ -23,19 +23,11 @@ export class DateRangeComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this._createDateRange();
     this.today = moment().format('YYYY-MM-DD');
-
-    if (this.dateRange.length > 0) {
-      if (!this.selectedDate) {
-        this.selectedDate = this.now;
-      }
-    }
   }
 
   ngOnChanges(): void {
-
-    this._createDateRange();
+    this.dateRange = this._createDateRange();
   }
 
   setSelectedDate(date: any): void {
@@ -44,29 +36,25 @@ export class DateRangeComponent implements OnChanges, OnInit {
   }
 
   private _createDateRange() {
-    this.dateRange = [];
-
-
-    const range = moment.range(this.startDate, this.endDate);
+    const start = moment(this.startDate).startOf('month').startOf('day');
+    const end = moment(this.endDate).endOf('month').endOf('day');
+    const range = moment.range(start, end);
     const dates = Array.from(range.by('day'));
 
-    dates.map((date: any) => {
-      this.dateRange.push({
+    let dateRange = dates.map((date: any) => ({
         fullDate: date.format('YYYY-MM-DD'),
         weekday: date.format('ddd'),
+        isoWeekday: date.isoWeekday(),
         day: date.format('D'),
         month: date.format('M'),
         occurrences: []
-      });
+      }));
 
-      if (date.format('YYYY-MM-DD' === moment().format('YYYY-MM-DD'))) {
-        this.now = this.dateRange;
-      } else if (date.format('YYYY-MM-DD') === moment(this.startDate).format('YYYY-MM-DD')) {
-        this.selectedDate = this.dateRange;
-      }
-    });
+    if (dateRange[0].isoWeekday !== 1) {
+      dateRange = this._addLeadingDatesFromPrevMonth(dateRange);
+    }
 
-
+    return dateRange;
 
   }
 
