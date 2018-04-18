@@ -15,7 +15,8 @@ import {Subscription} from 'rxjs/Subscription';
 export class MountsComponent implements OnDestroy, OnChanges{
   @Input() realm: string;
   @Input() name: string;
-
+  showImage: boolean;
+  image: any;
   data: any [] = [];
   loading$: Observable<boolean>;
   mountSubscription: Subscription;
@@ -34,6 +35,11 @@ export class MountsComponent implements OnDestroy, OnChanges{
       });
       this._store.dispatch(new DataActions.LoadMounts({name: this.name, realm: this.realm}));
     }
+  }
+
+  toggleImage(id: number): void {
+    this.showImage = !this.showImage;
+    this.image = 'http://media.blizzard.com/wow/renders/npcs/zoom/creature' + id + '.jpg';
   }
 
   ngOnDestroy(): void {

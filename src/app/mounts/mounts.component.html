@@ -1,9 +1,17 @@
-<div class="col-md-6 col-md-offset-3">
-  <ul class="list">
-    <li class="list__item list__item--clickable text-center" *ngFor="let mount of data">
-      <a target="_blank" href="http://www.wowhead.com/item={{mount.itemId}}/">
-        <p>{{mount.name}}</p>
-      </a>
+<div class="flex">
+  <ul class="list flex-1">
+    <li class="list__item list__item--clickable text-center" *ngFor="let mount of data" >
+      <div class="list__item-content">
+        <span class="flex-1">{{mount.creatureId}}</span>
+        <div class="flex-2" (click)="toggleImage(mount.creatureId)">{{mount.name}}</div>
+        <span class="flex-1 icon"><a target="_blank" href="http://www.wowhead.com/item={{mount.itemId}}/">
+        &#xf2f8;</a></span>
+      </div>
+    </li>
+  </ul>
+  <ul class="list flex-1">
+    <li  *ngIf="image && !error">
+      <img src="{{image}}" onerror="src='../../assets/images/No_Image_Available.png'; style='background-color: black'"/>
     </li>
   </ul>
 </div>
