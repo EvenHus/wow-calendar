@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from '../core/api.service';
 import * as rootState from '../store/index';
 import * as DataActions from '../store/data/data.actions';
@@ -12,7 +12,9 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './mounts.component.html'
 })
 
-export class MountsComponent implements OnDestroy, OnChanges{
+export class MountsComponent implements OnDestroy, OnChanges {
+  @ViewChild('mountImage') mountImage: ElementRef;
+  @ViewChild('mountListItem') mountListItem: ElementRef;
   @Input() realm: string;
   @Input() name: string;
   showImage: boolean;
@@ -40,6 +42,11 @@ export class MountsComponent implements OnDestroy, OnChanges{
   toggleImage(id: number): void {
     this.showImage = !this.showImage;
     this.image = 'http://media.blizzard.com/wow/renders/npcs/zoom/creature' + id + '.jpg';
+
+    if (this.mountListItem && this.mountImage) {
+      console.log(this.mountListItem.nativeElement.scrollHeight);
+      this.mountImage.nativeElement.scrollTop = this.mountListItem.nativeElement.scrollHeight;
+    }
   }
 
   ngOnDestroy(): void {
