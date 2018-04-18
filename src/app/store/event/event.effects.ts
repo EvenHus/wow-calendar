@@ -16,5 +16,12 @@ export class EventEffects {
         .catch(error => Observable.of(new EventActions.CreateEventFailure(error)));
     });
 
+  @Effect() getEvents$: Observable<Action> = this._actions.ofType(EventActions.GET_EVENTS)
+    .switchMap(_ => {
+      return this._service.getEvents()
+        .map(result => new EventActions.GetEventsSuccess(result))
+        .catch(error => Observable.of(new EventActions.GetEventsFailure(error)));
+    });
+
   constructor(private _actions: Actions, private _service: EventService) {}
 }

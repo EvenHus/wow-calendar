@@ -11,12 +11,11 @@
   <div class="calendar__weekday--month-view" *ngFor="let date of dateRange" [ngClass]="{'calendar__weekday--today': date.fullDate === today}" (click)="setSelectedDate(date)">
     <span *ngIf="date.day" class="calendar__date">{{ date.day }}</span>
 
-    <!--<div class="calendar__occurrences">
-      <div class="calendar__occurrence&#45;&#45;month-view"
-           [ngClass]="{ 'calendar__occurrence&#45;&#45;passed': occurrence.has_passed, 'calendar__occurrence&#45;&#45;cancelled': occurrence.cancelled }"
-           [ngStyle]="{ 'border-color': occurrence.color }" *ngFor="let occurrence of allDayOccurrences[date.fullDate]" (click)="goToEventDetail(occurrence)">
-        <span class="calendar__occurrence-title">{{ occurrence.title }}</span>
+    <div class="calendar__occurrences">
+      <div class="calendar__occurrence--month-view"
+           [ngStyle]="{ 'border-color': event.color }" *ngFor="let event of events">
+        <span class="calendar__occurrence-title">{{ event.title }}</span>
       </div>
-    </div>-->
+    </div>
   </div>
 </div>

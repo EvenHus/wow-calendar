@@ -32,6 +32,22 @@ export function reducer(state: EventState = initalState, {type, payload}: action
         loading: false,
         error: payload
       });
+    case EventActions.GET_EVENTS:
+      return Object.assign({}, state, {
+        loading: true,
+        error: null
+      });
+    case EventActions.GET_EVENTS_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        events: payload,
+        error: null
+      });
+    case EventActions.GET_EVENTS_FAILURE:
+      return Object.assign({}, state, {
+        loading: false,
+        error: payload
+      });
   }
 }
 

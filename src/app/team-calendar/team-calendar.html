@@ -20,6 +20,6 @@
         {{day}}
       </div>
     </div>
-    <app-date-range [startDate]="startDate" [endDate]="endDate" [selectedDate]="today" (onDateSelected)="onDateClicked($event)"></app-date-range>
+    <app-date-range [startDate]="startDate" [endDate]="endDate" [selectedDate]="today" [events]="events" (onDateSelected)="onDateClicked($event)"></app-date-range>
   </div>
 </div>

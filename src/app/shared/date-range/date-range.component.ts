@@ -14,6 +14,7 @@ export class DateRangeComponent implements OnChanges, OnInit {
   @Input() startDate: string;
   @Input() endDate: string;
   @Input() selectedDate: any;
+  @Input() events: any;
   @Output() onDateSelected: EventEmitter<any> = new EventEmitter();
   dateRange: any[];
   now: any;
@@ -24,10 +25,14 @@ export class DateRangeComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     this.today = moment().format('YYYY-MM-DD');
+
   }
 
   ngOnChanges(): void {
     this.dateRange = this._createDateRange();
+    if (this.events) {
+      console.log(this.events);
+    }
   }
 
   setSelectedDate(date: any): void {

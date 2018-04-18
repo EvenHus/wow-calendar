@@ -3,6 +3,7 @@ import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
 import * as EventActions from '../store/event/event.actions';
 import moment = require('moment');
+import {EventService} from '../core/event.service';
 
 @Component({
   moduleId: module.id,
@@ -16,11 +17,12 @@ export class TeamCalendarComponent implements OnInit, OnChanges {
   today: any;
 
   dateView: string;
+  events: any[];
 
   weekDays: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 
-  constructor(private _store: Store<rootState.IAppState>) {
+  constructor(private _store: Store<rootState.IAppState>, private _eventService: EventService) {
   }
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class TeamCalendarComponent implements OnInit, OnChanges {
     this.endDate = moment().endOf('month').endOf('day');
     this.today = {fullDate: moment().format('YYYY-MM-DD')};
     this.calendarChanges();
+    this.getEvents();
   }
 
   ngOnChanges(): void {
@@ -50,6 +53,12 @@ export class TeamCalendarComponent implements OnInit, OnChanges {
 
   createEvent(event: any) {
     this._store.dispatch(new EventActions.CreateEvent(event));
+  }
+
+  getEvents(): void {
+    this._eventService.getEventsDb$.subscribe(events => {
+      this.events = events;
+    })
   }
 
   calendarChanges() {
