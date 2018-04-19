@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {AngularFireDatabase} from 'angularfire2/database';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class EventService {
@@ -14,7 +15,6 @@ export class EventService {
     this.eventRef = _db.list('events');
     this.getEventsDb$ = _db.list('events').valueChanges();
 
-    this
   }
 
   createEvent(event: any): Observable<any>  {
@@ -28,9 +28,7 @@ export class EventService {
   }
 
   getEvents(): Observable<any> {
-    this.getEventsDb$.subscribe(event => {
-      console.log(event);
-    });
-    return Observable.of('ok');
+    console.log('getting events ');
+    return Observable.of(this.getEventsDb$.subscribe(event => event));
   }
 }

@@ -31,6 +31,7 @@ export class TeamCalendarComponent implements OnInit, OnChanges {
     this.today = {fullDate: moment().format('YYYY-MM-DD')};
     this.calendarChanges();
     this.getEvents();
+    this._store.select(rootState.getEventError).subscribe(event => console.log(event));
   }
 
   ngOnChanges(): void {
@@ -56,13 +57,18 @@ export class TeamCalendarComponent implements OnInit, OnChanges {
   }
 
   getEvents(): void {
-    this._eventService.getEventsDb$.subscribe(events => {
+    /*this._store.select(rootState.getEvents).subscribe(event => {
+      console.log(event);
+    });*/
+    this._store.dispatch(new EventActions.GetEvents());
+
+    /*this._eventService.getEventsDb$.subscribe(events => {
       this.events = events;
-    })
+    });*/
   }
 
   calendarChanges() {
-    this.dateView = moment(this.startDate).format("MMMM");
+    this.dateView = moment(this.startDate).format('MMMM');
   }
 
   onDateClicked(date: any): void {

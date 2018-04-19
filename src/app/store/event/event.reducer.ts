@@ -8,13 +8,13 @@ export interface EventState {
   error: string;
 }
 
-const initalState: EventState = {
+const initialState: EventState = {
   loading: null,
   events: null,
   error: null
 };
 
-export function reducer(state: EventState = initalState, {type, payload}: action): EventState {
+export function reducer(state: EventState = initialState, {type, payload}: action): EventState {
   switch (type) {
     case EventActions.CREATE_EVENT:
       return Object.assign({}, state, {
@@ -24,7 +24,6 @@ export function reducer(state: EventState = initalState, {type, payload}: action
     case EventActions.CREATE_EVENT_SUCCESS:
       return Object.assign({}, state, {
         loading: false,
-        events: payload,
         error: null
       });
     case EventActions.CREATE_EVENT_FAILURE:
@@ -35,9 +34,11 @@ export function reducer(state: EventState = initalState, {type, payload}: action
     case EventActions.GET_EVENTS:
       return Object.assign({}, state, {
         loading: true,
-        error: null
+        error: null,
+        events: null
       });
     case EventActions.GET_EVENTS_SUCCESS:
+      console.log(payload);
       return Object.assign({}, state, {
         loading: false,
         events: payload,
@@ -48,6 +49,8 @@ export function reducer(state: EventState = initalState, {type, payload}: action
         loading: false,
         error: payload
       });
+    default:
+      return state;
   }
 }
 
