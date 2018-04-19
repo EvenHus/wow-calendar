@@ -1,20 +1,23 @@
+<button class="button button--block button--info-outline margin-bottom-md" (click)="toggleImage()">{{buttonTitle}}</button>
 <div class="mounts">
   <ul class="mounts__list mounts__flex-1">
     <li class="mounts__list-item mounts__list-item--clickable text-center" *ngFor="let mount of data" #mountListItem>
       <div class="mounts__list-content">
         <span class="mounts__flex-1">{{mount.creatureId}}</span>
-        <div #mountListItem class="mounts__flex-2 mounts__list-clickable" (click)="toggleImage(mount.creatureId)">
+        <div #mountListItem class="mounts__flex-2 mounts__list-clickable" >
           {{mount.name}}
         </div>
         <span class="mounts__flex-1 icon"><a target="_blank" href="http://www.wowhead.com/item={{mount.itemId}}/">
         &#xf2f8;</a></span>
       </div>
+      <img class="margin-top-md" *ngIf="showImage" #mountImage src="http://media.blizzard.com/wow/renders/npcs/zoom/creature{{mount.creatureId}}.jpg"
+           onerror="src='../../assets/images/No_Image_Available.png'; style='background-color: black'"/>
     </li>
   </ul>
-  <ul class="list flex-1">
+  <!--<ul class="list flex-1">
     <li *ngIf="image && !error">
       <img #mountImage src="{{image}}"
            onerror="src='../../assets/images/No_Image_Available.png'; style='background-color: black'"/>
     </li>
-  </ul>
+  </ul>-->
 </div>

@@ -21,6 +21,7 @@ export class MountsComponent implements OnDestroy, OnChanges {
   image: any;
   data: any [] = [];
   loading$: Observable<boolean>;
+  buttonTitle:  string = 'Show Images';
   mountSubscription: Subscription;
 
 
@@ -41,12 +42,15 @@ export class MountsComponent implements OnDestroy, OnChanges {
 
   toggleImage(id: number): void {
     this.showImage = !this.showImage;
-    this.image = 'http://media.blizzard.com/wow/renders/npcs/zoom/creature' + id + '.jpg';
-
-    if (this.mountListItem && this.mountImage) {
-      console.log(this.mountListItem.nativeElement.scrollHeight);
-      this.mountImage.nativeElement.scrollTop = this.mountListItem.nativeElement.scrollHeight;
+    if (this.showImage) {
+      this.buttonTitle = 'Hide Images';
     }
+    if (!this.showImage) {
+      this.buttonTitle = 'Show Images';
+    }
+
+    //this.image = 'http://media.blizzard.com/wow/renders/npcs/zoom/creature' + id + '.jpg';
+
   }
 
   ngOnDestroy(): void {

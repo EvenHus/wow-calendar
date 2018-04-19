@@ -120,8 +120,9 @@
   }
 
   &--info-outline {
-    color: $color-brand-info;
+    color: $color-white;
     border: 1px solid $color-brand-info;
+    background: transparent;
 
     &:hover {
       color: #FFFFFF;
