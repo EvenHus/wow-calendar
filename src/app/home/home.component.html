@@ -1,18 +1,19 @@
-<div class="updating-animation" *ngIf="loading$ | async"></div>
+<div class="updating-animation" *ngIf="false"></div>
 <div class="container content">
 
   <div class="flex">
     <div class="flex-1 margin-top-lg">
-      <h1 class="text-center">Hello, {{name}}</h1>
+      <h1 class="text-center text-capitalize">Hello, {{name}}</h1>
     </div>
   </div>
 
-  <form class="form">
+  <form class="form" *ngIf="realm && name">
     <div class="form__label-group">
       <div class="form__label-group-label margin-md">
         <label class="form__label">Realm: </label>
         <select [(ngModel)]="realm" name="Select realm" class="form__select-control">
-          <option class="form__select-control-option" *ngFor="let realms of realmList" [attr.value]="realms">{{realms}}</option>
+          <option [ngValue]="realm">{{realm}}</option>
+          <option class="form__select-control-option" *ngFor="let realm of realmList" [attr.value]="realm">{{realm}}</option>
         </select>
       </div>
       <div class="form__label-group-label margin-md">

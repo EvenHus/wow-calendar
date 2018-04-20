@@ -1,11 +1,13 @@
-import {AfterContentInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
 import * as AuthActions from '../store/auth/auth.actions';
+import * as DataActions from '../store/data/data.actions';
 import {Subscription} from 'rxjs/Subscription';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {ApiService} from '../core/api.service';
 
 @Component({
   moduleId: module.id,
@@ -13,12 +15,13 @@ import 'rxjs/add/operator/map';
   templateUrl: './login.component.html'
 })
 
-export class LoginComponent implements OnInit, AfterContentInit {
+export class LoginComponent implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild('loginForm') loginForm;
   @Output() authenticated: EventEmitter<any> = new EventEmitter();
   password: string;
   name: string;
-  realm: string;
+  realm: any;
+  realmList: any[] = [];
   isNotUser: boolean;
   regUsers: any[] = [];
   auth$: Observable<any>;
@@ -26,9 +29,11 @@ export class LoginComponent implements OnInit, AfterContentInit {
   error$: Observable<any>;
 
   authSubscription: Subscription;
+  realmSubscription: Subscription;
 
 
-  constructor(private _store: Store<rootState.IAppState>, private _db: AngularFireDatabase) {
+  constructor(private _store: Store<rootState.IAppState>, private _db: AngularFireDatabase,
+              private _apiService: ApiService) {
   }
 
   ngOnInit(): void {
@@ -44,6 +49,15 @@ export class LoginComponent implements OnInit, AfterContentInit {
         this.regUsers.push(user.username);
       });
     });
+    this.realmSubscription = this._store.select(rootState.getRealms).subscribe(data => {
+      if (data) {
+        data.realms.map(realm => {
+          this.realmList.push(realm.name);
+        });
+      }
+    });
+
+    this._store.dispatch(new DataActions.LoadRealms());
   }
 
 
@@ -74,5 +88,15 @@ export class LoginComponent implements OnInit, AfterContentInit {
       }));
     }
   }
+
+  ngOnDestroy(): void {
+    if (this.realmSubscription) {
+      this.realmSubscription.unsubscribe();
+    }
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+  }
+
 
 }

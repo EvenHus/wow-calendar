@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import {LocalStorageService} from 'ngx-webstorage';
-import moment = require('moment');
-import * as AuthActions from '../store/auth/auth.actions';
+import * as moment from 'moment';
 import {Store} from '@ngrx/store';
+import * as AuthActions from '../store/auth/auth.actions';
 import * as rootState from '../store/index';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +21,7 @@ export class AuthService {
     this.getAuthDb$ = _db.list('auth').valueChanges();
   }
 
-  register(user: any): Observable<any> {
+  register(user: any) {
     return Observable.fromPromise(
       this.authRef.push(user).then(() => {
         this.authenticate(user);
@@ -62,11 +64,12 @@ export class AuthService {
     }
   }
 
-  checkToken(): void {
+  checkToken() {
     const token = this._ls.retrieve('TOKEN');
 
     if (token) {
-      if (moment().isAfter(token)) {
+      const tokenMoment = token[0];
+      if (moment().isAfter(tokenMoment)) {
         this._store.dispatch(new AuthActions.IsAuthFailure());
         this._ls.clear('TOKEN');
       } else {
@@ -80,7 +83,7 @@ export class AuthService {
   setNewToken(user: any): void {
     const token = this._ls.retrieve('TOKEN');
     if (!token) {
-      const momentToken = moment().add(1, 'd').toString();
+      const momentToken = moment().add(1, 'd').toISOString();
       this._ls.store('TOKEN', [momentToken, user]);
     }
   }

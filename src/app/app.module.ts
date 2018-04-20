@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {Ng2Webstorage} from 'ngx-webstorage';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
 import { AppComponent } from './app.component';
 import {appRoutes} from './app.router';
@@ -19,15 +19,29 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AuthEffects} from './store/auth/auth.effects';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {EventEffects} from './store/event/event.effects';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     LoginModule,
     CoreModule,
     CommonModule,
@@ -36,7 +50,8 @@ import {AuthEffects} from './store/auth/auth.effects';
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([
       DataEffects,
-      AuthEffects
+      AuthEffects,
+      EventEffects
     ]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

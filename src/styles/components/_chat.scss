@@ -19,11 +19,22 @@
       width: 100%;
       padding: $md;
       border-top: 1px solid $color-lighter-gray;
-      background: $color-white;
       color: $color-brand-danger;
       border-radius: 5px;
       margin-top: $sm;
       flex-direction: row-reverse;
+
+      &--received {
+        background: $color-white;
+        width: 60%;
+        float: left;
+      }
+
+      &--sent {
+        background: lighten($color-brand-success, 35%);
+        width: 60%;
+        float: right;
+      }
 
     }
 
@@ -36,7 +47,6 @@
     &--item-text {
       flex: 1;
       font-size: $default-font-size;
-      background-color: darken($color-white, 3%);
       border-radius: 5px;
       padding: $sm;
     }

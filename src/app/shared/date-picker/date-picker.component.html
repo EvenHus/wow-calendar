@@ -1,0 +1,63 @@
+<div class="date-picker">
+  <div class="date-picker__inputs">
+    <div class="date-picker__date-input">
+      <input type="text" name="date" class="date-picker__input" [ngModel]="displayDate" (focus)="showCalendar()"
+             (ngModelChange)="validateDate($event)" [ngClass]="{ 'form__input-invalid': selectedDate && !selectedDateIsValid }">
+
+      <div class="date-picker__calendar" *ngIf="calendarVisible">
+        <div class="date-picker__header">
+          <div class="date-picker__header-section date-picker__header-section--1 clickable">
+            <span *ngIf="!selectYear">
+              <span class="date-picker__header-section-1-button">{{ month }}</span>
+              <span class="date-picker__header-section-1-button text-underline" (click)="toggleSelectYear()">{{ year }}</span>
+            </span>
+            <span *ngIf="selectYear" class="date-picker__header-section-1-button icon" (click)="toggleSelectYear()">
+              &#xf3cf;
+            </span>
+          </div>
+          <div class="date-picker__header-section date-picker__header-section--1" *ngIf="!selectYear">
+            <button type="button" class="date-picker__header-button button button--secondary button--small" (click)="today()">
+              {{ 'TODAY' | translate }}
+            </button>
+          </div>
+          <div class="date-picker__header-section date-picker__header-section--2" *ngIf="!selectYear">
+            <button type="button" class="date-picker__header-button" (click)="prev()">&#xf3cf;</button>
+          </div>
+          <div class="date-picker__header-section date-picker__header-section--2" *ngIf="!selectYear">
+            <button type="button" class="date-picker__header-button" (click)="next()">&#xf3d1;</button>
+          </div>
+        </div>
+
+        <div class="date-picker__weekdays" *ngIf="!selectYear">
+          <div class="date-picker__weekday">{{ 'MON' | translate }}</div>
+          <div class="date-picker__weekday">{{ 'TUE' | translate }}</div>
+          <div class="date-picker__weekday">{{ 'WED' | translate }}</div>
+          <div class="date-picker__weekday">{{ 'THU' | translate }}</div>
+          <div class="date-picker__weekday">{{ 'FRI' | translate }}</div>
+          <div class="date-picker__weekday">{{ 'SAT' | translate }}</div>
+          <div class="date-picker__weekday">{{ 'SUN' | translate }}</div>
+        </div>
+        <div class="date-picker__dates" *ngIf="!selectYear">
+          <div *ngFor="let d of dateRange" class="date-picker__date" (click)="selectDate(d)"
+               [ngClass]="{ 'date-picker__selected-date': d.fullDate === selectedDate.fullDate }">
+            {{ d.date }}
+          </div>
+        </div>
+
+        <div class="date-picker__dates" *ngIf="selectYear">
+          <div *ngFor="let year of years" class="date-picker__date" (click)="setYear(year)">{{ year }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="time-picker__time-input" *ngIf="type === 'datetime'">
+      <input type="text" name="time" class="time-picker__input" [ngModel]="displayTime" (ngModelChange)="validateTime($event)" (focus)="showTime()">
+
+      <div #hourList class="time-picker__hour-list" *ngIf="timeVisible">
+        <div class="time-picker__hour-list-item" *ngFor="let h of hours" id="hour-{{ h.hour }}" (click)="selectTime(h)">
+          {{ h.hour }}:{{ h.minutes }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

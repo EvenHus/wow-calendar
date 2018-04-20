@@ -1,0 +1,39 @@
+.mounts {
+  display: flex;
+
+  &__list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: $default-font-size;
+  }
+
+  &__list-item {
+    @include clearfix;
+    width: 100%;
+    padding: $md;
+    border-top: 1px solid $color-lighter-gray;
+
+    &--clickable:hover {
+      background-color: $color-brand-info;
+      color: $color-white;
+    }
+  }
+
+  &__list-content {
+    display: flex;
+  }
+
+  &__flex-1 {
+    flex: 1;
+  }
+
+  &__flex-2 {
+    flex: 2;
+  }
+
+  &__list-clickable:hover {
+    cursor: pointer;
+  }
+}

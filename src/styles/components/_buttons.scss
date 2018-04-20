@@ -28,7 +28,6 @@
   &--primary-outline {
     color: $color-brand-primary;
     border-color: $color-brand-primary;
-    background: #FFFFFF;
 
     &:hover {
       color: #FFFFFF;
@@ -74,11 +73,60 @@
   &--danger-outline {
     color: $color-brand-danger;
     border: 1px solid $color-brand-danger;
-    background: #FFFFFF;
 
     &:hover {
       color: #FFFFFF;
       background: $color-brand-danger;
+    }
+  }
+
+  &--success {
+    border: 1px solid $color-brand-success;
+    color: #FFFFFF;
+    background: $color-brand-success;
+
+    &:hover {
+      background: darken($color-brand-success, 10%);
+    }
+
+    &:disabled {
+      background: rgba(black, 0.07);
+    }
+  }
+
+  &--success-outline {
+    color: $color-brand-success;
+    border: 1px solid $color-brand-success;
+    background: #FFFFFF;
+
+    &:hover {
+      color: #FFFFFF;
+      background: $color-brand-success;
+    }
+  }
+
+  &--info {
+    border: 1px solid $color-brand-info;
+    color: #FFFFFF;
+    background: $color-brand-info;
+
+    &:hover {
+      background: darken($color-brand-info, 10%);
+    }
+
+    &:disabled {
+      background: rgba(black, 0.07);
+    }
+  }
+
+  &--info-outline {
+    color: $color-white;
+    border: 1px solid $color-brand-info;
+    background: transparent;
+
+    &:hover {
+      color: #FFFFFF;
+      background: $color-brand-info;
     }
   }
 }

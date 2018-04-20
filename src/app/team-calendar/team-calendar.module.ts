@@ -2,9 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TeamCalendarComponent} from './team-calendar.component';
 import {Route, RouterModule} from '@angular/router';
-import {CalendarModule} from 'angular-calendar';
-import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {AddEventModule} from '../add-event/add-event.module';
+import {DateRangeModule} from '../shared/date-range/date-range.module';
 
 
 export const calendarRoute: Route[] = [
@@ -14,10 +13,9 @@ export const calendarRoute: Route[] = [
 @NgModule({
   imports: [
     CommonModule,
-    CalendarModule.forRoot(),
     RouterModule.forChild(calendarRoute),
-    NgbModalModule.forRoot(),
-    AddEventModule
+    AddEventModule,
+    DateRangeModule
   ],
   declarations: [
     TeamCalendarComponent

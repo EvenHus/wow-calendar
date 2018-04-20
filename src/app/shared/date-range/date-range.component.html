@@ -1,0 +1,21 @@
+<!--<div class="date-range">
+  <div *ngFor="let date of dateRange" (click)="setSelectedDate(date)" class="date-range__col date-range__col--1"
+  [ngClass]="{'date-range__today': date.fullDate === today}">
+    <div [ngClass]="{ 'date-range__button--active': date.fullDate === selectedDate.fullDate, 'date-range__button': date.fullDate !== selectedDate.fullDate}">
+      {{date.weekday | translate}} <br> {{date.day}}
+    </div>
+  </div>
+</div>-->
+
+<div class="calendar">
+  <div class="calendar__weekday--month-view" *ngFor="let date of dateRange" [ngClass]="{'calendar__weekday--today': date.fullDate === today}" (click)="setSelectedDate(date)">
+    <span *ngIf="date.day" class="calendar__date">{{ date.day }}</span>
+
+
+    <div *ngFor="let event of events">
+      <div *ngIf="checkDate(event.start, date.dateIsoString) && date.leading !== true ">
+        <span>{{ event.title }}</span>
+      </div>
+    </div>
+  </div>
+</div>

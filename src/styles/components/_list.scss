@@ -10,7 +10,6 @@
     width: 100%;
     padding: $md;
     border-top: 1px solid $color-lighter-gray;
-    background: $color-white;
 
     &--clickable:hover {
       cursor: pointer;
@@ -39,7 +38,7 @@
   }
 
   &__item-icon {
-    color: $color-brand-primary;
+    color: $color-brand-success;
     font-family: "Ionicons";
     font-size: $default-font-size;
   }
@@ -48,6 +47,7 @@
     @include ellipsis;
     font-size: $default-font-size;
     font-weight: bold;
+    color: $color-brand-success;
   }
 
   &__item-sub-heading {

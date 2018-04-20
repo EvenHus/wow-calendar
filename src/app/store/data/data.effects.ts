@@ -35,5 +35,12 @@ export class DataEffects {
         .catch(error => Observable.of(new DataActions.LoadTitlesFailed(error)));
     });
 
+  @Effect() loadRealms$: Observable<Action> = this._actions.ofType(DataActions.LOAD_REALMS)
+    .switchMap(_ => {
+      return this._api.getRealms()
+        .map(result => new DataActions.LoadRealmsSuccess(result))
+        .catch(error => Observable.of(new DataActions.LoadRealmsFailed(error)));
+    });
+
   constructor(private _actions: Actions, private _api: ApiService) {}
 }

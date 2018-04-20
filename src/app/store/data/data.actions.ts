@@ -9,6 +9,9 @@ export const LOAD_PROGRESSION_FAILED = '[Data] load progression failed';
 export const LOAD_TITLES = '[Data] load titles';
 export const LOAD_TITLES_SUCCESS = '[Data] load titles success';
 export const LOAD_TITLES_FAILED = '[Data] load titles failed';
+export const LOAD_REALMS = '[Data] load realms';
+export const LOAD_REALMS_SUCCESS = '[Data] load realms success';
+export const LOAD_REALMS_FAILED = '[Data] load realms failed';
 
 
 
@@ -65,6 +68,23 @@ export class LoadTitlesFailed implements Action {
 
   constructor(public payload: any) {}
 }
+export class LoadRealms implements Action {
+  readonly type = LOAD_REALMS;
+
+  constructor(public payload?: any) {}
+}
+
+export class LoadRealmsSuccess implements Action {
+  readonly type = LOAD_REALMS_SUCCESS;
+
+  constructor(public payload?: any) {}
+}
+
+export class LoadRealmsFailed implements Action {
+  readonly type = LOAD_REALMS_FAILED;
+
+  constructor(public payload?: any) {}
+}
 
 export type All = LoadMounts | LoadMountsFailure | LoadMountsSuccess | LoadProgression | LoadProgressionFailed |
-  LoadProgressionSuccess | LoadTitles | LoadTitlesFailed | LoadTitlesSuccess;
+  LoadProgressionSuccess | LoadTitles | LoadTitlesFailed | LoadTitlesSuccess | LoadRealms | LoadRealmsFailed | LoadRealmsSuccess;
