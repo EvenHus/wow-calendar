@@ -14,7 +14,6 @@ export class EventService {
   constructor(private _db: AngularFireDatabase) {
     this.eventRef = _db.list('events');
     this.getEventsDb$ = _db.list('events').valueChanges();
-
   }
 
   createEvent(event: any): Observable<any>  {
@@ -27,8 +26,27 @@ export class EventService {
     );
   }
 
+  getEvents2(): Observable<any> {
+    return this._db.list('/events').snapshotChanges()
+      .map(changes => {
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        if (changes.length > 0 ) {
+          return changes;
+        } else {
+          return Observable.throw('There are no events');
+        }
+      });
+  }
+
   getEvents(): Observable<any> {
-    console.log('getting events ');
-    return Observable.of(this.getEventsDb$.subscribe(event => event));
+    return this._db.list('/events').valueChanges()
+      .map(events => {
+
+        if (events.length > 0) {
+          return events;
+        } else {
+          return Observable.throw('There are no events');
+        }
+      });
   }
 }

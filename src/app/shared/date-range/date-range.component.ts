@@ -25,19 +25,23 @@ export class DateRangeComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     this.today = moment().format('YYYY-MM-DD');
-
   }
 
   ngOnChanges(): void {
     this.dateRange = this._createDateRange();
-    if (this.events) {
-      console.log(this.events);
-    }
   }
 
   setSelectedDate(date: any): void {
     this.selectedDate = date;
     this.onDateSelected.emit(date.fullDate);
+  }
+
+  checkDate(event, date): boolean {
+    if (moment(event).format('YYYY-MM-DD') === moment(date).format('YYYY-MM-DD')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private _createDateRange() {
@@ -47,6 +51,7 @@ export class DateRangeComponent implements OnChanges, OnInit {
     const dates = Array.from(range.by('day'));
 
     let dateRange = dates.map((date: any) => ({
+        dateIsoString: date.toISOString(),
         fullDate: date.format('YYYY-MM-DD'),
         weekday: date.format('ddd'),
         isoWeekday: date.isoWeekday(),
@@ -68,7 +73,7 @@ export class DateRangeComponent implements OnChanges, OnInit {
     const numDaysToAdd = (firstDay % 8) - 1;
 
     for (let i = 0; i < numDaysToAdd; i++) {
-      dates = [].concat({}, ...dates);
+      dates = [].concat({leading: true }, ...dates);
     }
 
     return dates;

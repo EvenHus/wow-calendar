@@ -68,7 +68,8 @@ export class AuthService {
     const token = this._ls.retrieve('TOKEN');
 
     if (token) {
-      if (moment().isAfter(token[0])) {
+      const tokenMoment = token[0];
+      if (moment().isAfter(tokenMoment)) {
         this._store.dispatch(new AuthActions.IsAuthFailure());
         this._ls.clear('TOKEN');
       } else {
@@ -82,7 +83,7 @@ export class AuthService {
   setNewToken(user: any): void {
     const token = this._ls.retrieve('TOKEN');
     if (!token) {
-      const momentToken = moment().add(1, 'd').toString();
+      const momentToken = moment().add(1, 'd').toISOString();
       this._ls.store('TOKEN', [momentToken, user]);
     }
   }

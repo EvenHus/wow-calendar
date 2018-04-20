@@ -38,7 +38,6 @@ export function reducer(state: EventState = initialState, {type, payload}: actio
         events: null
       });
     case EventActions.GET_EVENTS_SUCCESS:
-      console.log(payload);
       return Object.assign({}, state, {
         loading: false,
         events: payload,

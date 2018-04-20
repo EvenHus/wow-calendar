@@ -17,7 +17,7 @@ export class TeamCalendarComponent implements OnInit, OnChanges {
   today: any;
 
   dateView: string;
-  events: any[];
+  events: any;
 
   weekDays: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -39,14 +39,18 @@ export class TeamCalendarComponent implements OnInit, OnChanges {
   }
 
   prev(): void {
-    console.log('prev ');
     this.startDate = moment(this.startDate).subtract(1, 'month');
     this.endDate = moment(this.endDate).subtract(1, 'month');
     this.calendarChanges();
   }
 
+  goToToday(): void {
+    this.startDate = moment().startOf('month').startOf('day');
+    this.endDate = moment().endOf('month').endOf('day');
+    this.calendarChanges();
+  }
+
   next(): void {
-    console.log('next');
     this.startDate = moment(this.startDate).add(1, 'month');
     this.endDate = moment(this.endDate).add(1, 'month');
     this.calendarChanges();
@@ -57,14 +61,12 @@ export class TeamCalendarComponent implements OnInit, OnChanges {
   }
 
   getEvents(): void {
-    /*this._store.select(rootState.getEvents).subscribe(event => {
-      console.log(event);
-    });*/
+    this._store.select(rootState.getEvents).subscribe(events => {
+      if (events) {
+        this.events = events;
+      }
+    });
     this._store.dispatch(new EventActions.GetEvents());
-
-    /*this._eventService.getEventsDb$.subscribe(events => {
-      this.events = events;
-    });*/
   }
 
   calendarChanges() {

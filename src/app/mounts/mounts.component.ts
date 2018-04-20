@@ -5,6 +5,7 @@ import * as DataActions from '../store/data/data.actions';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
+import {HelperService} from '../core/helper.service';
 
 @Component({
   moduleId: module.id,
@@ -18,15 +19,19 @@ export class MountsComponent implements OnDestroy, OnChanges {
   @Input() realm: string;
   @Input() name: string;
   showImage: boolean;
+  showAllImages: boolean;
   image: any;
   data: any [] = [];
   loading$: Observable<boolean>;
-  buttonTitle:  string = 'Show Images';
+  buttonTitle:  string = 'Show all images';
+  isMobile: boolean;
+  creatureId: number;
   mountSubscription: Subscription;
 
 
-  constructor(private _api: ApiService, private _store: Store<rootState.IAppState>) {
+  constructor(private _api: ApiService, private _store: Store<rootState.IAppState>, private _helper: HelperService) {
     this.loading$ = this._store.select(rootState.getDataLoadingState);
+    this.isMobile = _helper.isMobile();
   }
 
   ngOnChanges(): void {
@@ -41,16 +46,18 @@ export class MountsComponent implements OnDestroy, OnChanges {
   }
 
   toggleImage(id: number): void {
+    this.creatureId = id;
     this.showImage = !this.showImage;
-    if (this.showImage) {
-      this.buttonTitle = 'Hide Images';
-    }
-    if (!this.showImage) {
-      this.buttonTitle = 'Show Images';
-    }
+  }
 
-    //this.image = 'http://media.blizzard.com/wow/renders/npcs/zoom/creature' + id + '.jpg';
-
+  toggleAllImages(): void {
+    this.showAllImages = !this.showAllImages;
+    if (this.showAllImages) {
+      this.buttonTitle = 'Hide all images';
+    }
+    if (!this.showAllImages) {
+      this.buttonTitle = 'Show all images';
+    }
   }
 
   ngOnDestroy(): void {

@@ -11,10 +11,10 @@
   <div class="calendar__weekday--month-view" *ngFor="let date of dateRange" [ngClass]="{'calendar__weekday--today': date.fullDate === today}" (click)="setSelectedDate(date)">
     <span *ngIf="date.day" class="calendar__date">{{ date.day }}</span>
 
-    <div class="calendar__occurrences">
-      <div class="calendar__occurrence--month-view"
-           [ngStyle]="{ 'border-color': event.color }" *ngFor="let event of events">
-        <span class="calendar__occurrence-title">{{ event.title }}</span>
+
+    <div *ngFor="let event of events">
+      <div *ngIf="checkDate(event.start, date.dateIsoString) && date.leading !== true ">
+        <span>{{ event.title }}</span>
       </div>
     </div>
   </div>
