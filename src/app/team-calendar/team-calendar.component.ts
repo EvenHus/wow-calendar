@@ -2,9 +2,8 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
 import * as EventActions from '../store/event/event.actions';
-import moment = require('moment');
 import {EventService} from '../core/event.service';
-
+import * as moment from 'moment';
 @Component({
   moduleId: module.id,
   selector: 'app-calendar',
