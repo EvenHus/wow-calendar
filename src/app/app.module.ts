@@ -14,10 +14,15 @@ import {NavModule} from './nav/nav.module';
 import {metaReducers, reducers} from './store';
 import {EffectsModule} from '@ngrx/effects';
 
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { MessagingService} from './core/messaging.service';
+import { environment } from '../environments/environment';
+import { AsyncPipe} from '@angular/common';
+
 import {DataEffects} from './store/data/data.effects';
-import {AngularFireModule} from 'angularfire2';
-import {environment} from '../environments/environment';
-import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AuthEffects} from './store/auth/auth.effects';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -55,9 +60,9 @@ export function createTranslateLoader(http: HttpClient) {
     ]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    Ng2Webstorage
+    Ng2Webstorage,
   ],
-  providers: [],
+  providers: [MessagingService, AsyncPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

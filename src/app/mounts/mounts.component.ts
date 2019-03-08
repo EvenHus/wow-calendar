@@ -3,8 +3,7 @@ import {ApiService} from '../core/api.service';
 import * as rootState from '../store/index';
 import * as DataActions from '../store/data/data.actions';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
+import {Observable, Subscription} from 'rxjs';
 import {HelperService} from '../core/helper.service';
 
 @Component({

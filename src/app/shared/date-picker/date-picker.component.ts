@@ -5,7 +5,7 @@ import {
 import {TranslateService} from '@ngx-translate/core';
 import * as Moment from 'moment';
 import { extendMoment } from 'moment-range';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 const moment = extendMoment(Moment);
 
 @Component({

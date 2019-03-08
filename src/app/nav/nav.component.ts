@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
-import {Observable} from 'rxjs/Observable';
+import {Observable, Subscription} from 'rxjs';
 import {AuthService} from '../core/auth.service';
 import {Router} from '@angular/router';
 import {ApiService} from '../core/api.service';
-import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,

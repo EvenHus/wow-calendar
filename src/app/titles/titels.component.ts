@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../core/api.service';
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 import * as rootState from '../store/index';
 import * as DataActions from '../store/data/data.actions';
