@@ -1,17 +1,14 @@
-
-import {throwError as observableThrowError, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {Observable} from 'rxjs/Observable';
 import {LocalStorageService} from 'ngx-webstorage';
 import * as moment from 'moment';
 import {Store} from '@ngrx/store';
 import * as AuthActions from '../store/auth/auth.actions';
 import * as rootState from '../store/index';
-import {fromPromise} from 'rxjs/internal-compatibility';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {map} from 'rxjs/operators';
-
-
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class AuthService {
@@ -25,31 +22,31 @@ export class AuthService {
   }
 
   register(user: any) {
-    return fromPromise(
+    return Observable.fromPromise(
       this.authRef.push(user).then(() => {
         this.authenticate(user);
       }).catch(error => {
-        return observableThrowError(error);
+        return Observable.throw(error);
       })
     );
   }
 
   authenticate(user: any): Observable<any> {
     return this._db.list('/auth', ref => ref.orderByChild('username').equalTo(user.username)).valueChanges()
-      .pipe(map((events: any) => {
+      .map(events => {
         if (events.length > 0) {
           return events[0];
         } else {
-          return observableThrowError('User do not exsist, pls register!');
+          return Observable.throw('User do not exsist, pls register!');
         }
-      }),
-      map((dbUser: any) => {
+      })
+      .map((dbUser: any) => {
         if (dbUser.password !== user.password) {
-          return observableThrowError('Wrong username or password');
+          return Observable.throw('Wrong username or password');
         }
         this.setNewToken(dbUser.username);
         return dbUser;
-      }));
+      });
   }
 
   loadLoggedInUser() {
@@ -58,12 +55,12 @@ export class AuthService {
       const username = token[1];
       return this._db.list('/auth', ref => ref.orderByChild('username').equalTo(username))
         .valueChanges()
-        .pipe(map(events => {
+        .map(events => {
           return events[0];
-        }),
-        map((dbUser: any) => {
+        })
+        .map((dbUser: any) => {
           return dbUser;
-        }));
+        });
     }
   }
 

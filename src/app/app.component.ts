@@ -1,11 +1,12 @@
 import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {NavigationStart, Router} from '@angular/router';
-import {Subscription, Observable, Subject, combineLatest} from 'rxjs';
+import {Subscription} from 'rxjs/Subscription';
 import {Store} from '@ngrx/store';
 import * as rootState from './store/index';
 import {AuthService} from './core/auth.service';
 import * as AuthActions from './store/auth/auth.actions';
-import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs/Rx';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-root',
@@ -21,20 +22,21 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.routerEventSubscription = this._router.events.pipe(map(event => this._setCurrentUrl(event))).subscribe();
+    this.routerEventSubscription = this._router.events.map(event => this._setCurrentUrl(event)).subscribe();
 
     const isAuthenticated$ = this._store.select(rootState.getAuthenticated)
-      .pipe(map(isAuthenticated => {
+      .map(isAuthenticated => {
         return this._handleIsAuthenticated(isAuthenticated);
-      }));
+      });
     const loggedInUser$ = this._store.select(rootState.getLoggedInUser);
 
-    this.authSubscription = combineLatest(this.currentUrl$, isAuthenticated$, loggedInUser$)
-      .pipe(map(value => ({
+    this.authSubscription = Observable
+      .combineLatest(this.currentUrl$, isAuthenticated$, loggedInUser$)
+      .map(value => ({
         currentUrl: value[0],
         isAuthenticated: value[1],
         loggedInUser: value[2]
-      })))
+      }))
       .subscribe(values => {
         this._handleRoute(values.currentUrl, values.isAuthenticated, values.loggedInUser);
       });

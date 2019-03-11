@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store';
 import * as DataActions from '../store/data/data.actions';
-import {Subscription} from 'rxjs';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,

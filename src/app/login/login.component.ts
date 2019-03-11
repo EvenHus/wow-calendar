@@ -3,11 +3,11 @@ import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
 import * as AuthActions from '../store/auth/auth.actions';
 import * as DataActions from '../store/data/data.actions';
-import {Subscription, Observable} from 'rxjs';
-import {AngularFireDatabase} from '@angular/fire/database';
-
+import {Subscription} from 'rxjs/Subscription';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 import {ApiService} from '../core/api.service';
-import {MessagingService} from '../core/messaging.service';
 
 @Component({
   moduleId: module.id,
@@ -27,14 +27,13 @@ export class LoginComponent implements OnInit, AfterContentInit, OnDestroy {
   auth$: Observable<any>;
   loading$: Observable<any>;
   error$: Observable<any>;
-  message$: Observable<any>;
 
   authSubscription: Subscription;
   realmSubscription: Subscription;
 
 
   constructor(private _store: Store<rootState.IAppState>, private _db: AngularFireDatabase,
-              private _apiService: ApiService, private messagingService: MessagingService) {
+              private _apiService: ApiService) {
   }
 
   ngOnInit(): void {
@@ -42,10 +41,6 @@ export class LoginComponent implements OnInit, AfterContentInit, OnDestroy {
     this.loading$ = this._store.select(rootState.getAuthLoadingState);
     this.error$ = this._store.select(rootState.getAuthError);
     this.isNotUser = false;
-    const userId = 'user001';
-    this.messagingService.requestPermission(userId);
-    this.messagingService.receiveMessage();
-    this.message$ = this.messagingService.currentMessage;
   }
 
   ngAfterContentInit(): void {

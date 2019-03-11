@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
 import * as rootState from '../store/index';
 import {Store} from '@ngrx/store';
-import {AngularFireDatabase} from '@angular/fire/database';
 
 @Component({
   moduleId: module.id,

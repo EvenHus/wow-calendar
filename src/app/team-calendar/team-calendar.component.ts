@@ -2,7 +2,7 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as rootState from '../store/index';
 import * as EventActions from '../store/event/event.actions';
-import * as moment from 'moment';
+import moment = require('moment');
 import {EventService} from '../core/event.service';
 
 @Component({
