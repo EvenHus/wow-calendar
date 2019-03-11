@@ -6,6 +6,9 @@ import * as rootState from './store/index';
 import {AuthService} from './core/auth.service';
 import * as AuthActions from './store/auth/auth.actions';
 import {map} from 'rxjs/operators';
+import {AngularFireMessaging} from '@angular/fire/messaging';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {MessagingService} from './core/messaging.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +18,10 @@ export class AppComponent implements OnInit, OnDestroy {
   authSubscription: Subscription;
   routerEventSubscription: Subscription;
   currentUrl$: Subject<string> = new Subject();
+  message: any;
 
   constructor(private _router: Router, private _store: Store<rootState.IAppState>,
-              private _authService: AuthService) {
+              private _authService: AuthService, private messagingService: MessagingService) {
   }
 
   ngOnInit(): void {
@@ -40,6 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
       });
 
     this._authService.checkToken();
+    this.message = this.messagingService.currentMessage;
   }
 
   ngOnDestroy(): void {
@@ -50,6 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.authSubscription.unsubscribe();
     }
   }
+
 
   private _setCurrentUrl(event): void {
     if (event instanceof NavigationStart) {

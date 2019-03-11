@@ -1,17 +1,19 @@
 {
   "short_name": "WoW Calendar",
   "name": "WoW Calendar, powered by hustech",
+  "background_color": "#444444",
+  "theme_color": "#886451",
+  "display": "standalone",
+  "orientation": "portrait",
+  "gcm_sender_id": "103953800507",
+  "scope": "/",
   "start_url": "/",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/assets/images/wow-icon3.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "background_color": "#444444",
-  "theme_color": "#886451",
-  "display": "standalone",
-  "orientation": "any",
-  "gcm_sender_id": "103953800507"
+  ]
 }

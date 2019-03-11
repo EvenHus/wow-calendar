@@ -1,12 +1,12 @@
 import {AfterContentInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import * as rootState from '../store/index';
 import * as AuthActions from '../store/auth/auth.actions';
 import * as DataActions from '../store/data/data.actions';
-import {Subscription, Observable} from 'rxjs';
-import {AngularFireDatabase} from '@angular/fire/database';
-
 import {ApiService} from '../core/api.service';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {Observable} from 'rxjs/internal/Observable';
+import {Subscription} from 'rxjs/internal/Subscription';
 import {MessagingService} from '../core/messaging.service';
 
 @Component({
@@ -39,9 +39,10 @@ export class LoginComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngOnInit(): void {
     this.auth$ = this._db.list('auth').valueChanges();
-    this.loading$ = this._store.select(rootState.getAuthLoadingState);
-    this.error$ = this._store.select(rootState.getAuthError);
+    this.loading$ = this._store.pipe(select(rootState.getAuthLoadingState));
+    this.error$ = this._store.pipe(select(rootState.getAuthError));
     this.isNotUser = false;
+
     const userId = 'user001';
     this.messagingService.requestPermission(userId);
     this.messagingService.receiveMessage();
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit, AfterContentInit, OnDestroy {
         this.regUsers.push(user.username);
       });
     });
-    this.realmSubscription = this._store.select(rootState.getRealms).subscribe(data => {
+    this.realmSubscription = this._store.pipe(select(rootState.getRealms)).subscribe(data => {
       if (data) {
         data.realms.map(realm => {
           this.realmList.push(realm.name);

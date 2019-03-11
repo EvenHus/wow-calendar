@@ -27,6 +27,7 @@ import {AuthEffects} from './store/auth/auth.effects';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {EventEffects} from './store/event/event.effects';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,6 +62,9 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     Ng2Webstorage,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AngularFireMessagingModule,
+    AngularFireAuthModule
   ],
   providers: [MessagingService, AsyncPipe],
   bootstrap: [AppComponent]
