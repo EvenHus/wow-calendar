@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Action} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import * as EventActions from './event.actions';
 import {EventService} from '../../core/event.service';
 
 @Injectable()
 export class EventEffects {
 
-  @Effect() createEvent$: Observable<Action> = this._actions.ofType(EventActions.CREATE_EVENT)
+  /*@Effect() createEvent$: Observable<Action> = this._actions.ofType(EventActions.CREATE_EVENT)
     .map((action: EventActions.CreateEvent) => action.payload)
     .switchMap(payload => {
       return this._service.createEvent(payload)
@@ -21,7 +21,7 @@ export class EventEffects {
       return this._service.getEvents()
         .map(result => new EventActions.GetEventsSuccess(result))
         .catch(error => Observable.of(new EventActions.GetEventsFailure(error)));
-    });
+    });*/
 
   constructor(private _actions: Actions, private _service: EventService) {}
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, HostListener, OnInit, Output, ViewChild} from '@angular/core';
-import moment = require('moment');
+import * as moment from 'moment';
 
 @Component({
   moduleId: module.id,

@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Effect, Actions} from '@ngrx/effects';
 import * as DataActions from './data.actions';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {ApiService} from '../../core/api.service';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
+
+
+
 
 @Injectable()
 export class DataEffects {
-
+/*
   @Effect() loadMountsEffect$: Observable<Action> = this._actions.ofType(DataActions.LOAD_MOUNTS)
     .map((action: DataActions.LoadMounts) => action.payload)
     .switchMap(payload => {
@@ -40,7 +40,7 @@ export class DataEffects {
       return this._api.getRealms()
         .map(result => new DataActions.LoadRealmsSuccess(result))
         .catch(error => Observable.of(new DataActions.LoadRealmsFailed(error)));
-    });
+    });*/
 
   constructor(private _actions: Actions, private _api: ApiService) {}
 }

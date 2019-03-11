@@ -1,9 +1,12 @@
+
+import {throwError as observableThrowError, Observable, of} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {AngularFireDatabase} from 'angularfire2/database';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/of';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {fromPromise} from 'rxjs/internal-compatibility';
+import {map} from 'rxjs/operators';
+
+
+
 
 @Injectable()
 export class EventService {
@@ -17,36 +20,36 @@ export class EventService {
   }
 
   createEvent(event: any): Observable<any>  {
-    return Observable.fromPromise(
+    return fromPromise(
       this.eventRef.push(event).then(() => {
-        return Observable.of('ok');
+        return of('ok');
       }).catch(error => {
-        return Observable.throw(error);
+        return observableThrowError(error);
       })
     );
   }
 
   getEvents2(): Observable<any> {
     return this._db.list('/events').snapshotChanges()
-      .map(changes => {
+      .pipe(map(changes => {
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
         if (changes.length > 0 ) {
           return changes;
         } else {
-          return Observable.throw('There are no events');
+          return observableThrowError('There are no events');
         }
-      });
+      }));
   }
 
   getEvents(): Observable<any> {
     return this._db.list('/events').valueChanges()
-      .map(events => {
+      .pipe(map(events => {
 
         if (events.length > 0) {
           return events;
         } else {
-          return Observable.throw('There are no events');
+          return observableThrowError('There are no events');
         }
-      });
+      }));
   }
 }
